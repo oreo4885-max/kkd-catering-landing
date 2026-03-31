@@ -1,0 +1,189 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+[id] {
+  scroll-margin-top: 140px;
+}
+
+body {
+  @apply bg-cream text-ink antialiased;
+  position: relative;
+  isolation: isolate;
+  font-family: var(--font-body), sans-serif;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  line-break: strict;
+  background-image:
+    radial-gradient(circle at top left, rgba(26, 111, 60, 0.08), transparent 30%),
+    radial-gradient(circle at top right, rgba(214, 64, 50, 0.05), transparent 24%),
+    linear-gradient(180deg, #fcfbf8 0%, #f7fbf8 42%, #fbfaf6 100%);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-image:
+    linear-gradient(180deg, rgba(252, 251, 248, 0.9), rgba(247, 251, 248, 0.94) 42%, rgba(251, 250, 246, 0.96)),
+    url("/media/매장내부.png");
+  background-size: cover, cover;
+  background-position: center, center top;
+  background-repeat: no-repeat;
+  filter: saturate(0.82);
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.22;
+  background-image:
+    radial-gradient(circle at 18% 12%, rgba(26, 111, 60, 0.08), transparent 22%),
+    radial-gradient(circle at 86% 18%, rgba(214, 64, 50, 0.08), transparent 18%),
+    url("/media/패턴.jpg");
+  background-size: auto, auto, 160px 160px;
+  background-position: center, center, center;
+  background-repeat: no-repeat, no-repeat, repeat;
+}
+
+::selection {
+  background: rgba(47, 138, 80, 0.16);
+}
+
+.section-shell {
+  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+}
+
+.section-label {
+  @apply inline-flex items-center rounded-full border border-forest-700/10 bg-white px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-forest-700 sm:text-xs sm:tracking-[0.24em];
+  font-family: var(--font-body), sans-serif;
+}
+
+.section-title {
+  @apply mt-4 text-[1.95rem] font-semibold tracking-tight text-forest-900 sm:text-4xl;
+  font-family: var(--font-display), serif;
+  word-break: keep-all;
+  text-wrap: balance;
+  line-height: 1.16;
+}
+
+.section-description {
+  @apply mt-4 max-w-3xl text-[15px] leading-7 text-forest-800/80 sm:text-lg;
+  word-break: keep-all;
+  text-wrap: pretty;
+}
+
+.card-surface {
+  @apply rounded-[26px] border border-forest-700/10 bg-white/90 shadow-card backdrop-blur sm:rounded-[28px];
+}
+
+.grid-pattern {
+  background-image:
+    linear-gradient(rgba(20, 90, 49, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(20, 90, 49, 0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.interactive-card {
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    border-color 220ms ease,
+    background-color 220ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .interactive-card:hover {
+    transform: translateY(-6px);
+  }
+}
+
+.image-shift {
+  transition: transform 500ms ease, filter 500ms ease;
+}
+
+.image-shift:hover {
+  transform: scale(1.04);
+  filter: saturate(1.05);
+}
+
+.soft-float {
+  animation: softFloat 6s ease-in-out infinite;
+}
+
+.soft-pulse {
+  animation: softPulse 3.2s ease-in-out infinite;
+}
+
+.fade-rise {
+  animation: fadeRise 500ms ease;
+}
+
+.ko-heading {
+  font-family: var(--font-display), serif;
+  word-break: keep-all;
+  text-wrap: balance;
+  letter-spacing: -0.03em;
+}
+
+.ko-body {
+  font-family: var(--font-body), sans-serif;
+  word-break: keep-all;
+  text-wrap: pretty;
+}
+
+.ko-chip {
+  font-family: var(--font-body), sans-serif;
+  word-break: keep-all;
+  white-space: normal;
+  line-height: 1.35;
+}
+
+@keyframes softFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes softPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(214, 64, 50, 0.12);
+  }
+  50% {
+    box-shadow: 0 16px 38px 0 rgba(214, 64, 50, 0.16);
+  }
+}
+
+@keyframes fadeRise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 640px) {
+  [id] {
+    scroll-margin-top: 112px;
+  }
+}

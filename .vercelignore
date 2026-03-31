@@ -1,0 +1,11 @@
+node_modules
+.next
+_recovery_backup_20260325_165731
+brief.md
+run-dev.bat
+devserver.out.log
+devserver.err.log
+public/media/KakaoTalk_*.jpg
+public/media/화면 캡처 *.jpg
+public/media/매장내부3.jpg
+public/media/매장내부4.jpg

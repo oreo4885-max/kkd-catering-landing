@@ -184,6 +184,6 @@ body::after {
 
 @media (max-width: 640px) {
   [id] {
-    scroll-margin-top: 112px;
+    scroll-margin-top: 190px;
   }
 }

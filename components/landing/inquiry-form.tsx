@@ -27,17 +27,36 @@ export function InquiryForm() {
   const { inquiryForm } = siteContent;
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
+  const [privacyChecked, setPrivacyChecked] = useState(false);
+
   const trustSignals = useMemo(
     () => [
       "예상 답변 시간: 영업일 기준 순차 회신",
-      "진행 가능 지역: 수도권 / 지방권 상담 후 검토",
+      "진행 가능 지역: 수도권/지방권 상담 후 검토",
       "필수 입력 3개: 업체명, 연락처, 행사일",
+    ],
+    [],
+  );
+
+  const privacyItems = useMemo(
+    () => [
+      "수집 항목: 업체명, 담당자명, 연락처, 이메일, 행사일, 행사시간, 행사 장소, 예상 인원, 희망 패키지, 전기 지원 가능 여부, 공동 브랜딩 가능 여부, 사진/영상 활용 가능 여부, 추가 요청사항",
+      "수집 목적: 케이터링 상담 접수, 운영 가능 여부 확인, 견적 및 제안 안내",
+      "보유 기간: 문의 접수일로부터 1년 보관 후 파기",
+      "동의 거부 권리 및 불이익: 동의를 거부하실 수 있으나, 상담 접수 및 회신이 제한될 수 있습니다.",
     ],
     [],
   );
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    if (!privacyChecked) {
+      setStatus("error");
+      setMessage("개인정보 수집 및 이용 동의 후 상담 요청이 가능합니다.");
+      return;
+    }
+
     setStatus("submitting");
     setMessage("");
 
@@ -57,14 +76,15 @@ export function InquiryForm() {
       const result = (await response.json()) as { message?: string };
 
       if (!response.ok) {
-        throw new Error(result.message || "문의 전송에 실패했습니다.");
+        throw new Error(result.message || "문의 접수 중 문제가 발생했습니다.");
       }
 
       setStatus("success");
       setMessage(result.message || "문의가 정상 접수되었습니다.");
       form.reset();
+      setPrivacyChecked(false);
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : "문의 전송에 실패했습니다.";
+      const errorMessage = error instanceof Error ? error.message : "문의 접수 중 문제가 발생했습니다.";
       setStatus("error");
       setMessage(errorMessage);
     }
@@ -82,6 +102,7 @@ export function InquiryForm() {
           </div>
         ))}
       </div>
+
       <div className="grid gap-3.5 sm:grid-cols-2 sm:gap-4">
         {inquiryForm.fields.map((field) => {
           const spanClass = field.type === "textarea" || field.name === "location" ? "sm:col-span-2" : "";
@@ -92,6 +113,7 @@ export function InquiryForm() {
                 {field.label}
                 {field.required ? " *" : ""}
               </span>
+
               {field.type === "select" ? (
                 <select className={inputClassName} name={field.name} defaultValue="" required={field.required}>
                   <option value="" disabled>
@@ -124,19 +146,43 @@ export function InquiryForm() {
           );
         })}
       </div>
+
+      <div className="mt-5 rounded-[22px] border border-forest-900/8 bg-forest-50/80 px-4 py-4 text-sm leading-6 text-forest-800 sm:mt-6 sm:px-5">
+        <label className="flex items-start gap-3 text-forest-900">
+          <input
+            className="mt-1 h-4 w-4 rounded border-forest-900/20 text-forest-800 focus:ring-forest-300"
+            type="checkbox"
+            name="privacyConsent"
+            value="agreed"
+            checked={privacyChecked}
+            onChange={(event) => setPrivacyChecked(event.target.checked)}
+            required
+          />
+          <span className="font-medium">[필수] 상담 접수를 위한 개인정보 수집 및 이용에 동의합니다.</span>
+        </label>
+
+        <div className="mt-3 rounded-[18px] bg-white/80 px-4 py-3 text-[13px] leading-6 text-forest-800/85">
+          {privacyItems.map((item) => (
+            <p key={item}>{item}</p>
+          ))}
+        </div>
+      </div>
+
       <div className="mt-5 flex flex-col gap-3 border-t border-forest-900/8 pt-4 text-sm text-forest-800/75 sm:mt-6 sm:pt-5 sm:flex-row sm:items-center sm:justify-between">
         <div className="space-y-2">
           <p>{inquiryForm.description}</p>
+          {!privacyChecked ? <p className="text-forest-700/80">개인정보 동의 후 상담 요청 버튼이 활성화됩니다.</p> : null}
           {message ? (
             <p className={status === "success" ? "text-forest-800" : "text-kkdred"}>{message}</p>
           ) : null}
         </div>
+
         <button
           type="submit"
-          disabled={status === "submitting"}
+          disabled={status === "submitting" || !privacyChecked}
           className="inline-flex h-11 items-center justify-center rounded-full bg-forest-800 px-5 text-[13px] font-semibold text-cream transition hover:bg-forest-900 disabled:cursor-not-allowed disabled:opacity-70 sm:h-12 sm:px-6 sm:text-sm"
         >
-          {status === "submitting" ? "문의 전송 중..." : inquiryForm.submitLabel}
+          {status === "submitting" ? "문의 전송 중.." : inquiryForm.submitLabel}
         </button>
       </div>
     </form>

@@ -24,9 +24,6 @@ export function BottomCtaSection() {
                 <a href={item.href} className="ko-heading mt-1 block text-lg font-semibold text-white hover:text-[#ffd8d1]">
                   {item.phone}
                 </a>
-                <a href={item.emailHref} className="mt-1 block text-sm text-white/78 underline decoration-white/20 underline-offset-4 hover:text-white">
-                  {item.email}
-                </a>
               </div>
             ))}
           </div>

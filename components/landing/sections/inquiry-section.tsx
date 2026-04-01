@@ -32,12 +32,6 @@ export function InquirySection() {
                     <a href={item.href} className="ko-heading mt-2 block text-[1.1rem] font-semibold text-forest-900 hover:text-forest-700 sm:text-xl">
                       {item.phone}
                     </a>
-                    <a
-                      href={item.emailHref}
-                      className="mt-1 block text-sm font-medium text-forest-700/85 underline decoration-forest-700/20 underline-offset-4 hover:text-forest-900"
-                    >
-                      {item.email}
-                    </a>
                   </div>
                 ))}
               </div>

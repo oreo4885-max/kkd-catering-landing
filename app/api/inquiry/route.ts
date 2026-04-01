@@ -65,6 +65,7 @@ type InquiryPayload = {
   coBranding: string;
   photoUsage: string;
   notes?: string;
+  privacyConsent?: string;
 };
 
 function pickRouteLabel(location: string) {
@@ -98,12 +99,17 @@ function validatePayload(payload: InquiryPayload) {
     coBranding: "공동 브랜딩 가능 여부",
     photoUsage: "사진/영상 활용 가능 여부",
     notes: "추가 요청사항",
+    privacyConsent: "개인정보 수집 및 이용 동의",
   };
 
   for (const field of requiredFields) {
     if (!payload[field]?.trim()) {
       return `${fieldLabels[field]} 값을 입력해 주세요.`;
     }
+  }
+
+  if (payload.privacyConsent !== "agreed") {
+    return "개인정보 수집 및 이용 동의가 필요합니다.";
   }
 
   return null;

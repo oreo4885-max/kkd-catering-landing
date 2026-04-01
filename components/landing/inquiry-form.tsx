@@ -24,7 +24,7 @@ function getPlaceholder(field: InquiryField) {
 }
 
 export function InquiryForm() {
-  const { inquiryForm } = siteContent;
+  const { inquiryForm, legal } = siteContent;
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
   const [privacyChecked, setPrivacyChecked] = useState(false);
@@ -42,10 +42,11 @@ export function InquiryForm() {
     () => [
       "수집 항목: 업체명, 담당자명, 연락처, 이메일, 행사일, 행사시간, 행사 장소, 예상 인원, 희망 패키지, 전기 지원 가능 여부, 공동 브랜딩 가능 여부, 사진/영상 활용 가능 여부, 추가 요청사항",
       "수집 목적: 케이터링 상담 접수, 운영 가능 여부 확인, 견적 및 제안 안내",
-      "보유 기간: 문의 접수일로부터 1년 보관 후 파기",
+      `보유 기간: ${legal.retentionPeriod}`,
+      `파기 기준: ${legal.destructionPolicy}`,
       "동의 거부 권리 및 불이익: 동의를 거부하실 수 있으나, 상담 접수 및 회신이 제한될 수 있습니다.",
     ],
-    [],
+    [legal.destructionPolicy, legal.retentionPeriod],
   );
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -161,6 +162,21 @@ export function InquiryForm() {
           <span className="font-medium">[필수] 상담 접수를 위한 개인정보 수집 및 이용에 동의합니다.</span>
         </label>
 
+        <div className="mt-3 flex flex-wrap items-center gap-3 text-[13px] font-medium text-forest-800">
+          <a
+            href={legal.privacyPolicyHref}
+            className="underline underline-offset-4 transition hover:text-forest-900"
+            target="_blank"
+            rel="noreferrer"
+          >
+            개인정보처리방침 보기
+          </a>
+          <span className="text-forest-700/70">운영주체: {legal.operator}</span>
+          <a href={`mailto:${legal.operatorEmail}`} className="underline underline-offset-4 transition hover:text-forest-900">
+            {legal.operatorEmail}
+          </a>
+        </div>
+
         <div className="mt-3 rounded-[18px] bg-white/80 px-4 py-3 text-[13px] leading-6 text-forest-800/85">
           {privacyItems.map((item) => (
             <p key={item}>{item}</p>
@@ -171,6 +187,7 @@ export function InquiryForm() {
       <div className="mt-5 flex flex-col gap-3 border-t border-forest-900/8 pt-4 text-sm text-forest-800/75 sm:mt-6 sm:pt-5 sm:flex-row sm:items-center sm:justify-between">
         <div className="space-y-2">
           <p>{inquiryForm.description}</p>
+          <p className="text-[13px] leading-6 text-forest-700/78">{legal.pageNotice}</p>
           {!privacyChecked ? <p className="text-forest-700/80">개인정보 동의 후 상담 요청 버튼이 활성화됩니다.</p> : null}
           {message ? (
             <p className={status === "success" ? "text-forest-800" : "text-kkdred"}>{message}</p>

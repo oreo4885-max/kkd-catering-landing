@@ -133,7 +133,6 @@ export function HeroSection() {
                 <DonutCoffeeIcon className="h-9 w-9 drop-shadow-[0_5px_6px_rgba(132,52,22,0.24)]" />
                 Donuts + Coffee Experience
               </div>
-              <p className="ko-body mt-3 text-[13px] leading-5 text-forest-800/75 sm:text-sm sm:leading-6">{currentShowcase.note}</p>
             </div>
           </div>
         </div>

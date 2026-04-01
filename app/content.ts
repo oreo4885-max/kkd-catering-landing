@@ -97,6 +97,15 @@ export type ContactContent = {
   contacts: ContactLine[];
 };
 
+export type LegalContent = {
+  pageNotice: string;
+  operator: string;
+  operatorEmail: string;
+  retentionPeriod: string;
+  destructionPolicy: string;
+  privacyPolicyHref: string;
+};
+
 export const siteContent = {
   seo: {
     title: "크리스피크림 도넛트럭 | 브랜드가 직접 찾아가는 도넛 케이터링",
@@ -212,6 +221,15 @@ export const siteContent = {
       },
     ],
   } satisfies ContactContent,
+
+  legal: {
+    pageNotice: "본 페이지는 크리스피크림도넛 공식 홈페이지가 아닌 영업 상담용 안내 페이지입니다.",
+    operator: "크리스피크림도넛 동부지점",
+    operatorEmail: "mcomc@lotte.net",
+    retentionPeriod: "접수일로부터 30일",
+    destructionPolicy: "보유기간 종료 후 30일 이내 파기",
+    privacyPolicyHref: "/privacy",
+  } satisfies LegalContent,
 
   ui: {
     heroCardEyebrow: "Premium On-site Experience",

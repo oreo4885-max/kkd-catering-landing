@@ -61,7 +61,7 @@ export function TopNav() {
   return (
     <header className="sticky top-0 z-50 px-4 pt-3 sm:px-6 sm:pt-4">
       <div
-        className={`mx-auto max-w-7xl rounded-[24px] border px-3.5 py-3 backdrop-blur transition-all sm:rounded-[28px] sm:px-6 sm:py-3.5 ${
+        className={`mx-auto max-w-7xl rounded-[22px] border px-3 py-2.5 backdrop-blur transition-all sm:rounded-[28px] sm:px-6 sm:py-3.5 ${
           scrolled
             ? "border-forest-900/12 bg-white/98 shadow-[0_18px_45px_rgba(22,34,19,0.14)]"
             : "border-forest-900/10 bg-white/94 shadow-card"
@@ -80,18 +80,18 @@ export function TopNav() {
           <div className="flex shrink-0 items-center gap-2">
             <a
               href="#inquiry-contact"
-              className="inline-flex h-11 shrink-0 items-center justify-center rounded-full border border-forest-900/10 bg-white px-4 text-[13px] font-semibold text-forest-900 transition hover:bg-forest-50 sm:h-10 sm:px-4 sm:text-sm"
-            >
-              상담 정보
-            </a>
-            <a
-              href="#inquiry"
-              className="inline-flex h-11 shrink-0 items-center justify-center rounded-full bg-forest-800 px-4 text-[13px] font-semibold text-cream transition hover:bg-forest-900 sm:h-10 sm:px-4 sm:text-sm"
-            >
-              문의하기
-            </a>
-          </div>
+            className="inline-flex h-10 shrink-0 items-center justify-center rounded-full border border-forest-900/10 bg-white px-3.5 text-[12px] font-semibold text-forest-900 transition hover:bg-forest-50 sm:h-10 sm:px-4 sm:text-sm"
+          >
+            상담 정보
+          </a>
+          <a
+            href="#inquiry"
+            className="inline-flex h-10 shrink-0 items-center justify-center rounded-full bg-forest-800 px-3.5 text-[12px] font-semibold text-cream transition hover:bg-forest-900 sm:h-10 sm:px-4 sm:text-sm"
+          >
+            문의하기
+          </a>
         </div>
+      </div>
 
         <nav className="hidden items-center gap-1 pt-3 lg:flex">
           {navItems.map((item) => {
@@ -115,7 +115,7 @@ export function TopNav() {
           })}
         </nav>
 
-        <nav className="grid grid-cols-4 gap-2 border-t border-forest-900/8 pt-3 lg:hidden">
+        <nav className="grid grid-cols-7 gap-1.5 border-t border-forest-900/8 pt-2.5 lg:hidden">
           {navItems.map((item) => {
             const targetId = item.href.replace("#", "");
             const active = activeSection === targetId;
@@ -125,10 +125,10 @@ export function TopNav() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setActiveSection(targetId)}
-                className={`ko-chip inline-flex min-h-[42px] items-center justify-center rounded-[18px] border px-2 py-2 text-center text-[13px] font-semibold transition-colors ${
+                className={`ko-chip inline-flex min-h-[34px] items-center justify-center rounded-[14px] border px-1.5 py-1 text-center text-[11px] font-semibold transition-colors ${
                   active
                     ? "border-forest-800 bg-forest-800 text-cream shadow-soft"
-                    : "border-forest-900/10 bg-forest-50/85 text-forest-900"
+                    : "border-forest-900/10 bg-white text-forest-900"
                 }`}
               >
                 {item.label}

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { siteContent } from "@/app/content";
+import { DonutCoffeeIcon } from "../brand-icons";
 import { SectionIntro } from "../section-intro";
 
 const processMeta = [
@@ -38,11 +39,7 @@ const processMeta = [
 ];
 
 function ProcessIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-5 w-5 text-[#1d6a4e]" fill="none" stroke="currentColor" strokeWidth="1.8">
-      <path d="M12 4.5 14 9l4.5 2-4.5 2-2 4.5-2-4.5-4.5-2L10 9l2-4.5Z" strokeLinejoin="round" />
-    </svg>
-  );
+  return <DonutCoffeeIcon className="h-5 w-5" />;
 }
 
 export function ProcessSection() {

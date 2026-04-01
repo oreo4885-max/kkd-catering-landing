@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { siteContent } from "@/app/content";
+import { DonutCoffeeIcon, DonutIcon } from "../brand-icons";
 import { SectionIntro } from "../section-intro";
 
 function PackageIcon({
@@ -13,10 +14,7 @@ function PackageIcon({
 }) {
   if (type === "badge") {
     return (
-      <svg viewBox="0 0 24 24" className={`h-5 w-5 ${accentClass}`} fill="none" stroke="currentColor" strokeWidth="1.8">
-        <path d="M12 3 19 7v10l-7 4-7-4V7l7-4Z" />
-        <path d="m9.5 12 1.7 1.7L14.8 10" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
+      <DonutIcon className={`h-5 w-5 ${accentClass}`} />
     );
   }
 
@@ -33,16 +31,12 @@ function PackageIcon({
 
   if (type === "signal") {
     return (
-      <svg viewBox="0 0 24 24" className={`h-5 w-5 ${accentClass}`} fill="none" stroke="currentColor" strokeWidth="1.8">
-        <path d="M12 4.5 14 9l4.5 2-4.5 2-2 4.5-2-4.5-4.5-2L10 9l2-4.5Z" strokeLinejoin="round" />
-      </svg>
+      <DonutCoffeeIcon className={`h-5 w-5 ${accentClass}`} />
     );
   }
 
   return (
-    <svg viewBox="0 0 24 24" className={`h-4 w-4 ${accentClass}`} fill="none" stroke="currentColor" strokeWidth="2">
-      <path d="m6.5 12.5 3.2 3.2L17.5 8" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
+    <DonutIcon className={`h-4 w-4 ${accentClass}`} />
   );
 }
 
@@ -261,10 +255,11 @@ export function PackagesSection() {
                 </div>
 
                 <div className="p-3 sm:p-4 lg:p-4">
-                  <div className="rounded-[22px] border border-white/12 bg-white/8 px-4 py-3 sm:rounded-[24px] sm:py-3.5">
-                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/70">
+                <div className="rounded-[22px] border border-white/12 bg-white/8 px-4 py-3 sm:rounded-[24px] sm:py-3.5">
+                    <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/70">
+                      <DonutCoffeeIcon className="h-5 w-5" />
                       {pricingGuide.label}
-                    </p>
+                    </div>
                     <p className="ko-heading mt-1.5 text-[1.02rem] font-semibold text-white sm:text-xl">{pricingGuide.headline}</p>
                     <p className="ko-body mt-1.5 text-[13px] leading-5 text-white/82 sm:text-sm sm:leading-6">
                       {pricingGuide.description}

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { siteContent } from "@/app/content";
+import { DonutCoffeeIcon, DonutIcon } from "../brand-icons";
 
 const showcaseItems = [
   {
@@ -57,8 +58,9 @@ export function HeroSection() {
             {hero.badges.map((badge) => (
               <li
                 key={badge}
-                className="interactive-card ko-chip rounded-full border border-forest-900/8 bg-white px-3.5 py-1.5 text-[13px] font-medium text-forest-800 sm:px-4 sm:py-2 sm:text-sm"
+                className="interactive-card ko-chip inline-flex items-center gap-2 rounded-full border border-forest-900/8 bg-white px-3.5 py-1.5 text-[13px] font-medium text-forest-800 sm:px-4 sm:py-2 sm:text-sm"
               >
+                <DonutIcon className="h-4 w-4 shrink-0" />
                 {badge}
               </li>
             ))}
@@ -91,7 +93,8 @@ export function HeroSection() {
                     {siteContent.ui.heroCardTitle}
                   </p>
                 </div>
-                <div className="rounded-full border border-kkdred/20 bg-white px-3 py-1 text-[11px] font-medium text-kkdred sm:text-xs">
+                <div className="inline-flex items-center gap-2 rounded-full border border-kkdred/20 bg-white px-3 py-1 text-[11px] font-medium text-kkdred sm:text-xs">
+                  <DonutCoffeeIcon className="h-5 w-5" />
                   {siteContent.ui.heroCardBadge}
                 </div>
               </div>
@@ -126,7 +129,11 @@ export function HeroSection() {
                   );
                 })}
               </div>
-              <p className="ko-body mt-3 text-[13px] leading-5 text-forest-800/75 sm:mt-4 sm:text-sm sm:leading-6">{currentShowcase.note}</p>
+              <div className="mt-3 inline-flex items-center gap-2 rounded-full bg-white/75 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-forest-800 sm:mt-4 sm:text-xs">
+                <DonutCoffeeIcon className="h-5 w-5" />
+                Donuts + Coffee Experience
+              </div>
+              <p className="ko-body mt-3 text-[13px] leading-5 text-forest-800/75 sm:text-sm sm:leading-6">{currentShowcase.note}</p>
             </div>
           </div>
         </div>

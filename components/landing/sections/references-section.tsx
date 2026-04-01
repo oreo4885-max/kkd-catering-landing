@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { siteContent } from "@/app/content";
+import { DonutCoffeeIcon } from "../brand-icons";
 import { SectionIntro } from "../section-intro";
 
 const referenceVisuals = [
@@ -30,14 +31,7 @@ const referenceVisuals = [
 ];
 
 function ReferenceIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-5 w-5 text-[#1d6a4e]" fill="none" stroke="currentColor" strokeWidth="1.8">
-      <path d="M7.5 11a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
-      <path d="M16.5 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
-      <path d="M3.5 18c.7-2.2 2.2-3.5 4-3.5s3.3 1.3 4 3.5" strokeLinecap="round" />
-      <path d="M13.5 18c.5-1.7 1.7-2.8 3.1-2.8 1.4 0 2.6 1.1 3.1 2.8" strokeLinecap="round" />
-    </svg>
-  );
+  return <DonutCoffeeIcon className="h-5 w-5" />;
 }
 
 export function ReferencesSection() {

@@ -2,18 +2,13 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { siteContent } from "@/app/content";
+import { DonutCoffeeIcon } from "../brand-icons";
 
 function AutoPackageIcon({ active }: { active: boolean }) {
   return (
-    <svg
-      viewBox="0 0 24 24"
+    <DonutCoffeeIcon
       className={`h-4 w-4 transition-transform duration-300 ${active ? "scale-100" : "scale-90 opacity-70"}`}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-    >
-      <path d="M12 4.5 14 9l4.5 2-4.5 2-2 4.5-2-4.5-4.5-2L10 9l2-4.5Z" strokeLinejoin="round" />
-    </svg>
+    />
   );
 }
 
@@ -61,7 +56,10 @@ export function QuickQuoteSection() {
                 {quickQuote.description}
               </p>
               <div className="mt-5 rounded-[22px] bg-forest-50 px-4 py-4 sm:mt-6 sm:rounded-[24px] sm:px-5 sm:py-5">
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-forest-700">Quick Summary</p>
+                <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-forest-700">
+                  <DonutCoffeeIcon className="h-5 w-5" />
+                  Quick Summary
+                </div>
                 <p className="ko-body mt-3 text-[15px] leading-7 text-forest-900 sm:text-base sm:leading-8">{summaryByPackage[desiredPackage]}</p>
               </div>
             </div>

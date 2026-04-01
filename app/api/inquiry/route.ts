@@ -68,7 +68,7 @@ type InquiryPayload = {
 };
 
 function pickRouteLabel(location: string) {
-  const normalized = location.replace(/\s+/g, "");
+  const normalized = (location || "").replace(/\s+/g, "");
 
   if (metroKeywords.some((keyword) => normalized.includes(keyword))) {
     return "수도권 담당";
@@ -82,24 +82,27 @@ function pickRouteLabel(location: string) {
 }
 
 function validatePayload(payload: InquiryPayload) {
-  const requiredFields: Array<keyof InquiryPayload> = [
-    "company",
-    "contactName",
-    "phone",
-    "email",
-    "eventDate",
-    "eventTime",
-    "location",
-    "attendees",
-    "desiredPackage",
-    "power",
-    "coBranding",
-    "photoUsage",
-  ];
+  const requiredFields: Array<keyof InquiryPayload> = ["company", "phone", "eventDate"];
+
+  const fieldLabels: Record<keyof InquiryPayload, string> = {
+    company: "업체명",
+    contactName: "담당자명",
+    phone: "연락처",
+    email: "이메일",
+    eventDate: "행사일",
+    eventTime: "행사시간",
+    location: "행사 장소",
+    attendees: "예상 인원",
+    desiredPackage: "희망 패키지",
+    power: "전기 지원 가능 여부",
+    coBranding: "공동 브랜딩 가능 여부",
+    photoUsage: "사진/영상 활용 가능 여부",
+    notes: "추가 요청사항",
+  };
 
   for (const field of requiredFields) {
     if (!payload[field]?.trim()) {
-      return `${field} 값이 비어 있습니다.`;
+      return `${fieldLabels[field]} 값을 입력해 주세요.`;
     }
   }
 

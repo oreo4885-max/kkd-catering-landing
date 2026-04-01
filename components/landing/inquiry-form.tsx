@@ -93,7 +93,7 @@ export function InquiryForm() {
                 {field.required ? " *" : ""}
               </span>
               {field.type === "select" ? (
-                <select className={inputClassName} name={field.name} defaultValue="">
+                <select className={inputClassName} name={field.name} defaultValue="" required={field.required}>
                   <option value="" disabled>
                     선택해 주세요
                   </option>
@@ -109,6 +109,7 @@ export function InquiryForm() {
                   name={field.name}
                   rows={5}
                   placeholder={getPlaceholder(field)}
+                  required={field.required}
                 />
               ) : (
                 <input
@@ -116,6 +117,7 @@ export function InquiryForm() {
                   name={field.name}
                   type={field.type}
                   placeholder={getPlaceholder(field)}
+                  required={field.required}
                 />
               )}
             </label>

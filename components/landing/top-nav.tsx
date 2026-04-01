@@ -1,11 +1,9 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { siteContent } from "@/app/content";
 
 const navItems = [
   { label: "소개", href: "#hero" },
-  { label: "활용", href: "#use-cases" },
   { label: "패키지", href: "#packages" },
   { label: "브랜딩", href: "#branding" },
   { label: "후기", href: "#references" },

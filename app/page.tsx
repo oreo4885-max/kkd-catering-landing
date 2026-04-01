@@ -10,7 +10,6 @@ import {
   ReferencesSection,
   StickyMobileCta,
   TopNav,
-  UseCasesSection,
   WhySection,
 } from "@/components/landing";
 
@@ -21,7 +20,6 @@ export default function Home() {
       <HeroSection />
       <QuickQuoteSection />
       <WhySection />
-      <UseCasesSection />
       <PackagesSection />
       <CoBrandingSection />
       <ReferencesSection />

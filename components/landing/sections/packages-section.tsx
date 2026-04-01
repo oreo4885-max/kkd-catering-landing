@@ -13,31 +13,18 @@ function PackageIcon({
   accentClass: string;
 }) {
   if (type === "badge") {
-    return (
-      <DonutIcon className={`h-6 w-6 ${accentClass}`} />
-    );
+    return <DonutIcon className={`h-6 w-6 ${accentClass}`} />;
   }
 
   if (type === "attendees") {
-    return (
-      <svg viewBox="0 0 24 24" className={`h-5 w-5 ${accentClass}`} fill="none" stroke="currentColor" strokeWidth="1.8">
-        <path d="M7.5 11a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
-        <path d="M16.5 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
-        <path d="M3.5 18c.7-2.2 2.2-3.5 4-3.5s3.3 1.3 4 3.5" strokeLinecap="round" />
-        <path d="M13.5 18c.5-1.7 1.7-2.8 3.1-2.8 1.4 0 2.6 1.1 3.1 2.8" strokeLinecap="round" />
-      </svg>
-    );
+    return <DonutIcon className={`h-6 w-6 ${accentClass}`} />;
   }
 
   if (type === "signal") {
-    return (
-      <DonutCoffeeIcon className={`h-7 w-7 ${accentClass}`} />
-    );
+    return <DonutCoffeeIcon className={`h-7 w-7 ${accentClass}`} />;
   }
 
-  return (
-    <DonutIcon className={`h-5 w-5 ${accentClass}`} />
-  );
+  return <DonutIcon className={`h-5 w-5 ${accentClass}`} />;
 }
 
 export function PackagesSection() {
@@ -301,20 +288,6 @@ export function PackagesSection() {
                   ))}
                 </div>
               </div>
-            </div>
-            <div className="mt-4 flex flex-col gap-2.5 sm:mt-5 sm:flex-row sm:gap-3">
-              <a
-                href="#inquiry"
-                className="inline-flex h-11 items-center justify-center rounded-full bg-white px-5 text-[13px] font-semibold text-forest-900 transition hover:bg-[#f7efe9] sm:h-12 sm:px-6 sm:text-sm"
-              >
-                이 패키지로 문의하기
-              </a>
-              <a
-                href="#inquiry-contact"
-                className="inline-flex h-11 items-center justify-center rounded-full border border-white/20 px-5 text-[13px] font-semibold text-cream transition hover:bg-white/10 sm:h-12 sm:px-6 sm:text-sm"
-              >
-                상담 정보 바로 보기
-              </a>
             </div>
           </article>
         </div>

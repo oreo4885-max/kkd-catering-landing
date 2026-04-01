@@ -58,9 +58,9 @@ export function HeroSection() {
             {hero.badges.map((badge) => (
               <li
                 key={badge}
-                className="interactive-card ko-chip inline-flex items-center gap-2 rounded-full border border-forest-900/8 bg-white px-3.5 py-1.5 text-[13px] font-medium text-forest-800 sm:px-4 sm:py-2 sm:text-sm"
+                className="interactive-card ko-chip inline-flex items-center gap-2.5 rounded-full border border-forest-900/8 bg-white px-3.5 py-1.5 text-[13px] font-medium text-forest-800 sm:px-4 sm:py-2 sm:text-sm"
               >
-                <DonutIcon className="h-4 w-4 shrink-0" />
+                <DonutIcon className="h-6 w-6 shrink-0 drop-shadow-[0_5px_6px_rgba(191,104,39,0.24)]" />
                 {badge}
               </li>
             ))}
@@ -93,8 +93,8 @@ export function HeroSection() {
                     {siteContent.ui.heroCardTitle}
                   </p>
                 </div>
-                <div className="inline-flex items-center gap-2 rounded-full border border-kkdred/20 bg-white px-3 py-1 text-[11px] font-medium text-kkdred sm:text-xs">
-                  <DonutCoffeeIcon className="h-5 w-5" />
+                <div className="inline-flex items-center gap-3 rounded-full border border-kkdred/20 bg-white px-3.5 py-1.5 text-[11px] font-medium text-kkdred sm:text-xs">
+                  <DonutCoffeeIcon className="h-9 w-9 drop-shadow-[0_5px_6px_rgba(132,52,22,0.24)]" />
                   {siteContent.ui.heroCardBadge}
                 </div>
               </div>
@@ -129,8 +129,8 @@ export function HeroSection() {
                   );
                 })}
               </div>
-              <div className="mt-3 inline-flex items-center gap-2 rounded-full bg-white/75 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-forest-800 sm:mt-4 sm:text-xs">
-                <DonutCoffeeIcon className="h-5 w-5" />
+              <div className="mt-3 inline-flex items-center gap-3 rounded-full bg-white/78 px-3.5 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-forest-800 sm:mt-4 sm:text-xs">
+                <DonutCoffeeIcon className="h-9 w-9 drop-shadow-[0_5px_6px_rgba(132,52,22,0.24)]" />
                 Donuts + Coffee Experience
               </div>
               <p className="ko-body mt-3 text-[13px] leading-5 text-forest-800/75 sm:text-sm sm:leading-6">{currentShowcase.note}</p>

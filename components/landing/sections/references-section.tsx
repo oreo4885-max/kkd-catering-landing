@@ -31,7 +31,7 @@ const referenceVisuals = [
 ];
 
 function ReferenceIcon() {
-  return <DonutCoffeeIcon className="h-5 w-5" />;
+  return <DonutCoffeeIcon className="h-7 w-7 drop-shadow-[0_5px_6px_rgba(132,52,22,0.16)]" />;
 }
 
 export function ReferencesSection() {
@@ -146,7 +146,7 @@ export function ReferencesSection() {
                       className="rounded-[20px] border border-white/12 bg-white/8 px-4 py-3.5 backdrop-blur sm:rounded-[22px]"
                     >
                       <div className="flex items-start gap-3">
-                        <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#c9eedc]">
+                        <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-[18px] bg-[#c9eedc] shadow-[0_10px_18px_rgba(18,38,25,0.08)]">
                           <ReferenceIcon />
                         </span>
                         <p className="ko-body text-[13px] leading-5 text-white sm:text-sm sm:leading-6">{point}</p>

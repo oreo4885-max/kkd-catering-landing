@@ -39,7 +39,7 @@ const processMeta = [
 ];
 
 function ProcessIcon() {
-  return <DonutCoffeeIcon className="h-5 w-5" />;
+  return <DonutCoffeeIcon className="h-7 w-7 drop-shadow-[0_5px_6px_rgba(132,52,22,0.16)]" />;
 }
 
 export function ProcessSection() {
@@ -122,7 +122,7 @@ export function ProcessSection() {
                       className="rounded-[20px] border border-forest-900/8 bg-forest-50 px-4 py-3.5"
                     >
                       <div className="flex items-start gap-3">
-                        <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#c9eedc]">
+                        <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-[18px] bg-[#c9eedc] shadow-[0_10px_18px_rgba(18,38,25,0.08)]">
                           <ProcessIcon />
                         </span>
                         <p className="ko-body text-[13px] leading-5 text-forest-900 sm:text-sm sm:leading-6">{item}</p>

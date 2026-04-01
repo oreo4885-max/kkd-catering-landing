@@ -14,7 +14,7 @@ function PackageIcon({
 }) {
   if (type === "badge") {
     return (
-      <DonutIcon className={`h-5 w-5 ${accentClass}`} />
+      <DonutIcon className={`h-6 w-6 ${accentClass}`} />
     );
   }
 
@@ -31,12 +31,12 @@ function PackageIcon({
 
   if (type === "signal") {
     return (
-      <DonutCoffeeIcon className={`h-5 w-5 ${accentClass}`} />
+      <DonutCoffeeIcon className={`h-7 w-7 ${accentClass}`} />
     );
   }
 
   return (
-    <DonutIcon className={`h-4 w-4 ${accentClass}`} />
+    <DonutIcon className={`h-5 w-5 ${accentClass}`} />
   );
 }
 
@@ -221,7 +221,7 @@ export function PackagesSection() {
                     className={`fade-rise rounded-[20px] border px-4 py-3 backdrop-blur sm:rounded-[22px] ${palette.subtleCard}`}
                   >
                     <div className="flex items-center gap-3">
-                      <span className={`inline-flex h-10 w-10 items-center justify-center rounded-2xl ${palette.accentBg}`}>
+                      <span className={`inline-flex h-12 w-12 items-center justify-center rounded-[18px] shadow-[0_10px_18px_rgba(18,38,25,0.08)] ${palette.accentBg}`}>
                         <PackageIcon type={signal.icon} accentClass={palette.accentText} />
                       </span>
                       <div>
@@ -256,8 +256,8 @@ export function PackagesSection() {
 
                 <div className="p-3 sm:p-4 lg:p-4">
                 <div className="rounded-[22px] border border-white/12 bg-white/8 px-4 py-3 sm:rounded-[24px] sm:py-3.5">
-                    <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/70">
-                      <DonutCoffeeIcon className="h-5 w-5" />
+                    <div className="inline-flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.18em] text-white/70">
+                      <DonutCoffeeIcon className="h-7 w-7 drop-shadow-[0_5px_6px_rgba(132,52,22,0.18)]" />
                       {pricingGuide.label}
                     </div>
                     <p className="ko-heading mt-1.5 text-[1.02rem] font-semibold text-white sm:text-xl">{pricingGuide.headline}</p>
@@ -281,7 +281,7 @@ export function PackagesSection() {
                 <ul className="mt-3 space-y-2.5">
                   {activePackage.highlights.map((feature) => (
                     <li key={`${activePackage.id}-${feature}`} className="fade-rise flex gap-3 text-[13px] leading-5 text-white/90 sm:text-[15px] sm:leading-6">
-                      <span className={`inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full ${palette.checkBg}`}>
+                      <span className={`inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full ${palette.checkBg}`}>
                         <PackageIcon type="check" accentClass={palette.checkText} />
                       </span>
                       <span>{feature}</span>

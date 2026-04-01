@@ -7,7 +7,7 @@ import { DonutCoffeeIcon } from "../brand-icons";
 function AutoPackageIcon({ active }: { active: boolean }) {
   return (
     <DonutCoffeeIcon
-      className={`h-4 w-4 transition-transform duration-300 ${active ? "scale-100" : "scale-90 opacity-70"}`}
+      className={`h-5 w-5 transition-transform duration-300 ${active ? "scale-100" : "scale-90 opacity-70"}`}
     />
   );
 }
@@ -57,7 +57,7 @@ export function QuickQuoteSection() {
               </p>
               <div className="mt-5 rounded-[22px] bg-forest-50 px-4 py-4 sm:mt-6 sm:rounded-[24px] sm:px-5 sm:py-5">
                 <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-forest-700">
-                  <DonutCoffeeIcon className="h-5 w-5" />
+                  <DonutCoffeeIcon className="h-7 w-7 drop-shadow-[0_5px_6px_rgba(132,52,22,0.16)]" />
                   Quick Summary
                 </div>
                 <p className="ko-body mt-3 text-[15px] leading-7 text-forest-900 sm:text-base sm:leading-8">{summaryByPackage[desiredPackage]}</p>

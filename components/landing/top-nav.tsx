@@ -61,7 +61,7 @@ export function TopNav() {
   return (
     <header className="sticky top-0 z-50 px-4 pt-2.5 sm:px-6 sm:pt-4">
       <div
-        className={`mx-auto max-w-7xl rounded-[22px] border px-3 py-2 backdrop-blur transition-all sm:rounded-[28px] sm:px-6 sm:py-3.5 ${
+        className={`mx-auto max-w-7xl rounded-[22px] border px-3 py-2 backdrop-blur-none transition-all sm:rounded-[28px] sm:px-6 sm:py-3.5 sm:backdrop-blur ${
           scrolled
             ? "border-forest-900/12 bg-white/98 shadow-[0_18px_45px_rgba(22,34,19,0.14)]"
             : "border-forest-900/10 bg-white/94 shadow-card"

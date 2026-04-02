@@ -7,28 +7,28 @@ import { SectionIntro } from "../section-intro";
 const brandingVisuals = [
   {
     image: "/media/web-ready/serving-scene-square.jpg",
-    context: "임직원 응원형",
-    mood: "따뜻한 응원 메시지와 팀 경험 중심",
+    context: "임직원 웰컴형",
+    mood: "환영 메시지와 출근길 경험 강화 중심",
   },
   {
     image: "/media/web-ready/hero-truck-front.jpg",
     context: "지점 프로모션형",
-    mood: "고객 접점과 브랜드 노출 강화 중심",
+    mood: "방문 고객 접점과 브랜드 노출 강화 중심",
   },
   {
     image: "/media/web-ready/event-overview-wide.jpg",
-    context: "학교 행사형",
-    mood: "밝고 사진이 잘 남는 현장 분위기 중심",
+    context: "캠퍼스 응원형",
+    mood: "밝고 참여감 있는 현장 분위기 중심",
   },
   {
     image: "/media/web-ready/truck-closeup-square.jpg",
     context: "촬영장 서포트형",
-    mood: "응원 문구와 순간 집중형 운영 중심",
+    mood: "응원 메시지와 휴식 타이밍 연계 중심",
   },
   {
     image: "/media/web-ready/queue-side-view.jpg",
-    context: "브랜드 응원형",
-    mood: "사람이 모이고 반응이 보이는 현장 중심",
+    context: "팝업 유입형",
+    mood: "대기 구간 참여 유도와 주목도 강화 중심",
   },
 ];
 
@@ -57,7 +57,7 @@ export function CoBrandingSection() {
 
               return (
                 <button
-                  key={example}
+                  key={example.title}
                   type="button"
                   onClick={() => setActiveIndex(index)}
                   className={`interactive-card group relative min-w-[220px] overflow-hidden rounded-[22px] border px-4 py-3.5 text-left transition-all duration-300 sm:min-w-[250px] sm:rounded-[24px] sm:px-5 sm:py-4 ${
@@ -74,7 +74,9 @@ export function CoBrandingSection() {
                   <p className={`text-[11px] font-semibold uppercase tracking-[0.18em] sm:text-xs ${active ? "text-white/75" : "text-kkdred"}`}>
                     {siteContent.ui.brandingBadge}
                   </p>
-                  <p className="ko-heading mt-3 line-clamp-2 text-[1.02rem] font-semibold leading-6 sm:text-lg sm:leading-7">{example}</p>
+                  <p className="ko-heading mt-3 line-clamp-2 text-[1.02rem] font-semibold leading-6 sm:text-lg sm:leading-7">
+                    {example.title}
+                  </p>
                   <div className="mt-4 flex items-center justify-between">
                     <span className={`text-[13px] sm:text-sm ${active ? "text-cream/78" : "text-forest-700/70"}`}>브랜딩 보기</span>
                     <span
@@ -95,7 +97,7 @@ export function CoBrandingSection() {
           <div className="relative mt-5">
             <div className="pointer-events-none absolute -inset-x-4 -top-4 h-[18rem] rounded-[40px] bg-[#a9523f]/18 blur-3xl sm:-inset-x-8 sm:h-[22rem]" />
             <article
-              key={activeExample}
+              key={activeExample.title}
               className="fade-rise relative overflow-hidden rounded-[28px] bg-[#a9523f] p-5 text-cream shadow-soft transition-all duration-500 sm:rounded-[32px] sm:p-8 lg:p-10"
             >
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.15),transparent_26%)]" />
@@ -106,11 +108,10 @@ export function CoBrandingSection() {
                     {activeVisual.context}
                   </p>
                   <h3 className="ko-heading mt-3 max-w-[18ch] text-[1.9rem] font-semibold leading-[1.2] sm:mt-4 sm:text-[2.3rem]">
-                    {activeExample}
+                    {activeExample.title}
                   </h3>
                   <p className="ko-body mt-3 max-w-3xl text-[15px] leading-7 text-white/82 sm:mt-4 sm:text-lg sm:leading-8">
-                    현장 성격에 맞춰 브랜드명, 지점명, 응원 문구, 행사 목적을 자연스럽게 녹여내는 방식의 브랜딩 예시입니다.
-                    단순 로고 노출보다 톤과 분위기를 맞추는 데 초점을 둡니다.
+                    {activeExample.description}
                   </p>
 
                   <div className="mt-5 grid gap-2.5 sm:mt-8 sm:grid-cols-2 sm:gap-3">
@@ -144,7 +145,7 @@ export function CoBrandingSection() {
                     <img
                       key={activeVisual.image}
                       src={activeVisual.image}
-                      alt={`${activeExample} 브랜딩 예시 이미지`}
+                      alt={`${activeExample.title} 브랜딩 예시 이미지`}
                       className="fade-rise h-full w-full object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/28 via-black/10 to-transparent" />

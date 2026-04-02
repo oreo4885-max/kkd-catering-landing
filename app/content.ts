@@ -58,6 +58,11 @@ export type ReferenceItem = {
   author: string;
 };
 
+export type BrandingExampleItem = {
+  title: string;
+  description: string;
+};
+
 export type FaqItem = {
   question: string;
   answer: string;
@@ -181,8 +186,7 @@ export const siteContent = {
   quickQuote: {
     eyebrow: "Quick Quote",
     title: "3분 안에 우리 행사에 맞는 운영 방향을 가볍게 확인해 보세요",
-    description:
-      "세부 제한사항보다 먼저, 행사 규모와 목적에 맞는 패키지 방향을 빠르게 잡아드리는 용도의 상단 퀵폼입니다.",
+    description: "",
     attendeeOptions: ["100~120명", "150명 이상", "250명 이상"],
     eventOptions: ["기업 행사", "지점 프로모션", "학교 행사", "촬영장 서포트", "브랜드 협업"],
     packageOptions: [
@@ -358,12 +362,32 @@ export const siteContent = {
   ] satisfies PackageItem[],
 
   brandingExamples: [
-    "임직원 출근길 웰컴 도넛트럭 이벤트",
-    "지점 방문 고객 감사 프로모션 운영",
-    "대학교 캠퍼스 응원형 현장 이벤트",
-    "촬영장 응원 메시지 연계 서포트 운영",
-    "브랜드 팝업 현장 대기열 유입 이벤트",
-  ],
+    {
+      title: "임직원 출근길 웰컴 도넛트럭 이벤트",
+      description:
+        "출근 시간대에 맞춰 환영 메시지와 간편한 운영 동선을 구성하는 예시입니다. 첫 인상과 브랜드 친밀도를 높이는 흐름에 적합합니다.",
+    },
+    {
+      title: "지점 방문 고객 감사 프로모션 운영",
+      description:
+        "방문 고객에게 감사 메시지와 브랜드 경험을 함께 전달하는 예시입니다. 체류 만족도와 재방문 인상을 높이는 흐름에 잘 맞습니다.",
+    },
+    {
+      title: "대학교 캠퍼스 응원형 현장 이벤트",
+      description:
+        "축제, 설명회, 학사 행사처럼 밝고 참여감 있는 현장에 어울리는 예시입니다. 사진 반응과 주목도를 자연스럽게 끌어올리기 좋습니다.",
+    },
+    {
+      title: "촬영장 응원 메시지 연계 서포트 운영",
+      description:
+        "촬영 및 지원 현장에 맞춰 응원 문구와 휴식 타이밍을 자연스럽게 연결하는 예시입니다. 메시지 전달력과 현장 만족도를 함께 챙길 수 있습니다.",
+    },
+    {
+      title: "브랜드 팝업 현장 대기열 유입 이벤트",
+      description:
+        "팝업 대기 구간에서도 브랜드 노출과 참여 경험이 이어지도록 설계하는 예시입니다. 대기 시간을 체험 요소로 전환하기에 적합합니다.",
+    },
+  ] satisfies BrandingExampleItem[],
 
   process: [
     {

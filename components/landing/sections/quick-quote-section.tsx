@@ -52,9 +52,6 @@ export function QuickQuoteSection() {
               <h2 className="ko-heading mt-4 max-w-[12ch] text-[1.9rem] font-semibold tracking-tight text-forest-900 sm:max-w-[14ch] sm:text-3xl">
                 {quickQuote.title}
               </h2>
-              <p className="ko-body mt-3 max-w-[36rem] text-[14px] leading-6 text-forest-800/80 sm:mt-4 sm:text-base sm:leading-7">
-                {quickQuote.description}
-              </p>
               <div className="mt-5 rounded-[22px] bg-forest-50 px-4 py-4 sm:mt-6 sm:rounded-[24px] sm:px-5 sm:py-5">
                 <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-forest-700">
                   <DonutCoffeeIcon className="h-7 w-7 drop-shadow-[0_5px_6px_rgba(132,52,22,0.16)]" />

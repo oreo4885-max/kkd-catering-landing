@@ -12,12 +12,9 @@ export function InquirySection() {
           <div className="lg:sticky lg:top-10">
             <SectionIntro {...siteContent.sections.inquiry} />
             <div className="mt-6 card-surface rounded-[24px] p-5 sm:mt-8 sm:rounded-[28px] sm:p-6">
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-forest-700">
-                {siteContent.inquiryForm.title}
-              </p>
-              <p className="mt-3 text-[14px] leading-6 text-forest-800/85 sm:mt-4 sm:text-sm sm:leading-7">{siteContent.inquiryForm.description}</p>
-              <div className="mt-4 rounded-[20px] bg-forest-800 px-4 py-3.5 text-[13px] leading-6 text-cream/90 sm:rounded-[22px] sm:py-4 sm:text-sm sm:leading-7">
-                빠른 확인을 원하시면 `업체명`, `연락처`, `행사일`만 먼저 남겨주셔도 검토를 시작할 수 있습니다.
+              <div className="rounded-[22px] bg-forest-800 px-5 py-5 text-base font-semibold leading-8 text-cream sm:px-6 sm:py-6 sm:text-[1.08rem] sm:leading-9">
+                빠른 확인이 필요하시면 <span className="text-white">업체명, 연락처, 행사일</span>만 먼저 남겨주셔도
+                상담 검토를 시작할 수 있습니다.
               </div>
               <div className="mt-4 rounded-[20px] border border-forest-900/8 bg-forest-50 px-4 py-3.5 text-[13px] leading-6 text-forest-800/88 sm:rounded-[22px] sm:py-4 sm:text-sm sm:leading-7">
                 <p className="font-semibold text-forest-900">{legal.pageNotice}</p>

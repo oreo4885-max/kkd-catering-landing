@@ -29,22 +29,13 @@ export function InquiryForm() {
   const [message, setMessage] = useState("");
   const [privacyChecked, setPrivacyChecked] = useState(false);
 
-  const trustSignals = useMemo(
-    () => [
-      "예상 답변 시간: 영업일 기준 순차 회신",
-      "진행 가능 지역: 수도권/지방권 상담 후 검토",
-      "필수 입력 3개: 업체명, 연락처, 행사일",
-    ],
-    [],
-  );
-
   const privacyItems = useMemo(
     () => [
       "수집 항목: 업체명, 담당자명, 연락처, 이메일, 행사일, 행사시간, 행사 장소, 예상 인원, 희망 패키지, 전기 지원 가능 여부, 공동 브랜딩 가능 여부, 사진/영상 활용 가능 여부, 추가 요청사항",
       "수집 목적: 케이터링 상담 접수, 운영 가능 여부 확인, 견적 및 제안 안내",
       `보유 기간: ${legal.retentionPeriod}`,
       `파기 기준: ${legal.destructionPolicy}`,
-      "동의 거부 권리 및 불이익: 동의를 거부하실 수 있으나, 상담 접수 및 회신이 제한될 수 있습니다.",
+      "동의 거부 권리 및 불이익: 동의를 거부하실 수 있으나 상담 접수 및 회신이 제한될 수 있습니다.",
     ],
     [legal.destructionPolicy, legal.retentionPeriod],
   );
@@ -93,17 +84,6 @@ export function InquiryForm() {
 
   return (
     <form className="card-surface rounded-[28px] p-4 sm:rounded-[32px] sm:p-8" id="inquiry-form" onSubmit={handleSubmit}>
-      <div className="mb-5 grid gap-2.5 sm:mb-6 sm:grid-cols-3 sm:gap-3">
-        {trustSignals.map((item) => (
-          <div
-            key={item}
-            className="rounded-[18px] border border-forest-900/8 bg-forest-50 px-4 py-3.5 text-[13px] leading-5 text-forest-800 sm:rounded-[20px] sm:py-4 sm:text-sm sm:leading-6"
-          >
-            {item}
-          </div>
-        ))}
-      </div>
-
       <div className="grid gap-3.5 sm:grid-cols-2 sm:gap-4">
         {inquiryForm.fields.map((field) => {
           const spanClass = field.type === "textarea" || field.name === "location" ? "sm:col-span-2" : "";
@@ -186,8 +166,6 @@ export function InquiryForm() {
 
       <div className="mt-5 flex flex-col gap-3 border-t border-forest-900/8 pt-4 text-sm text-forest-800/75 sm:mt-6 sm:pt-5 sm:flex-row sm:items-center sm:justify-between">
         <div className="space-y-2">
-          <p>{inquiryForm.description}</p>
-          <p className="text-[13px] leading-6 text-forest-700/78">{legal.pageNotice}</p>
           {!privacyChecked ? <p className="text-forest-700/80">개인정보 동의 후 상담 요청 버튼이 활성화됩니다.</p> : null}
           {message ? (
             <p className={status === "success" ? "text-forest-800" : "text-kkdred"}>{message}</p>
@@ -199,7 +177,7 @@ export function InquiryForm() {
           disabled={status === "submitting" || !privacyChecked}
           className="inline-flex h-11 items-center justify-center rounded-full bg-forest-800 px-5 text-[13px] font-semibold text-cream transition hover:bg-forest-900 disabled:cursor-not-allowed disabled:opacity-70 sm:h-12 sm:px-6 sm:text-sm"
         >
-          {status === "submitting" ? "문의 전송 중.." : inquiryForm.submitLabel}
+          {status === "submitting" ? "문의 전송 중..." : inquiryForm.submitLabel}
         </button>
       </div>
     </form>

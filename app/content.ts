@@ -174,7 +174,7 @@ export const siteContent = {
       eyebrow: "Inquiry Form",
       title: "문의하면 무엇을 받을 수 있나요",
       description:
-        "예상 인원, 행사일, 장소 정도만 남겨주셔도 운영 가능 여부와 적합한 패키지 방향을 빠르게 검토해드립니다.",
+        "업체명, 연락처, 행사일만 먼저 남겨주셔도 상담 검토를 빠르게 시작할 수 있습니다.",
     },
   },
 
@@ -436,7 +436,7 @@ export const siteContent = {
 
   inquiryForm: {
     title: "빠른 견적 문의",
-    description: "필수 항목 3개만 먼저 남겨주셔도 운영 가능 여부와 적합한 패키지 방향을 빠르게 검토해드립니다.",
+    description: "업체명, 연락처, 행사일만 먼저 남겨주셔도 상담 검토를 빠르게 시작할 수 있습니다.",
     fields: [
       { name: "company", label: "업체명", type: "text", required: true },
       { name: "contactName", label: "담당자명", type: "text", required: false },

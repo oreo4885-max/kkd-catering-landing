@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+import nodemailer from "nodemailer";
+import { siteContent } from "@/app/content";
 
 const metroKeywords = [
   "서울",
@@ -53,17 +55,17 @@ const localKeywords = [
 
 type InquiryPayload = {
   company: string;
-  contactName: string;
+  contactName?: string;
   phone: string;
-  email: string;
+  email?: string;
   eventDate: string;
-  eventTime: string;
-  location: string;
-  attendees: string;
-  desiredPackage: string;
-  power: string;
-  coBranding: string;
-  photoUsage: string;
+  eventTime?: string;
+  location?: string;
+  attendees?: string;
+  desiredPackage?: string;
+  power?: string;
+  coBranding?: string;
+  photoUsage?: string;
   notes?: string;
   privacyConsent?: string;
 };
@@ -72,11 +74,11 @@ function pickRouteLabel(location: string) {
   const normalized = (location || "").replace(/\s+/g, "");
 
   if (metroKeywords.some((keyword) => normalized.includes(keyword))) {
-    return "수도권 담당";
+    return "수도권지역담당";
   }
 
   if (localKeywords.some((keyword) => normalized.includes(keyword))) {
-    return "지방권 담당";
+    return "지방권지역담당";
   }
 
   return "지역 확인 필요";
@@ -115,6 +117,67 @@ function validatePayload(payload: InquiryPayload) {
   return null;
 }
 
+function getRecipient(routeLabel: string) {
+  const metroEmail = process.env.INQUIRY_TO_METRO || siteContent.contact.contacts[0]?.email;
+  const localEmail = process.env.INQUIRY_TO_LOCAL || siteContent.contact.contacts[1]?.email;
+  const fallbackEmail = process.env.INQUIRY_TO_FALLBACK || siteContent.legal.operatorEmail;
+
+  if (routeLabel === "수도권지역담당") {
+    return metroEmail;
+  }
+
+  if (routeLabel === "지방권지역담당") {
+    return localEmail;
+  }
+
+  return fallbackEmail;
+}
+
+function getTransporter() {
+  const host = process.env.SMTP_HOST;
+  const port = Number(process.env.SMTP_PORT || 587);
+  const secure = process.env.SMTP_SECURE === "true";
+  const user = process.env.SMTP_USER;
+  const pass = process.env.SMTP_PASS;
+
+  if (!host || !port || !user || !pass) {
+    return null;
+  }
+
+  return nodemailer.createTransport({
+    host,
+    port,
+    secure,
+    auth: {
+      user,
+      pass,
+    },
+  });
+}
+
+function buildMailText(payload: InquiryPayload, routeLabel: string) {
+  return [
+    "새 상담 문의가 접수되었습니다.",
+    "",
+    `담당 구분: ${routeLabel}`,
+    `업체명: ${payload.company || "-"}`,
+    `담당자명: ${payload.contactName || "-"}`,
+    `연락처: ${payload.phone || "-"}`,
+    `이메일: ${payload.email || "-"}`,
+    `행사일: ${payload.eventDate || "-"}`,
+    `행사시간: ${payload.eventTime || "-"}`,
+    `행사 장소: ${payload.location || "-"}`,
+    `예상 인원: ${payload.attendees || "-"}`,
+    `희망 패키지: ${payload.desiredPackage || "-"}`,
+    `전기 지원 가능 여부: ${payload.power || "-"}`,
+    `공동 브랜딩 가능 여부: ${payload.coBranding || "-"}`,
+    `사진/영상 활용 가능 여부: ${payload.photoUsage || "-"}`,
+    `추가 요청사항: ${payload.notes || "-"}`,
+    "",
+    "본 메일은 랜딩페이지 상담 문의 폼을 통해 자동 접수되었습니다.",
+  ].join("\n");
+}
+
 export async function POST(request: Request) {
   try {
     const payload = (await request.json()) as InquiryPayload;
@@ -124,49 +187,36 @@ export async function POST(request: Request) {
       return NextResponse.json({ message: validationError }, { status: 400 });
     }
 
-    const scriptUrl = process.env.GOOGLE_SCRIPT_URL;
-    const scriptSecret = process.env.GOOGLE_SCRIPT_SECRET;
+    const transporter = getTransporter();
+    const from = process.env.SMTP_FROM || process.env.SMTP_USER;
 
-    if (!scriptUrl || !scriptSecret) {
+    if (!transporter || !from) {
       return NextResponse.json(
-        { message: "문의 저장 설정이 아직 완료되지 않았습니다. 관리자에게 문의해 주세요." },
+        { message: "메일 접수 설정이 아직 완료되지 않았습니다. 관리자에게 문의해 주세요." },
         { status: 500 },
       );
     }
 
-    const routeLabel = pickRouteLabel(payload.location);
+    const routeLabel = pickRouteLabel(payload.location || "");
+    const to = getRecipient(routeLabel);
 
-    const response = await fetch(scriptUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        ...payload,
-        routeLabel,
-        secret: scriptSecret,
-      }),
-      cache: "no-store",
+    if (!to) {
+      return NextResponse.json(
+        { message: "문의 수신 메일 주소가 설정되지 않았습니다. 관리자에게 문의해 주세요." },
+        { status: 500 },
+      );
+    }
+
+    await transporter.sendMail({
+      from,
+      to,
+      replyTo: payload.email || undefined,
+      subject: `[크리스피크림도넛 상담 접수] ${payload.company} / ${payload.eventDate}`,
+      text: buildMailText(payload, routeLabel),
     });
 
-    const rawText = await response.text();
-    let result: { ok?: boolean; message?: string } = {};
-
-    try {
-      result = JSON.parse(rawText) as { ok?: boolean; message?: string };
-    } catch {
-      result = {};
-    }
-
-    if (!response.ok || !result.ok) {
-      return NextResponse.json(
-        { message: "문의 저장 중 문제가 발생했습니다. 잠시 후 다시 시도해 주세요." },
-        { status: 500 },
-      );
-    }
-
     return NextResponse.json({
-      message: `${routeLabel} 기준으로 문의가 정상 접수되었습니다. 담당자가 확인 후 연락드릴 예정입니다.`,
+      message: `${routeLabel} 기준으로 문의가 정상 접수되었습니다. 담당자가 회사 메일에서 확인 후 연락드릴 예정입니다.`,
     });
   } catch (error) {
     console.error(error);

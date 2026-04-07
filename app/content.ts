@@ -91,8 +91,6 @@ export type ContactLine = {
   label: string;
   phone: string;
   href: string;
-  email: string;
-  emailHref: string;
 };
 
 export type ContactContent = {
@@ -105,7 +103,6 @@ export type ContactContent = {
 export type LegalContent = {
   pageNotice: string;
   operator: string;
-  operatorEmail: string;
   retentionPeriod: string;
   destructionPolicy: string;
   privacyPolicyHref: string;
@@ -212,15 +209,11 @@ export const siteContent = {
         label: "수도권지역담당",
         phone: "02-708-2822",
         href: "tel:02-708-2822",
-        email: "jeonseonyoung@lotte.net",
-        emailHref: "mailto:jeonseonyoung@lotte.net",
       },
       {
         label: "지방권지역담당",
         phone: "051-501-6637",
         href: "tel:051-501-6637",
-        email: "mihyeon.cheon@lotte.net",
-        emailHref: "mailto:mihyeon.cheon@lotte.net",
       },
     ],
   } satisfies ContactContent,
@@ -228,7 +221,6 @@ export const siteContent = {
   legal: {
     pageNotice: "본 페이지는 크리스피크림도넛 공식 홈페이지가 아닌 영업 상담용 안내 페이지입니다.",
     operator: "크리스피크림도넛 동부지점",
-    operatorEmail: "mcomc@lotte.net",
     retentionPeriod: "접수일로부터 30일",
     destructionPolicy: "보유기간 종료 후 30일 이내 파기",
     privacyPolicyHref: "/privacy",

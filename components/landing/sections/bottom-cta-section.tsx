@@ -32,12 +32,7 @@ export function BottomCtaSection() {
           </p>
           <div className="mt-4 space-y-1 text-sm text-cream/76">
             <p>{legal.pageNotice}</p>
-            <p>
-              운영주체: {legal.operator} ·{" "}
-              <a href={`mailto:${legal.operatorEmail}`} className="underline underline-offset-4 hover:text-white">
-                {legal.operatorEmail}
-              </a>
-            </p>
+            <p>운영주체: {legal.operator}</p>
           </div>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <a

@@ -18,9 +18,6 @@ export function InquirySection() {
                 <p className="mt-2">
                   운영주체: <span className="font-medium text-forest-900">{legal.operator}</span>
                 </p>
-                <a href={`mailto:${legal.operatorEmail}`} className="underline underline-offset-4">
-                  {legal.operatorEmail}
-                </a>
               </div>
             </div>
           </div>

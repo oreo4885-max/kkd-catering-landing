@@ -17,12 +17,6 @@ export default function PrivacyPage() {
               <p className="mt-2">
                 운영주체: <span className="font-semibold text-forest-900">{legal.operator}</span>
               </p>
-              <p>
-                문의:{" "}
-                <a href={`mailto:${legal.operatorEmail}`} className="underline underline-offset-4">
-                  {legal.operatorEmail}
-                </a>
-              </p>
             </section>
 
             <section>
@@ -58,12 +52,7 @@ export default function PrivacyPage() {
 
             <section>
               <h2 className="ko-heading text-xl font-semibold text-forest-900">5. 문의</h2>
-              <p className="mt-2">추가 확인이 필요하신 경우 아래 운영 연락처로 문의해 주세요.</p>
-              <p className="mt-2">
-                <a href={`mailto:${legal.operatorEmail}`} className="underline underline-offset-4">
-                  {legal.operatorEmail}
-                </a>
-              </p>
+              <p className="mt-2">추가 확인이 필요하신 경우 본 페이지에 안내된 지역 담당 번호를 통해 전화 상담으로 문의해 주세요.</p>
             </section>
           </div>
         </div>

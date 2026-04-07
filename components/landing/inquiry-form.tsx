@@ -153,9 +153,6 @@ export function InquiryForm() {
             개인정보처리방침 보기
           </a>
           <span className="text-forest-700/70">운영주체: {legal.operator}</span>
-          <a href={`mailto:${legal.operatorEmail}`} className="underline underline-offset-4 transition hover:text-forest-900">
-            {legal.operatorEmail}
-          </a>
         </div>
 
         <div className="mt-3 rounded-[18px] bg-white/80 px-4 py-3 text-[13px] leading-6 text-forest-800/85">

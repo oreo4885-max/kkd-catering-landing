@@ -30,7 +30,7 @@ export function InquirySection() {
               </p>
             </div>
 
-            <div className="mt-5 grid gap-3 sm:grid-cols-2">
+            <div className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
               {contact.contacts.map((item) => (
                 <a
                   key={item.phone}
@@ -45,6 +45,9 @@ export function InquirySection() {
                 </a>
               ))}
             </div>
+            <p className="mt-3 rounded-[18px] border border-forest-900/8 bg-forest-50 px-4 py-3 text-[13px] leading-6 text-forest-800/82 sm:text-sm sm:leading-7">
+              {contact.metroNotice}
+            </p>
 
             <div className="mt-5 grid gap-3 lg:grid-cols-[1.1fr_0.9fr]">
               <div className="rounded-[22px] border border-forest-900/8 bg-forest-50 px-5 py-4 text-[13px] leading-6 text-forest-800/88 sm:text-sm sm:leading-7">

@@ -82,6 +82,7 @@ export type ContactLine = {
 
 export type ContactContent = {
   title: string;
+  metroNotice: string;
   consultHours: string;
   lunchBreak: string;
   contacts: ContactLine[];
@@ -175,13 +176,19 @@ export const siteContent = {
 
   contact: {
     title: "전화 상담 안내",
+    metroNotice: "수도권은 지역 및 담당 구분없이 문의연락 가능합니다.",
     consultHours: "09:00~18:00",
     lunchBreak: "12:00~13:00",
     contacts: [
       {
-        label: "수도권지역담당",
+        label: "수도권지역 1담당",
         phone: "02-708-2822",
         href: "tel:02-708-2822",
+      },
+      {
+        label: "수도권지역 2담당",
+        phone: "02-709-2048",
+        href: "tel:02-709-2048",
       },
       {
         label: "지방권지역담당",

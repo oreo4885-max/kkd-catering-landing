@@ -53,9 +53,6 @@ export function BottomCtaSection() {
               {siteContent.bottomCta.secondaryCta.label}
             </a>
           </div>
-          <p className="mt-4 text-sm text-cream/72">
-            웹페이지에서는 개인정보를 입력받지 않으며, 전화 상담을 통해 운영 가능 여부를 안내드립니다.
-          </p>
         </div>
       </div>
     </section>

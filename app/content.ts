@@ -177,9 +177,8 @@ export const siteContent = {
     },
     inquiry: {
       eyebrow: "Phone Consultation",
-      title: "전화로 바로 상담받을 수 있나요",
-      description:
-        "웹에서 개인정보를 남기지 않고도 지역 담당 번호로 직접 연결해 상담을 진행하실 수 있습니다.",
+      title: "전화 상담 안내",
+      description: "지역 담당 번호로 직접 연결해 행사일, 지역, 예상 인원 기준으로 빠르게 상담을 진행하실 수 있습니다.",
     },
   },
 
@@ -516,7 +515,7 @@ export const siteContent = {
 
   bottomCta: {
     title: "행사에 맞는 도넛트럭 상담을 바로 시작해 보세요",
-    description: "웹에서 개인정보를 남기지 않고, 지역 담당 번호로 직접 연결해 상담을 진행하실 수 있습니다.",
+    description: "지역 담당 번호로 직접 연결해 행사일, 지역, 예상 인원 기준으로 빠르게 상담을 진행하실 수 있습니다.",
     primaryCta: {
       label: "수도권 전화 상담",
       href: "tel:02-708-2822",

@@ -176,10 +176,10 @@ export const siteContent = {
         "운영 제한사항을 앞세우기보다, 문의 전 가장 많이 궁금해하는 내용부터 신뢰감 있게 안내합니다.",
     },
     inquiry: {
-      eyebrow: "Inquiry Form",
-      title: "문의하면 무엇을 받을 수 있나요",
+      eyebrow: "Phone Consultation",
+      title: "전화로 바로 상담받을 수 있나요",
       description:
-        "업체명, 연락처, 행사일만 먼저 남겨주셔도 상담 검토를 빠르게 시작할 수 있습니다.",
+        "웹에서 개인정보를 남기지 않고도 지역 담당 번호로 직접 연결해 상담을 진행하실 수 있습니다.",
     },
   },
 
@@ -195,8 +195,8 @@ export const siteContent = {
       "Premium Brand Event",
     ],
     primaryCta: {
-      label: "지금 견적 문의하기",
-      href: "#inquiry",
+      label: "전화 상담 번호 보기",
+      href: "#inquiry-contact",
     },
     secondaryCta: {
       label: "추천 패키지 확인하기",
@@ -205,7 +205,7 @@ export const siteContent = {
   } satisfies QuickQuoteContent,
 
   contact: {
-    title: "상담 안내",
+    title: "전화 상담 안내",
     consultHours: "09:00~18:00",
     lunchBreak: "12:00~13:00",
     contacts: [
@@ -273,8 +273,8 @@ export const siteContent = {
       "레퍼런스 협업형 패키지로 첫 문의 부담 완화",
     ],
     primaryCta: {
-      label: "지금 견적 문의하기",
-      href: "#inquiry",
+      label: "전화 상담 번호 보기",
+      href: "#inquiry-contact",
     },
     secondaryCta: {
       label: "추천 패키지 확인하기",
@@ -440,7 +440,7 @@ export const siteContent = {
     {
       question: "전기 지원이 꼭 필요한가요?",
       answer:
-        "현장 조건에 따라 필요한 운영 방식이 달라질 수 있습니다. 전기 지원 가능 여부를 함께 남겨주시면 빠르게 확인해드립니다.",
+        "현장 조건에 따라 필요한 운영 방식이 달라질 수 있습니다. 전화 상담 시 전기 지원 가능 여부를 알려주시면 빠르게 확인해드립니다.",
     },
     {
       question: "공동 브랜딩이 가능한가요?",
@@ -515,15 +515,15 @@ export const siteContent = {
   },
 
   bottomCta: {
-    title: "행사에 맞는 도넛트럭 운영안을 받아보세요",
-    description: "브랜드를 유지하면서도 현장에 맞는 방식으로 도넛 케이터링을 제안드립니다.",
+    title: "행사에 맞는 도넛트럭 상담을 바로 시작해 보세요",
+    description: "웹에서 개인정보를 남기지 않고, 지역 담당 번호로 직접 연결해 상담을 진행하실 수 있습니다.",
     primaryCta: {
-      label: "지금 견적 문의하기",
-      href: "#inquiry",
+      label: "수도권 전화 상담",
+      href: "tel:02-708-2822",
     },
     secondaryCta: {
-      label: "추천 패키지 확인하기",
-      href: "#packages",
+      label: "지방권 전화 상담",
+      href: "tel:051-501-6637",
     },
   },
 };

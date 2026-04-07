@@ -1,5 +1,4 @@
 import { siteContent } from "@/app/content";
-import { InquiryForm } from "../inquiry-form";
 import { SectionIntro } from "../section-intro";
 
 export function InquirySection() {
@@ -13,45 +12,71 @@ export function InquirySection() {
             <SectionIntro {...siteContent.sections.inquiry} />
             <div className="mt-6 card-surface rounded-[24px] p-5 sm:mt-8 sm:rounded-[28px] sm:p-6">
               <div className="rounded-[22px] bg-forest-800 px-5 py-5 text-base font-semibold leading-8 text-cream sm:px-6 sm:py-6 sm:text-[1.08rem] sm:leading-9">
-                빠른 확인이 필요하시면 <span className="text-white">업체명, 연락처, 행사일</span>만 먼저 남겨주셔도
-                상담 검토를 시작할 수 있습니다.
+                <span className="text-white">전화 상담 시 업체명, 행사일, 예상 인원</span> 정도만 말씀해 주셔도
+                운영 가능 여부와 방향을 빠르게 안내드릴 수 있습니다.
               </div>
               <div className="mt-4 rounded-[20px] border border-forest-900/8 bg-forest-50 px-4 py-3.5 text-[13px] leading-6 text-forest-800/88 sm:rounded-[22px] sm:py-4 sm:text-sm sm:leading-7">
                 <p className="font-semibold text-forest-900">{legal.pageNotice}</p>
                 <p className="mt-2">
                   운영주체: <span className="font-medium text-forest-900">{legal.operator}</span>
                 </p>
+                <p className="mt-2">현재 웹페이지에서는 상담 내용을 별도로 저장하지 않고, 공개된 번호로 직접 상담을 안내합니다.</p>
                 <a href={`mailto:${legal.operatorEmail}`} className="underline underline-offset-4">
                   {legal.operatorEmail}
                 </a>
               </div>
             </div>
-            <div className="mt-4 card-surface rounded-[24px] p-5 sm:rounded-[28px] sm:p-6" id="inquiry-contact">
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-forest-700">{contact.title}</p>
-              <div className="mt-4 grid gap-3">
-                {contact.contacts.map((item) => (
-                  <div
-                    key={item.phone}
-                    className="rounded-[20px] border border-forest-900/8 bg-white px-4 py-3.5 transition hover:border-forest-700/25 hover:bg-forest-50 sm:rounded-[22px] sm:py-4"
-                  >
-                    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-forest-700/70">{item.label}</p>
-                    <a href={item.href} className="ko-heading mt-2 block text-[1.1rem] font-semibold text-forest-900 hover:text-forest-700 sm:text-xl">
-                      {item.phone}
-                    </a>
-                  </div>
-                ))}
+          </div>
+          <div className="card-surface rounded-[28px] p-5 sm:rounded-[32px] sm:p-8" id="inquiry-contact">
+            <div className="rounded-[24px] bg-forest-900 px-5 py-5 text-cream sm:px-6 sm:py-6">
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#ffd8d1]">Direct Call Guide</p>
+              <h3 className="ko-heading mt-3 text-2xl font-semibold leading-tight text-white sm:text-[2rem]">
+                웹에서 개인정보를 남기지 않고
+                <br />
+                전화로 바로 상담하실 수 있습니다
+              </h3>
+              <p className="mt-3 text-sm leading-7 text-cream/80 sm:text-base">
+                지역 담당 번호로 직접 연결해 행사일, 지역, 예상 인원만 말씀해 주시면 운영 가능 여부와 추천 패키지를 빠르게 안내드립니다.
+              </p>
+            </div>
+
+            <div className="mt-5 grid gap-3 sm:grid-cols-2">
+              {contact.contacts.map((item) => (
+                <a
+                  key={item.phone}
+                  href={item.href}
+                  className="rounded-[24px] border border-forest-900/10 bg-white px-5 py-5 transition hover:-translate-y-0.5 hover:border-forest-700/25 hover:bg-forest-50"
+                >
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-forest-700/70">{item.label}</p>
+                  <p className="ko-heading mt-3 text-2xl font-semibold text-forest-900 sm:text-[1.9rem]">{item.phone}</p>
+                  <p className="mt-3 inline-flex rounded-full bg-forest-100 px-3 py-1 text-xs font-semibold text-forest-800">
+                    전화 바로 연결
+                  </p>
+                </a>
+              ))}
+            </div>
+
+            <div className="mt-5 grid gap-3 lg:grid-cols-[1.1fr_0.9fr]">
+              <div className="rounded-[22px] border border-forest-900/8 bg-forest-50 px-5 py-4 text-[13px] leading-6 text-forest-800/88 sm:text-sm sm:leading-7">
+                <p className="font-semibold text-forest-900">통화 전 준비하면 좋은 정보</p>
+                <ul className="mt-2 space-y-1.5">
+                  <li>업체명 또는 행사명</li>
+                  <li>희망 행사일과 지역</li>
+                  <li>예상 인원과 원하는 운영 분위기</li>
+                </ul>
               </div>
-              <div className="mt-4 rounded-[20px] bg-forest-50 px-4 py-3.5 text-[13px] leading-6 text-forest-800/85 sm:rounded-[22px] sm:py-4 sm:text-sm sm:leading-7">
-                <p>
+              <div className="rounded-[22px] border border-forest-900/8 bg-white px-5 py-4 text-[13px] leading-6 text-forest-800/88 sm:text-sm sm:leading-7">
+                <p className="font-semibold text-forest-900">{contact.title}</p>
+                <p className="mt-2">
                   상담 가능 시간: <span className="font-semibold text-forest-900">{contact.consultHours}</span>
                 </p>
                 <p>
                   점심시간: <span className="font-semibold text-forest-900">{contact.lunchBreak}</span>
                 </p>
+                <p className="mt-2 text-forest-700/80">문의가 몰리는 시간대에는 순차적으로 연결될 수 있습니다.</p>
               </div>
             </div>
           </div>
-          <InquiryForm />
         </div>
       </div>
     </section>

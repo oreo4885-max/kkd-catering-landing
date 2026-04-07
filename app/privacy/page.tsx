@@ -1,21 +1,5 @@
 import { siteContent } from "@/app/content";
 
-const privacyItems = [
-  "업체명, 담당자명, 연락처, 이메일, 행사일, 행사시간, 행사 장소, 예상 인원, 희망 패키지, 전기 지원 가능 여부, 공동 브랜딩 가능 여부, 사진/영상 활용 가능 여부, 추가 요청사항",
-];
-
-const purposes = [
-  "케이터링 상담 접수 및 운영 가능 여부 확인",
-  "행사 규모와 목적에 맞는 패키지, 견적, 제안 안내",
-  "문의자에 대한 상담 회신 및 운영 협의",
-];
-
-const processingMethods = [
-  "웹 문의 폼을 통해 접수된 정보는 회사 메일 계정으로 전달됩니다.",
-  "접수된 정보는 상담 회신, 운영 검토, 내부 협의 목적에 한해 사용됩니다.",
-  "업무 처리에 필요한 최소 인원만 해당 메일에 접근합니다.",
-];
-
 export default function PrivacyPage() {
   const { legal } = siteContent;
 
@@ -42,43 +26,43 @@ export default function PrivacyPage() {
             </section>
 
             <section>
-              <h2 className="ko-heading text-xl font-semibold text-forest-900">2. 수집 항목</h2>
-              <ul className="mt-2 list-disc pl-5">
-                {privacyItems.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </section>
-
-            <section>
-              <h2 className="ko-heading text-xl font-semibold text-forest-900">3. 수집 및 이용 목적</h2>
-              <ul className="mt-2 list-disc pl-5">
-                {purposes.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </section>
-
-            <section>
-              <h2 className="ko-heading text-xl font-semibold text-forest-900">4. 처리 방법</h2>
-              <ul className="mt-2 list-disc pl-5">
-                {processingMethods.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </section>
-
-            <section>
-              <h2 className="ko-heading text-xl font-semibold text-forest-900">5. 보유 및 파기</h2>
-              <p className="mt-2">보유기간: {legal.retentionPeriod}</p>
-              <p>파기기준: {legal.destructionPolicy}</p>
-              <p>관련 메일 및 업무상 생성된 사본은 보유기간 종료 후 지체 없이 삭제를 원칙으로 합니다.</p>
-            </section>
-
-            <section>
-              <h2 className="ko-heading text-xl font-semibold text-forest-900">6. 동의 거부 권리</h2>
+              <h2 className="ko-heading text-xl font-semibold text-forest-900">2. 웹페이지 개인정보 수집 여부</h2>
               <p className="mt-2">
-                개인정보 수집 및 이용 동의를 거부하실 수 있으나, 문의 접수와 상담 회신이 제한될 수 있습니다.
+                현재 본 랜딩페이지는 웹 문의 폼을 운영하지 않으며, 방문자가 페이지에서 이름, 연락처, 이메일 등 개인정보를 직접 입력해
+                전송하도록 구성하지 않았습니다.
+              </p>
+              <p className="mt-2">
+                상담은 페이지에 안내된 번호를 통한 직접 전화 연결 방식으로 진행되며, 웹페이지 자체에서는 별도의 개인정보 저장 기능을
+                사용하지 않습니다.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="ko-heading text-xl font-semibold text-forest-900">3. 전화 상담 안내</h2>
+              <p className="mt-2">
+                고객이 공개된 상담 번호로 직접 연락하시는 경우, 실제 상담 과정에서 필요한 범위의 정보는 영업 상담 및 운영 가능 여부
+                확인을 위해 별도로 확인될 수 있습니다.
+              </p>
+              <p className="mt-2">
+                전화 상담 이후 전달되는 정보는 상담 목적에 필요한 최소 범위에서만 취급하며, 별도의 내부 운영 기준에 따라 관리합니다.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="ko-heading text-xl font-semibold text-forest-900">4. 운영 방식</h2>
+              <p className="mt-2">본 페이지는 크리스피크림도넛 영업 상담을 보다 쉽게 안내하기 위한 랜딩페이지입니다.</p>
+              <p className="mt-2">
+                문의가 필요한 경우, 공개된 지역 담당 번호로 직접 전화해 상담을 진행해 주시기 바랍니다.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="ko-heading text-xl font-semibold text-forest-900">5. 문의</h2>
+              <p className="mt-2">추가 확인이 필요하신 경우 아래 운영 연락처로 문의해 주세요.</p>
+              <p className="mt-2">
+                <a href={`mailto:${legal.operatorEmail}`} className="underline underline-offset-4">
+                  {legal.operatorEmail}
+                </a>
               </p>
             </section>
           </div>

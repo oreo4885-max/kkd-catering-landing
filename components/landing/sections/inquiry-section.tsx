@@ -61,7 +61,7 @@ export function InquirySection() {
               <div className="rounded-[22px] border border-forest-900/8 bg-white px-5 py-4 text-[13px] leading-6 text-forest-800/88 sm:text-sm sm:leading-7">
                 <p className="font-semibold text-forest-900">{contact.title}</p>
                 <p className="mt-2">
-                  상담 가능 시간: <span className="font-semibold text-forest-900">{contact.consultHours}</span>
+                  상담 가능 시간(평일 기준): <span className="font-semibold text-forest-900">{contact.consultHours}</span>
                 </p>
                 <p>
                   점심시간: <span className="font-semibold text-forest-900">{contact.lunchBreak}</span>

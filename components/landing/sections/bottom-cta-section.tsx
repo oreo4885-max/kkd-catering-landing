@@ -29,7 +29,7 @@ export function BottomCtaSection() {
           </div>
           <p className="mt-4 text-sm text-cream/76">{contact.metroNotice}</p>
           <p className="mt-4 text-sm text-cream/72">
-            상담 가능 시간 {contact.consultHours} | 점심시간 {contact.lunchBreak}
+            상담 가능 시간(평일 기준) {contact.consultHours} | 점심시간 {contact.lunchBreak}
           </p>
           <div className="mt-4 space-y-1 text-sm text-cream/76">
             <p>{legal.pageNotice}</p>

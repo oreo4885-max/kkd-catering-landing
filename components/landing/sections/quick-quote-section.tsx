@@ -111,7 +111,7 @@ export function QuickQuoteSection() {
                 </div>
                 {brandCollabDisabled ? (
                   <p className="ko-body mt-3 text-[11px] leading-5 text-forest-700/65 sm:text-xs sm:leading-6">
-                    `100~120명` 기준에서는 브랜드 협업 유형을 제외한 행사만 레퍼런스 협업형으로 자동 추천됩니다.
+                    100~120명 기준에서는 브랜드 협업 유형을 제외한 행사만 레퍼런스 협업형으로 자동 추천됩니다.
                   </p>
                 ) : null}
               </div>

@@ -33,11 +33,6 @@ export type ReasonItem = {
   description: string;
 };
 
-export type UseCase = {
-  title: string;
-  description: string;
-};
-
 export type PackageItem = {
   id: string;
   name: string;
@@ -68,14 +63,6 @@ export type FaqItem = {
   answer: string;
 };
 
-export type InquiryField = {
-  name: string;
-  label: string;
-  type: "text" | "tel" | "email" | "date" | "select" | "textarea";
-  required: boolean;
-  options?: string[];
-};
-
 export type QuickQuoteContent = {
   eyebrow: string;
   title: string;
@@ -103,9 +90,6 @@ export type ContactContent = {
 export type LegalContent = {
   pageNotice: string;
   operator: string;
-  retentionPeriod: string;
-  destructionPolicy: string;
-  privacyPolicyHref: string;
 };
 
 export const siteContent = {
@@ -136,12 +120,6 @@ export const siteContent = {
       description:
         "단순 간식 제공이 아니라 브랜드가 직접 현장으로 들어와 도넛과 커피, 그리고 기억에 남는 경험까지 함께 만드는 케이터링입니다.",
     },
-    useCases: {
-      eyebrow: "Best Use Cases",
-      title: "이런 행사에 특히 잘 맞습니다",
-      description:
-        "기업 행사부터 촬영장, 학교, 팬서포트까지. 현장 분위기와 사진 결과물, 브랜드 경험이 중요한 행사에 강합니다.",
-    },
     packages: {
       eyebrow: "Package Overview",
       title: "인원 기준으로 이해하기 쉬운 패키지 구성",
@@ -171,11 +149,6 @@ export const siteContent = {
       title: "자주 묻는 질문",
       description:
         "운영 제한사항을 앞세우기보다, 문의 전 가장 많이 궁금해하는 내용부터 신뢰감 있게 안내합니다.",
-    },
-    inquiry: {
-      eyebrow: "Phone Consultation",
-      title: "전화 상담 안내",
-      description: "지역 담당 번호로 직접 연결해 행사일, 지역, 예상 인원 기준으로 빠르게 상담을 진행하실 수 있습니다.",
     },
   },
 
@@ -221,22 +194,12 @@ export const siteContent = {
   legal: {
     pageNotice: "본 페이지는 크리스피크림도넛 공식 홈페이지가 아닌 영업 상담용 안내 페이지입니다.",
     operator: "크리스피크림도넛 동부지점",
-    retentionPeriod: "접수일로부터 30일",
-    destructionPolicy: "보유기간 종료 후 30일 이내 파기",
-    privacyPolicyHref: "/privacy",
   } satisfies LegalContent,
 
   ui: {
     heroCardEyebrow: "Premium On-site Experience",
     heroCardTitle: "크리스피크림도넛\n케이터링 트럭",
     heroCardBadge: "Donuts + Coffee",
-    useCaseBadge: "Best Fit",
-    useCasePrompt: "행사 유형을 눌러 추천 이유를 확인해 보세요",
-    useCaseDetailPoints: [
-      "브랜드 무드가 살아나는 현장",
-      "사진과 후기가 남는 운영",
-      "간단 문의만으로 운영 방향 제안",
-    ],
     packagePrompt: "행사 규모에 맞는 패키지를 선택해 세부 구성을 확인하세요",
     packageHighlightsLabel: "포함 포인트",
     packageRecommendedLabel: "추천 행사",
@@ -295,29 +258,6 @@ export const siteContent = {
         "기업명, 지점명, 행사명, 촬영장 응원 문구 등 현장 목적에 맞는 브랜딩 연출을 협의할 수 있습니다.",
     },
   ] satisfies ReasonItem[],
-
-  useCases: [
-    {
-      title: "기업 복지 / 임직원 이벤트",
-      description: "출근길 이벤트, 사내 복지 데이, 성과 격려, 시즌 행사에 잘 맞습니다.",
-    },
-    {
-      title: "지점 프로모션 / 고객 이벤트",
-      description: "오픈행사, 방문 유도, 고객 감사 프로모션에 적합합니다.",
-    },
-    {
-      title: "학교 / 학원 / 대학교 행사",
-      description: "축제, 설명회, 입시설명회, 학부모 행사 등 밝고 친근한 현장에 잘 어울립니다.",
-    },
-    {
-      title: "촬영장 / 아티스트 서포트",
-      description: "현장을 응원하는 톤으로 운영하기 좋고, 사진 결과물도 좋습니다.",
-    },
-    {
-      title: "브랜드 협업 / 샘플링",
-      description: "브랜드 로고 노출, 현장 체험형 운영, 공동 프로모션 연출이 가능합니다.",
-    },
-  ] satisfies UseCase[],
 
   packages: [
     {
@@ -448,62 +388,6 @@ export const siteContent = {
         "단순 제공형이 아니라, 브랜드가 직접 현장에 들어와 도넛과 커피, 그리고 사진이 남는 경험까지 함께 만드는 점입니다.",
     },
   ] satisfies FaqItem[],
-
-  inquiryForm: {
-    title: "빠른 견적 문의",
-    description: "업체명, 연락처, 행사일만 먼저 남겨주셔도 상담 검토를 빠르게 시작할 수 있습니다.",
-    fields: [
-      { name: "company", label: "업체명", type: "text", required: true },
-      { name: "contactName", label: "담당자명", type: "text", required: false },
-      { name: "phone", label: "연락처", type: "tel", required: true },
-      { name: "email", label: "이메일", type: "email", required: false },
-      { name: "eventDate", label: "행사일", type: "date", required: true },
-      { name: "eventTime", label: "행사시간", type: "text", required: false },
-      { name: "location", label: "행사 장소", type: "text", required: false },
-      {
-        name: "attendees",
-        label: "예상 인원",
-        type: "select",
-        required: false,
-        options: ["100명 이하", "100~120명", "150명 이상", "250명 이상"],
-      },
-      {
-        name: "desiredPackage",
-        label: "희망 패키지",
-        type: "select",
-        required: false,
-        options: [
-          "Reference Collaboration",
-          "Standard Corporate Package",
-          "Premium Brand Event",
-          "상담 후 추천받기",
-        ],
-      },
-      {
-        name: "power",
-        label: "전기 지원 가능 여부",
-        type: "select",
-        required: false,
-        options: ["가능", "불가", "미확인"],
-      },
-      {
-        name: "coBranding",
-        label: "공동 브랜딩 가능 여부",
-        type: "select",
-        required: false,
-        options: ["가능", "불가", "협의 가능"],
-      },
-      {
-        name: "photoUsage",
-        label: "사진/영상 활용 가능 여부",
-        type: "select",
-        required: false,
-        options: ["가능", "불가", "협의 가능"],
-      },
-      { name: "notes", label: "추가 요청사항", type: "textarea", required: false },
-    ] satisfies InquiryField[],
-    submitLabel: "지금 상담 요청 보내기",
-  },
 
   bottomCta: {
     title: "행사에 맞는 도넛트럭 상담을 바로 시작해 보세요",

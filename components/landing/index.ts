@@ -9,5 +9,4 @@ export { QuickQuoteSection } from "./sections/quick-quote-section";
 export { ReferencesSection } from "./sections/references-section";
 export { StickyMobileCta } from "./sections/sticky-mobile-cta";
 export { TopNav } from "./top-nav";
-export { UseCasesSection } from "./sections/use-cases-section";
 export { WhySection } from "./sections/why-section";

@@ -14,7 +14,7 @@ export function BottomCtaSection() {
           <p className="mt-4 max-w-3xl text-base leading-7 text-cream/80 sm:text-lg">
             {siteContent.bottomCta.description}
           </p>
-          <div className="mt-6 grid gap-3 text-sm text-cream/85 sm:grid-cols-2 xl:grid-cols-3">
+          <div className="mt-6 max-w-[420px] text-sm text-cream/85">
             {contact.contacts.map((item) => (
               <div
                 key={item.phone}

@@ -176,22 +176,12 @@ export const siteContent = {
 
   contact: {
     title: "전화 상담 안내",
-    metroNotice: "수도권은 지역 및 담당 구분없이 문의연락 가능합니다.",
+    metroNotice: "현재 할인 프로모션 운영은 지방권에서만 진행중입니다.",
     consultHours: "09:00~18:00",
     lunchBreak: "12:00~13:00",
     contacts: [
       {
-        label: "수도권지역 1담당",
-        phone: "02-708-2822",
-        href: "tel:02-708-2822",
-      },
-      {
-        label: "수도권지역 2담당",
-        phone: "02-709-2048",
-        href: "tel:02-709-2048",
-      },
-      {
-        label: "지방권지역담당",
+        label: "부산,김해,대구,창원,울산 지역담당",
         phone: "051-501-6637",
         href: "tel:051-501-6637",
       },
@@ -400,12 +390,12 @@ export const siteContent = {
     title: "행사에 맞는 도넛트럭 상담을 바로 시작해 보세요",
     description: "지역 담당 번호로 직접 연결해 행사일, 지역, 예상 인원 기준으로 빠르게 상담을 진행하실 수 있습니다.",
     primaryCta: {
-      label: "수도권 전화 상담",
-      href: "tel:02-708-2822",
-    },
-    secondaryCta: {
       label: "지방권 전화 상담",
       href: "tel:051-501-6637",
+    },
+    secondaryCta: {
+      label: "추천 패키지 확인하기",
+      href: "#packages",
     },
   },
 };

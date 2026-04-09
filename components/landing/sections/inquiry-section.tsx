@@ -30,12 +30,12 @@ export function InquirySection() {
               </p>
             </div>
 
-            <div className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+            <div className="mt-5 max-w-[420px]">
               {contact.contacts.map((item) => (
                 <a
                   key={item.phone}
                   href={item.href}
-                  className="rounded-[24px] border border-forest-900/10 bg-white px-5 py-5 transition hover:-translate-y-0.5 hover:border-forest-700/25 hover:bg-forest-50"
+                  className="block rounded-[24px] border border-forest-900/10 bg-white px-5 py-5 transition hover:-translate-y-0.5 hover:border-forest-700/25 hover:bg-forest-50"
                 >
                   <p className="text-xs font-semibold uppercase tracking-[0.18em] text-forest-700/70">{item.label}</p>
                   <p className="ko-heading mt-3 text-2xl font-semibold text-forest-900 sm:text-[1.9rem]">{item.phone}</p>

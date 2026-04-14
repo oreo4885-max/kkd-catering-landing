@@ -399,13 +399,13 @@ export function QuickQuoteSection() {
               </p>
 
               <div className="mt-5 rounded-[24px] bg-forest-800 px-5 py-5 text-cream shadow-soft sm:mt-6 sm:px-6 sm:py-6">
-                <div className="grid gap-3">
+                <div className="rounded-[20px] border border-white/12 bg-white/7 px-4 py-4">
                   <div>
                     <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#ffd8d1]">메뉴 선택</p>
                     <div className="mt-2 rounded-full border border-white/12 bg-white/8 p-1">
-                    <div className="grid grid-cols-2 gap-1">
-                      {menuOptions.map((option) => {
-                        const active = option.id === menu;
+                      <div className="grid grid-cols-2 gap-1">
+                        {menuOptions.map((option) => {
+                          const active = option.id === menu;
 
                           return (
                             <button
@@ -424,8 +424,8 @@ export function QuickQuoteSection() {
                     </div>
                   </div>
 
-                  <div className="grid gap-3 sm:grid-cols-[1fr_1.15fr]">
-                    <div className="rounded-[18px] border border-white/12 bg-white/7 px-4 py-3">
+                  <div className="mt-4 grid gap-4">
+                    <div>
                       <div className="flex items-center justify-between gap-3">
                         <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#ffd8d1]">예상 인원</p>
                         <div className="hidden items-center gap-2 rounded-full border border-white/14 bg-white/10 px-3 py-1 text-xs text-white/80 sm:flex">
@@ -467,9 +467,9 @@ export function QuickQuoteSection() {
                       </div>
                     </div>
 
-                    <div className="rounded-[18px] border border-white/12 bg-white/7 px-4 py-3">
+                    <div>
                       <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#ffd8d1]">행사 지역</p>
-                      <div className="mt-3 grid gap-2">
+                      <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
                         {regionOptions.map((option) => {
                           const active = option.id === region;
 
@@ -478,14 +478,13 @@ export function QuickQuoteSection() {
                               key={option.id}
                               type="button"
                               onClick={() => setRegion(option.id)}
-                              className={`flex items-center justify-between gap-3 rounded-[14px] border px-3.5 py-2 text-left text-[12px] font-semibold transition ${
+                              className={`inline-flex min-h-[40px] items-center justify-center rounded-[14px] border px-3 py-2 text-center text-[12px] font-semibold transition ${
                                 active
                                   ? "border-white bg-white text-forest-900 shadow-soft"
                                   : "border-white/20 bg-transparent text-cream/82"
                               }`}
                             >
-                              <span>{option.label}</span>
-                              <span className={`shrink-0 text-[11px] ${active ? "text-forest-700" : "text-cream/68"}`}>{option.note}</span>
+                              {option.label}
                             </button>
                           );
                         })}

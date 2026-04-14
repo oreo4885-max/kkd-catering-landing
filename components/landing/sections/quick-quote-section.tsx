@@ -157,9 +157,8 @@ export function QuickQuoteSection() {
   }, [activeMenu.maxAttendees, activeMenu.minAttendees]);
 
   const estimatedTotal = useMemo(() => {
-    const baseCost = Math.max(activeMenu.minimum, attendees * activeMenu.perHead);
-    const volumeDiscount = attendees >= 250 ? 0.95 : attendees >= 180 ? 0.97 : 1;
-    return Math.max(800000, roundToNearestTenThousand(baseCost * volumeDiscount + activeRegion.surcharge));
+    const baseCost = activeMenu.minimum + attendees * activeMenu.perHead;
+    return roundToNearestTenThousand(baseCost + activeRegion.surcharge);
   }, [activeMenu, activeRegion.surcharge, attendees]);
 
   const handlePrintEstimate = () => {
@@ -465,7 +464,7 @@ export function QuickQuoteSection() {
 
                     <div className="rounded-[18px] border border-white/12 bg-white/7 px-4 py-3">
                       <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#ffd8d1]">행사 지역</p>
-                      <div className="mt-3 flex flex-wrap gap-2">
+                      <div className="mt-3 grid gap-2">
                         {regionOptions.map((option) => {
                           const active = option.id === region;
 
@@ -474,20 +473,18 @@ export function QuickQuoteSection() {
                               key={option.id}
                               type="button"
                               onClick={() => setRegion(option.id)}
-                              className={`rounded-full border px-3 py-1.5 text-[12px] font-semibold transition ${
+                              className={`flex items-center justify-between gap-3 rounded-[14px] border px-3.5 py-2 text-left text-[12px] font-semibold transition ${
                                 active
                                   ? "border-white bg-white text-forest-900 shadow-soft"
                                   : "border-white/20 bg-transparent text-cream/82"
                               }`}
                             >
-                              {option.label}
+                              <span>{option.label}</span>
+                              <span className={`shrink-0 text-[11px] ${active ? "text-forest-700" : "text-cream/68"}`}>{option.note}</span>
                             </button>
                           );
                         })}
                       </div>
-                      <p className="mt-3 text-xs leading-6 text-cream/76">
-                        선택 지역: {activeRegion.label} · {activeRegion.note}
-                      </p>
                     </div>
                   </div>
                 </div>

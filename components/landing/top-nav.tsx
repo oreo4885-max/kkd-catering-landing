@@ -76,21 +76,6 @@ export function TopNav() {
               DonutsTruck
             </div>
           </a>
-
-          <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
-            <a
-              href="#inquiry-contact"
-              className="inline-flex h-9 shrink-0 items-center justify-center rounded-full border border-forest-900/10 bg-white px-3 text-[11px] font-semibold text-forest-900 transition hover:bg-forest-50 sm:h-10 sm:px-4 sm:text-sm"
-            >
-              상담 번호
-            </a>
-            <a
-              href="#inquiry-contact"
-              className="inline-flex h-9 shrink-0 items-center justify-center rounded-full bg-forest-800 px-3 text-[11px] font-semibold text-cream transition hover:bg-forest-900 sm:h-10 sm:px-4 sm:text-sm"
-            >
-              전화 상담
-            </a>
-          </div>
         </div>
 
         <nav className="hidden items-center gap-1 pt-3 lg:flex">

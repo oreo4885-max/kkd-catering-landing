@@ -432,6 +432,9 @@ export function QuickQuoteSection() {
                     추천 패키지 더 보기
                   </a>
                 </div>
+                <div className="mt-4 rounded-[18px] border border-white/12 bg-white/7 px-4 py-3 text-sm leading-6 text-cream/84">
+                  고객사 예산에 맞춘 메뉴 및 수량 조정이 가능합니다. 우선 상담을 남겨주시면 운영 가능한 방향으로 함께 조율해드립니다.
+                </div>
                 <p className="mt-3 text-xs text-cream/62">출력 창에서 PDF 저장 또는 인쇄로 바로 공유할 수 있습니다.</p>
                 {callNumber ? <p className="mt-1 text-xs text-cream/62">상담 연결: {callNumber}</p> : null}
               </div>

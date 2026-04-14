@@ -38,28 +38,52 @@ const menuOptions: MenuOption[] = [
 
 const regionOptions: RegionOption[] = [
   {
-    id: "zone-1",
-    label: "1구간",
+    id: "busan",
+    label: "부산",
     surcharge: 0,
-    note: "부산 시내 및 기장 (반경 20km 이내)",
+    note: "기본 포함",
   },
   {
-    id: "zone-2",
-    label: "2구간",
+    id: "gijang",
+    label: "기장",
+    surcharge: 0,
+    note: "기본 포함",
+  },
+  {
+    id: "gimhae",
+    label: "김해",
     surcharge: 50000,
-    note: "김해, 양산 등 (반경 40km 이내)",
+    note: "+5만 원",
   },
   {
-    id: "zone-3",
-    label: "3구간",
+    id: "yangsan",
+    label: "양산",
+    surcharge: 50000,
+    note: "+5만 원",
+  },
+  {
+    id: "changwon",
+    label: "창원",
     surcharge: 100000,
-    note: "창원, 울산, 밀양 등 (반경 70km 이내)",
+    note: "+10만 원",
   },
   {
-    id: "zone-4",
-    label: "4구간",
+    id: "ulsan",
+    label: "울산",
+    surcharge: 100000,
+    note: "+10만 원",
+  },
+  {
+    id: "miryang",
+    label: "밀양",
+    surcharge: 100000,
+    note: "+10만 원",
+  },
+  {
+    id: "daegu-gyeongbuk",
+    label: "대구경북",
     surcharge: 150000,
-    note: "대구, 경북 권역 등 (반경 100km 이상 / 추가 협의)",
+    note: "+15만 원 / 협의",
   },
 ];
 
@@ -352,7 +376,7 @@ export function QuickQuoteSection() {
     <section className="-mt-2 pb-14 sm:pb-24" id="quick-quote">
       <div className="section-shell">
         <div className="rounded-[28px] border border-forest-900/8 bg-white p-4 shadow-card sm:rounded-[32px] sm:p-8">
-          <div className="grid gap-5 lg:grid-cols-[0.86fr_1.14fr] lg:items-start">
+          <div className="mx-auto max-w-4xl">
             <div>
               <span className="section-label">Estimate Calculator</span>
               <h2 className="ko-heading mt-4 max-w-[12ch] text-[1.9rem] font-semibold tracking-tight text-forest-900 sm:max-w-[15ch] sm:text-3xl">
@@ -363,24 +387,97 @@ export function QuickQuoteSection() {
               </p>
 
               <div className="mt-5 rounded-[24px] bg-forest-800 px-5 py-5 text-cream shadow-soft sm:mt-6 sm:px-6 sm:py-6">
-                <div className="rounded-full border border-white/12 bg-white/8 p-1">
-                  <div className="grid grid-cols-2 gap-1">
-                    {menuOptions.map((option) => {
-                      const active = option.id === menu;
+                <div className="grid gap-3">
+                  <div>
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#ffd8d1]">메뉴 선택</p>
+                    <div className="mt-2 rounded-full border border-white/12 bg-white/8 p-1">
+                      <div className="grid grid-cols-2 gap-1">
+                        {menuOptions.map((option) => {
+                          const active = option.id === menu;
 
-                      return (
-                        <button
-                          key={option.id}
-                          type="button"
-                          onClick={() => setMenu(option.id)}
-                          className={`inline-flex min-h-[40px] items-center justify-center rounded-full px-3 text-[13px] font-semibold transition ${
-                            active ? "bg-white text-forest-900 shadow-soft" : "text-cream/78"
-                          }`}
-                        >
-                          {option.label}
-                        </button>
-                      );
-                    })}
+                          return (
+                            <button
+                              key={option.id}
+                              type="button"
+                              onClick={() => setMenu(option.id)}
+                              className={`inline-flex min-h-[40px] items-center justify-center rounded-full px-3 text-[13px] font-semibold transition ${
+                                active ? "bg-white text-forest-900 shadow-soft" : "text-cream/78"
+                              }`}
+                            >
+                              {option.label}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="grid gap-3 sm:grid-cols-[1fr_1.15fr]">
+                    <div className="rounded-[18px] border border-white/12 bg-white/7 px-4 py-3">
+                      <div className="flex items-center justify-between gap-3">
+                        <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#ffd8d1]">예상 인원</p>
+                        <div className="flex items-center gap-2 rounded-full border border-white/14 bg-white/10 px-3 py-1 text-xs text-white/80">
+                          <span>직접 입력</span>
+                          <input
+                            type="number"
+                            min={100}
+                            max={300}
+                            step={1}
+                            value={attendees}
+                            onChange={(event) => {
+                              const nextValue = Number(event.target.value);
+
+                              if (Number.isNaN(nextValue)) return;
+                              setAttendees(Math.max(100, Math.min(300, nextValue)));
+                            }}
+                            className="w-14 border-0 bg-transparent p-0 text-right text-sm font-semibold text-white focus:outline-none"
+                          />
+                        </div>
+                      </div>
+                      <div className="mt-3">
+                        <input
+                          type="range"
+                          min={100}
+                          max={300}
+                          step={1}
+                          value={attendees}
+                          onChange={(event) => setAttendees(Number(event.target.value))}
+                          className="h-2 w-full cursor-pointer appearance-none rounded-full bg-white/20 accent-[#ffd8d1]"
+                        />
+                        <div className="mt-2 flex items-center justify-between text-[11px] text-cream/68">
+                          <span>100명</span>
+                          <span className="font-semibold text-white">{attendees}명</span>
+                          <span>300명</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="rounded-[18px] border border-white/12 bg-white/7 px-4 py-3">
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#ffd8d1]">행사 지역</p>
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        {regionOptions.map((option) => {
+                          const active = option.id === region;
+
+                          return (
+                            <button
+                              key={option.id}
+                              type="button"
+                              onClick={() => setRegion(option.id)}
+                              className={`rounded-full border px-3 py-1.5 text-[12px] font-semibold transition ${
+                                active
+                                  ? "border-white bg-white text-forest-900 shadow-soft"
+                                  : "border-white/20 bg-transparent text-cream/82"
+                              }`}
+                            >
+                              {option.label}
+                            </button>
+                          );
+                        })}
+                      </div>
+                      <p className="mt-3 text-xs leading-6 text-cream/76">
+                        선택 지역: {activeRegion.label} · {activeRegion.note}
+                      </p>
+                    </div>
                   </div>
                 </div>
 
@@ -456,96 +553,6 @@ export function QuickQuoteSection() {
                 </div>
                 <p className="mt-3 text-xs text-cream/62">출력 창에서 PDF 저장 또는 인쇄로 바로 공유할 수 있습니다.</p>
                 {callNumber ? <p className="mt-1 text-xs text-cream/62">상담 연결: {callNumber}</p> : null}
-              </div>
-            </div>
-
-            <div className="grid gap-4 sm:gap-5">
-              <div className="rounded-[24px] border border-forest-900/8 bg-cream px-3.5 py-3.5 sm:rounded-[28px] sm:px-5 sm:py-4">
-                <div className="flex items-center justify-between gap-3">
-                  <p className="text-sm font-semibold text-forest-900">메뉴 선택</p>
-                  <p className="text-xs font-medium text-forest-700/70">선택한 메뉴가 즉시 견적에 반영됩니다</p>
-                </div>
-                <div className="mt-3 space-y-2.5 text-sm text-forest-800/84">
-                  <div className="rounded-[18px] border border-forest-900/8 bg-white px-4 py-3">
-                    <p className="font-semibold text-forest-900">도넛 단품</p>
-                    <p className="mt-1 text-xs leading-5 text-forest-700/74">도넛 중심의 간결한 운영형</p>
-                  </div>
-                  <div className="rounded-[18px] border border-forest-900/8 bg-white px-4 py-3">
-                    <p className="font-semibold text-forest-900">도넛+커피세트</p>
-                    <p className="mt-1 text-xs leading-5 text-forest-700/74">도넛과 커피를 함께 운영하는 기본형</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="rounded-[24px] border border-forest-900/8 bg-cream px-3.5 py-3.5 sm:rounded-[28px] sm:px-5 sm:py-4">
-                <div className="flex items-center justify-between gap-3">
-                  <p className="text-sm font-semibold text-forest-900">예상 인원</p>
-                  <div className="flex items-center gap-2 rounded-full border border-forest-900/10 bg-white px-3 py-1.5">
-                    <span className="text-xs font-medium text-forest-700/72">직접 입력</span>
-                    <input
-                      type="number"
-                      min={100}
-                      max={500}
-                      step={1}
-                      value={attendees}
-                      onChange={(event) => {
-                        const nextValue = Number(event.target.value);
-
-                        if (Number.isNaN(nextValue)) return;
-                        setAttendees(Math.max(100, Math.min(500, nextValue)));
-                      }}
-                      className="w-16 border-0 bg-transparent p-0 text-right text-sm font-semibold text-forest-900 focus:outline-none"
-                    />
-                  </div>
-                </div>
-                <div className="mt-4">
-                  <input
-                    type="range"
-                    min={100}
-                    max={500}
-                    step={1}
-                    value={attendees}
-                    onChange={(event) => setAttendees(Number(event.target.value))}
-                    className="h-2 w-full cursor-pointer appearance-none rounded-full bg-forest-100 accent-forest-800"
-                  />
-                  <div className="mt-2 flex items-center justify-between text-xs text-forest-700/65">
-                    <span>100명</span>
-                    <span className="font-semibold text-forest-900">{attendees}명</span>
-                    <span>500명</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="rounded-[24px] border border-forest-900/8 bg-cream px-3.5 py-3.5 sm:rounded-[28px] sm:px-5 sm:py-4">
-                <p className="text-sm font-semibold text-forest-900">행사 지역</p>
-                <div className="mt-3 space-y-2.5">
-                  {regionOptions.map((option) => {
-                    const active = option.id === region;
-
-                    return (
-                      <button
-                        key={option.id}
-                        type="button"
-                        onClick={() => setRegion(option.id)}
-                        className={`w-full rounded-[18px] border px-4 py-3 text-left transition ${
-                          active
-                            ? "border-forest-800 bg-forest-800 text-cream shadow-soft"
-                            : "border-forest-900/10 bg-white text-forest-900 hover:border-forest-700/20 hover:bg-forest-50"
-                        }`}
-                      >
-                        <div className="flex items-center justify-between gap-3">
-                          <p className="text-sm font-semibold">{option.label}</p>
-                          <p className={`text-xs font-semibold ${active ? "text-[#ffd8d1]" : "text-forest-700/70"}`}>
-                            {option.surcharge > 0 ? `+${formatCurrency(option.surcharge)}` : "무료 / 기본요금 포함"}
-                          </p>
-                        </div>
-                        <p className={`mt-1 text-xs leading-5 ${active ? "text-cream/78" : "text-forest-700/72"}`}>
-                          {option.note}
-                        </p>
-                      </button>
-                    );
-                  })}
-                </div>
               </div>
             </div>
           </div>

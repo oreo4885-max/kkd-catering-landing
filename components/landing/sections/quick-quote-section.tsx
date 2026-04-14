@@ -24,54 +24,42 @@ const menuOptions: MenuOption[] = [
     id: "donut",
     label: "도넛 단품",
     description: "도넛 중심의 간결한 운영형",
-    minimum: 520000,
-    perHead: 7800,
+    minimum: 800000,
+    perHead: 8200,
   },
   {
     id: "combo",
-    label: "도넛 + 커피",
+    label: "도넛+커피세트",
     description: "도넛과 커피를 함께 운영하는 기본형",
-    minimum: 690000,
-    perHead: 10800,
+    minimum: 920000,
+    perHead: 11200,
   },
 ];
 
 const regionOptions: RegionOption[] = [
   {
-    id: "yeonsan",
-    label: "부산 연산점 인근",
+    id: "zone-1",
+    label: "1구간",
     surcharge: 0,
-    note: "기본 출동 권역",
+    note: "부산 시내 및 기장 (반경 20km 이내)",
   },
   {
-    id: "busan",
-    label: "부산 타 권역",
-    surcharge: 70000,
-    note: "도심 외 이동 포함",
+    id: "zone-2",
+    label: "2구간",
+    surcharge: 50000,
+    note: "김해, 양산 등 (반경 40km 이내)",
   },
   {
-    id: "gimhae",
-    label: "김해",
+    id: "zone-3",
+    label: "3구간",
     surcharge: 100000,
-    note: "근거리 외곽 이동",
+    note: "창원, 울산, 밀양 등 (반경 70km 이내)",
   },
   {
-    id: "changwon",
-    label: "창원",
+    id: "zone-4",
+    label: "4구간",
     surcharge: 150000,
-    note: "권역 외 출동 기준",
-  },
-  {
-    id: "ulsan",
-    label: "울산",
-    surcharge: 190000,
-    note: "장거리 이동 포함",
-  },
-  {
-    id: "daegu",
-    label: "대구",
-    surcharge: 230000,
-    note: "장거리 이동 포함",
+    note: "대구, 경북 권역 등 (반경 100km 이상 / 추가 협의)",
   },
 ];
 
@@ -119,7 +107,7 @@ function escapeHtml(value: string) {
 
 export function QuickQuoteSection() {
   const [menu, setMenu] = useState<MenuOption["id"]>("combo");
-  const [attendees, setAttendees] = useState(120);
+  const [attendees, setAttendees] = useState(100);
   const [region, setRegion] = useState(regionOptions[0].id);
 
   const activeMenu = useMemo(() => menuOptions.find((item) => item.id === menu) ?? menuOptions[0], [menu]);
@@ -132,8 +120,8 @@ export function QuickQuoteSection() {
 
   const estimatedTotal = useMemo(() => {
     const baseCost = Math.max(activeMenu.minimum, attendees * activeMenu.perHead);
-    const volumeDiscount = attendees >= 250 ? 0.94 : attendees >= 160 ? 0.97 : 1;
-    return roundToNearestTenThousand(baseCost * volumeDiscount + activeRegion.surcharge);
+    const volumeDiscount = attendees >= 250 ? 0.95 : attendees >= 180 ? 0.97 : 1;
+    return Math.max(800000, roundToNearestTenThousand(baseCost * volumeDiscount + activeRegion.surcharge));
   }, [activeMenu, activeRegion.surcharge, attendees]);
 
   const perHeadPrice = roundToNearestTenThousand(activeMenu.perHead * 10) / 10;
@@ -375,25 +363,57 @@ export function QuickQuoteSection() {
               </p>
 
               <div className="mt-5 rounded-[24px] bg-forest-800 px-5 py-5 text-cream shadow-soft sm:mt-6 sm:px-6 sm:py-6">
-                <div className="flex items-center gap-3">
-                  {activeMenu.id === "combo" ? (
-                    <DonutCoffeeIcon className="h-12 w-12 drop-shadow-[0_10px_12px_rgba(17,9,5,0.24)]" />
-                  ) : (
-                    <DonutIcon className="h-12 w-12 drop-shadow-[0_10px_12px_rgba(17,9,5,0.24)]" />
-                  )}
-                  <div>
-                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#ffd8d1]">Estimated Total</p>
-                    <p className="mt-1 text-lg font-semibold text-white">{activeMenu.label}</p>
+                <div className="rounded-full border border-white/12 bg-white/8 p-1">
+                  <div className="grid grid-cols-2 gap-1">
+                    {menuOptions.map((option) => {
+                      const active = option.id === menu;
+
+                      return (
+                        <button
+                          key={option.id}
+                          type="button"
+                          onClick={() => setMenu(option.id)}
+                          className={`inline-flex min-h-[40px] items-center justify-center rounded-full px-3 text-[13px] font-semibold transition ${
+                            active ? "bg-white text-forest-900 shadow-soft" : "text-cream/78"
+                          }`}
+                        >
+                          {option.label}
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
 
-                <p className="ko-heading mt-5 text-[2rem] font-semibold leading-none text-white sm:text-[2.4rem]">
+                <div className="mt-5 flex items-start justify-between gap-3">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#ffd8d1]">Estimate Total</p>
+                    <p className="mt-2 text-sm font-medium text-cream/78">{activeMenu.label}</p>
+                  </div>
+                  {activeMenu.id === "combo" ? (
+                    <DonutCoffeeIcon className="h-12 w-12 shrink-0 drop-shadow-[0_10px_12px_rgba(17,9,5,0.24)]" />
+                  ) : (
+                    <DonutIcon className="h-12 w-12 shrink-0 drop-shadow-[0_10px_12px_rgba(17,9,5,0.24)]" />
+                  )}
+                </div>
+
+                <p className="ko-heading mt-4 text-[2rem] font-semibold leading-none text-white sm:text-[2.4rem]">
                   {formatCurrency(estimatedTotal)}
                 </p>
                 <p className="mt-3 text-sm leading-7 text-cream/80">
-                  {attendees}명 기준, {activeRegion.label} 운영 예상 견적입니다. 현장 동선, 운영 시간, 전기 지원 여부에 따라 실제 제안은
-                  달라질 수 있습니다.
+                  {attendees}명 기준, {activeRegion.label} {activeRegion.note} 운영 예상 견적입니다.
                 </p>
+
+                <div className="mt-4 flex flex-wrap gap-2">
+                  <span className="rounded-full border border-white/14 bg-white/8 px-3 py-1.5 text-[12px] font-medium text-cream/84">
+                    예상 인원 {attendees}명
+                  </span>
+                  <span className="rounded-full border border-white/14 bg-white/8 px-3 py-1.5 text-[12px] font-medium text-cream/84">
+                    지역 {activeRegion.label}
+                  </span>
+                  <span className="rounded-full border border-white/14 bg-white/8 px-3 py-1.5 text-[12px] font-medium text-cream/84">
+                    1인 기준 약 {formatCurrency(perHeadPrice)}
+                  </span>
+                </div>
 
                 <div className="mt-5 grid gap-3 sm:grid-cols-2">
                   <div className="rounded-[18px] border border-white/15 bg-white/8 px-4 py-3">
@@ -402,12 +422,11 @@ export function QuickQuoteSection() {
                     <p className="mt-1 text-sm leading-6 text-cream/76">{recommendedPackage.note}</p>
                   </div>
                   <div className="rounded-[18px] border border-white/15 bg-white/8 px-4 py-3">
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#ffd8d1]">계산 기준</p>
-                    <p className="mt-2 text-base font-semibold text-white">1인 기준 약 {formatCurrency(perHeadPrice)}</p>
-                    <p className="mt-1 text-sm leading-6 text-cream/76">
-                      {activeRegion.note}
-                      {activeRegion.surcharge > 0 ? ` · 지역 가산 ${formatCurrency(activeRegion.surcharge)}` : " · 기본 출동 범위"}
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#ffd8d1]">지역 가산</p>
+                    <p className="mt-2 text-base font-semibold text-white">
+                      {activeRegion.surcharge > 0 ? formatCurrency(activeRegion.surcharge) : "무료 / 기본 포함"}
                     </p>
+                    <p className="mt-1 text-sm leading-6 text-cream/76">{activeRegion.note}</p>
                   </div>
                 </div>
 
@@ -444,39 +463,17 @@ export function QuickQuoteSection() {
               <div className="rounded-[24px] border border-forest-900/8 bg-cream px-3.5 py-3.5 sm:rounded-[28px] sm:px-5 sm:py-4">
                 <div className="flex items-center justify-between gap-3">
                   <p className="text-sm font-semibold text-forest-900">메뉴 선택</p>
-                  <p className="text-xs font-medium text-forest-700/70">도넛 단품 / 도넛+커피</p>
+                  <p className="text-xs font-medium text-forest-700/70">선택한 메뉴가 즉시 견적에 반영됩니다</p>
                 </div>
-                <div className="mt-3 grid gap-2 sm:grid-cols-2">
-                  {menuOptions.map((option) => {
-                    const active = option.id === menu;
-
-                    return (
-                      <button
-                        key={option.id}
-                        type="button"
-                        onClick={() => setMenu(option.id)}
-                        className={`rounded-[20px] border px-4 py-4 text-left transition ${
-                          active
-                            ? "border-forest-800 bg-forest-800 text-cream shadow-soft"
-                            : "border-forest-900/10 bg-white text-forest-900 hover:border-forest-700/20 hover:bg-forest-50"
-                        }`}
-                      >
-                        <div className="flex items-start gap-3">
-                          {option.id === "combo" ? (
-                            <DonutCoffeeIcon className="h-11 w-11 shrink-0" />
-                          ) : (
-                            <DonutIcon className="h-11 w-11 shrink-0" />
-                          )}
-                          <div>
-                            <p className="text-sm font-semibold">{option.label}</p>
-                            <p className={`mt-1 text-xs leading-5 ${active ? "text-cream/76" : "text-forest-700/72"}`}>
-                              {option.description}
-                            </p>
-                          </div>
-                        </div>
-                      </button>
-                    );
-                  })}
+                <div className="mt-3 space-y-2.5 text-sm text-forest-800/84">
+                  <div className="rounded-[18px] border border-forest-900/8 bg-white px-4 py-3">
+                    <p className="font-semibold text-forest-900">도넛 단품</p>
+                    <p className="mt-1 text-xs leading-5 text-forest-700/74">도넛 중심의 간결한 운영형</p>
+                  </div>
+                  <div className="rounded-[18px] border border-forest-900/8 bg-white px-4 py-3">
+                    <p className="font-semibold text-forest-900">도넛+커피세트</p>
+                    <p className="mt-1 text-xs leading-5 text-forest-700/74">도넛과 커피를 함께 운영하는 기본형</p>
+                  </div>
                 </div>
               </div>
 
@@ -487,15 +484,15 @@ export function QuickQuoteSection() {
                     <span className="text-xs font-medium text-forest-700/72">직접 입력</span>
                     <input
                       type="number"
-                      min={50}
-                      max={300}
-                      step={10}
+                      min={100}
+                      max={500}
+                      step={1}
                       value={attendees}
                       onChange={(event) => {
                         const nextValue = Number(event.target.value);
 
                         if (Number.isNaN(nextValue)) return;
-                        setAttendees(Math.max(50, Math.min(300, nextValue)));
+                        setAttendees(Math.max(100, Math.min(500, nextValue)));
                       }}
                       className="w-16 border-0 bg-transparent p-0 text-right text-sm font-semibold text-forest-900 focus:outline-none"
                     />
@@ -504,24 +501,24 @@ export function QuickQuoteSection() {
                 <div className="mt-4">
                   <input
                     type="range"
-                    min={50}
-                    max={300}
-                    step={10}
+                    min={100}
+                    max={500}
+                    step={1}
                     value={attendees}
                     onChange={(event) => setAttendees(Number(event.target.value))}
                     className="h-2 w-full cursor-pointer appearance-none rounded-full bg-forest-100 accent-forest-800"
                   />
                   <div className="mt-2 flex items-center justify-between text-xs text-forest-700/65">
-                    <span>50명</span>
+                    <span>100명</span>
                     <span className="font-semibold text-forest-900">{attendees}명</span>
-                    <span>300명</span>
+                    <span>500명</span>
                   </div>
                 </div>
               </div>
 
               <div className="rounded-[24px] border border-forest-900/8 bg-cream px-3.5 py-3.5 sm:rounded-[28px] sm:px-5 sm:py-4">
                 <p className="text-sm font-semibold text-forest-900">행사 지역</p>
-                <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                <div className="mt-3 space-y-2.5">
                   {regionOptions.map((option) => {
                     const active = option.id === region;
 
@@ -530,14 +527,19 @@ export function QuickQuoteSection() {
                         key={option.id}
                         type="button"
                         onClick={() => setRegion(option.id)}
-                        className={`rounded-[18px] border px-4 py-3 text-left transition ${
+                        className={`w-full rounded-[18px] border px-4 py-3 text-left transition ${
                           active
                             ? "border-forest-800 bg-forest-800 text-cream shadow-soft"
                             : "border-forest-900/10 bg-white text-forest-900 hover:border-forest-700/20 hover:bg-forest-50"
                         }`}
                       >
-                        <p className="text-sm font-semibold">{option.label}</p>
-                        <p className={`mt-1 text-xs leading-5 ${active ? "text-cream/76" : "text-forest-700/72"}`}>
+                        <div className="flex items-center justify-between gap-3">
+                          <p className="text-sm font-semibold">{option.label}</p>
+                          <p className={`text-xs font-semibold ${active ? "text-[#ffd8d1]" : "text-forest-700/70"}`}>
+                            {option.surcharge > 0 ? `+${formatCurrency(option.surcharge)}` : "무료 / 기본요금 포함"}
+                          </p>
+                        </div>
+                        <p className={`mt-1 text-xs leading-5 ${active ? "text-cream/78" : "text-forest-700/72"}`}>
                           {option.note}
                         </p>
                       </button>

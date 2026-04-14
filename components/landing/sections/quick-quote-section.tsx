@@ -27,7 +27,7 @@ const menuOptions: MenuOption[] = [
     label: "도넛 단품",
     description: "도넛 중심의 간결한 운영형",
     minimum: 800000,
-    perHead: 8200,
+    perHead: 8000,
     minAttendees: 100,
     maxAttendees: 250,
   },

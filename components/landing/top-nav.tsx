@@ -59,9 +59,9 @@ export function TopNav() {
   }, [sectionIds]);
 
   return (
-    <header className="sticky top-0 z-50 px-4 pt-2.5 sm:px-6 sm:pt-4">
+    <header className="sticky top-0 z-50 px-4 pt-2 sm:px-6 sm:pt-3">
       <div
-        className={`mx-auto max-w-7xl rounded-[22px] border px-3 py-2 backdrop-blur-none transition-all sm:rounded-[28px] sm:px-6 sm:py-3.5 sm:backdrop-blur ${
+        className={`mx-auto max-w-7xl rounded-[20px] border px-3 py-1.5 backdrop-blur-none transition-all sm:rounded-[24px] sm:px-5 sm:py-2.5 sm:backdrop-blur ${
           scrolled
             ? "border-forest-900/12 bg-white/98 shadow-[0_18px_45px_rgba(22,34,19,0.14)]"
             : "border-forest-900/10 bg-white/94 shadow-card"
@@ -69,10 +69,10 @@ export function TopNav() {
       >
         <div className="flex items-center justify-between gap-3 sm:gap-4">
           <a href="#hero" className="min-w-0 shrink">
-            <div className="ko-heading text-[15px] font-semibold tracking-[-0.02em] text-forest-900 sm:text-lg">
+            <div className="ko-heading text-[14px] font-semibold tracking-[-0.02em] text-forest-900 sm:text-[17px]">
               크리스피크림도넛
             </div>
-            <div className="text-[10px] font-semibold uppercase tracking-[0.28em] text-forest-700/70 sm:text-[11px]">
+            <div className="text-[9px] font-semibold uppercase tracking-[0.24em] text-forest-700/70 sm:text-[10px]">
               DonutsTruck
             </div>
           </a>

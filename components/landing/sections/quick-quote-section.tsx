@@ -27,7 +27,7 @@ const menuOptions: MenuOption[] = [
     label: "도넛 단품",
     description: "도넛 중심의 간결한 운영형",
     minimum: 800000,
-    perHead: 8000,
+    perHead: 5000,
     minAttendees: 100,
     maxAttendees: 250,
   },
@@ -36,7 +36,7 @@ const menuOptions: MenuOption[] = [
     label: "도넛+커피세트",
     description: "도넛과 커피를 함께 운영하는 기본형",
     minimum: 800000,
-    perHead: 11200,
+    perHead: 8000,
     minAttendees: 60,
     maxAttendees: 200,
   },
@@ -157,7 +157,8 @@ export function QuickQuoteSection() {
   }, [activeMenu.maxAttendees, activeMenu.minAttendees]);
 
   const estimatedTotal = useMemo(() => {
-    const baseCost = activeMenu.minimum + attendees * activeMenu.perHead;
+    const extraAttendees = Math.max(attendees - activeMenu.minAttendees, 0);
+    const baseCost = activeMenu.minimum + extraAttendees * activeMenu.perHead;
     return roundToNearestTenThousand(baseCost + activeRegion.surcharge);
   }, [activeMenu, activeRegion.surcharge, attendees]);
 
@@ -314,10 +315,10 @@ export function QuickQuoteSection() {
       <p class="subtitle">내부 품의용으로 바로 공유할 수 있도록 행사 정보 기준의 참고 견적을 정리한 문서입니다.</p>
 
       <section class="hero">
-        <div class="hero-label">Estimated Total</div>
+        <div class="hero-label">Estimated Total (VAT 포함)</div>
         <p class="hero-price">${escapeHtml(formatCurrency(estimatedTotal))}</p>
         <p class="hero-note">
-          ${escapeHtml(activeMenu.label)} / ${escapeHtml(`${attendees}명`)} / ${escapeHtml(activeRegion.label)} 기준 참고 견적입니다.
+          ${escapeHtml(activeMenu.label)} / ${escapeHtml(`${attendees}명`)} / ${escapeHtml(activeRegion.label)} 기준 VAT 포함 참고 견적입니다.
           현장 동선, 운영 시간, 전기 지원 여부에 따라 실제 제안은 달라질 수 있습니다.
         </p>
       </section>
@@ -351,6 +352,10 @@ export function QuickQuoteSection() {
               <td>${escapeHtml(activeRegion.surcharge > 0 ? formatCurrency(activeRegion.surcharge) : "없음")}</td>
             </tr>
             <tr>
+              <th>추가 단가</th>
+              <td>${escapeHtml(`기준 인원 초과 시 1인당 ${formatCurrency(activeMenu.perHead)} 추가`)}</td>
+            </tr>
+            <tr>
               <th>출력 일시</th>
               <td>${escapeHtml(formatTimestamp(issuedAt))}</td>
             </tr>
@@ -359,7 +364,7 @@ export function QuickQuoteSection() {
       </section>
 
       <p class="footer">
-        본 문서는 익명 행사 정보 기준의 간이 견적서이며, 실제 운영 제안은 행사 일정, 동선, 설치 조건, 운영 시간에 따라 조정될 수 있습니다.
+        본 문서는 익명 행사 정보 기준의 VAT 포함 간이 견적서이며, 실제 운영 제안은 행사 일정, 동선, 설치 조건, 운영 시간에 따라 조정될 수 있습니다.
         전화 상담 시 이 금액을 기준으로 빠르게 논의하실 수 있습니다.
       </p>
     </main>
@@ -489,9 +494,9 @@ export function QuickQuoteSection() {
                   </div>
                 </div>
 
-                <div className="mt-5 flex items-start justify-between gap-3">
+                  <div className="mt-5 flex items-start justify-between gap-3">
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#ffd8d1]">Estimate Total</p>
+                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#ffd8d1]">Estimate Total · VAT 포함</p>
                     <p className="mt-2 text-sm font-medium text-cream/78">{activeMenu.label}</p>
                   </div>
                   {activeMenu.id === "combo" ? (
@@ -505,7 +510,7 @@ export function QuickQuoteSection() {
                   {formatCurrency(estimatedTotal)}
                 </p>
                 <p className="mt-3 text-sm leading-7 text-cream/80">
-                  {attendees}명 기준, {activeRegion.label} {activeRegion.note} 운영 예상 견적입니다.
+                  {attendees}명 기준, {activeRegion.label} {activeRegion.note} 운영의 VAT 포함 예상 견적입니다.
                 </p>
 
                 <div className="mt-4 flex flex-wrap gap-2">
@@ -519,17 +524,25 @@ export function QuickQuoteSection() {
 
                 <div className="mt-5 grid gap-3 sm:grid-cols-2">
                   <div className="rounded-[18px] border border-white/15 bg-white/8 px-4 py-3">
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#ffd8d1]">추천 패키지</p>
-                    <p className="mt-2 text-base font-semibold text-white">{recommendedPackage.label}</p>
-                    <p className="mt-1 text-sm leading-6 text-cream/76">{recommendedPackage.note}</p>
-                  </div>
-                  <div className="rounded-[18px] border border-white/15 bg-white/8 px-4 py-3">
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#ffd8d1]">지역 가산</p>
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#ffd8d1]">지역 가산 비용</p>
                     <p className="mt-2 text-base font-semibold text-white">
                       {activeRegion.surcharge > 0 ? formatCurrency(activeRegion.surcharge) : "무료 / 기본 포함"}
                     </p>
                     <p className="mt-1 text-sm leading-6 text-cream/76">{activeRegion.note}</p>
                   </div>
+                  <div className="rounded-[18px] border border-white/15 bg-white/8 px-4 py-3">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#ffd8d1]">인당 추가금액 비용</p>
+                    <p className="mt-2 text-base font-semibold text-white">{formatCurrency(activeMenu.perHead)}</p>
+                    <p className="mt-1 text-sm leading-6 text-cream/76">
+                      {activeMenu.minAttendees}명 초과 시 1인당 추가 적용
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mt-3 rounded-[18px] border border-white/15 bg-white/8 px-4 py-3">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#ffd8d1]">추천 패키지</p>
+                  <p className="mt-2 text-base font-semibold text-white">{recommendedPackage.label}</p>
+                  <p className="mt-1 text-sm leading-6 text-cream/76">{recommendedPackage.note}</p>
                 </div>
 
                 <div className="mt-5 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap">

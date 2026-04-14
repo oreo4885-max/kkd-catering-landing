@@ -1,5 +1,3 @@
-import { siteContent } from "@/app/content";
-
 export function StickyMobileCta() {
   return (
     <div className="fixed inset-x-0 bottom-0 z-50 border-t border-forest-900/10 bg-cream/98 p-4 sm:hidden">

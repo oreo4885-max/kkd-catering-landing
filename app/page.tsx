@@ -4,6 +4,7 @@ import {
   FaqSection,
   HeroSection,
   InquirySection,
+  KakaoFloatingButton,
   PackagesSection,
   ProcessSection,
   QuickQuoteSection,
@@ -27,6 +28,7 @@ export default function Home() {
       <FaqSection />
       <InquirySection />
       <BottomCtaSection />
+      <KakaoFloatingButton />
       <StickyMobileCta />
     </main>
   );

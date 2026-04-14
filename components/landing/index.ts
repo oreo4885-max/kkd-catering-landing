@@ -3,6 +3,7 @@ export { CoBrandingSection } from "./sections/co-branding-section";
 export { FaqSection } from "./sections/faq-section";
 export { HeroSection } from "./sections/hero-section";
 export { InquirySection } from "./sections/inquiry-section";
+export { KakaoFloatingButton } from "./sections/kakao-floating-button";
 export { PackagesSection } from "./sections/packages-section";
 export { ProcessSection } from "./sections/process-section";
 export { QuickQuoteSection } from "./sections/quick-quote-section";

@@ -98,6 +98,25 @@ function roundToNearestTenThousand(value: number) {
   return Math.round(value / 10000) * 10000;
 }
 
+function formatTimestamp(date: Date) {
+  return new Intl.DateTimeFormat("ko-KR", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(date);
+}
+
+function escapeHtml(value: string) {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+}
+
 export function QuickQuoteSection() {
   const [menu, setMenu] = useState<MenuOption["id"]>("combo");
   const [attendees, setAttendees] = useState(120);
@@ -118,6 +137,228 @@ export function QuickQuoteSection() {
   }, [activeMenu, activeRegion.surcharge, attendees]);
 
   const perHeadPrice = roundToNearestTenThousand(activeMenu.perHead * 10) / 10;
+
+  const handlePrintEstimate = () => {
+    const issuedAt = new Date();
+    const estimateHtml = `<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <title>크리스피크림도넛 케이터링 트럭 간이 견적서</title>
+    <style>
+      :root {
+        color-scheme: light;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: #f5f6f3;
+        color: #113522;
+        font-family: "Segoe UI", "Malgun Gothic", sans-serif;
+      }
+      .sheet {
+        width: 820px;
+        margin: 0 auto;
+        padding: 40px 36px 48px;
+        background: white;
+      }
+      .eyebrow {
+        font-size: 12px;
+        letter-spacing: 0.28em;
+        font-weight: 700;
+        color: #7c8d84;
+        text-transform: uppercase;
+      }
+      .title {
+        margin: 14px 0 10px;
+        font-size: 34px;
+        line-height: 1.15;
+        font-weight: 800;
+        color: #123b28;
+      }
+      .subtitle {
+        margin: 0;
+        font-size: 15px;
+        line-height: 1.8;
+        color: #476050;
+      }
+      .hero {
+        margin-top: 28px;
+        padding: 24px 28px;
+        border-radius: 24px;
+        background: linear-gradient(135deg, #13492f 0%, #1b5b3a 100%);
+        color: white;
+      }
+      .hero-label {
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #ffd8d1;
+      }
+      .hero-price {
+        margin: 12px 0 0;
+        font-size: 40px;
+        line-height: 1;
+        font-weight: 800;
+      }
+      .hero-note {
+        margin: 14px 0 0;
+        font-size: 14px;
+        line-height: 1.75;
+        color: rgba(255, 255, 255, 0.82);
+      }
+      .grid {
+        margin-top: 24px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+      .box {
+        border: 1px solid rgba(17, 53, 34, 0.12);
+        border-radius: 18px;
+        padding: 18px 18px 16px;
+        background: #f9fbf8;
+      }
+      .box-label {
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #557161;
+      }
+      .box-value {
+        margin-top: 8px;
+        font-size: 22px;
+        font-weight: 800;
+        line-height: 1.25;
+        color: #123b28;
+      }
+      .box-text {
+        margin-top: 6px;
+        font-size: 14px;
+        line-height: 1.7;
+        color: #4a6555;
+      }
+      .meta-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .meta-table th,
+      .meta-table td {
+        border-top: 1px solid rgba(17, 53, 34, 0.08);
+        padding: 14px 0;
+        text-align: left;
+        vertical-align: top;
+      }
+      .meta-table th {
+        width: 148px;
+        font-size: 13px;
+        font-weight: 700;
+        color: #56705f;
+      }
+      .meta-table td {
+        font-size: 15px;
+        line-height: 1.7;
+        color: #183c2a;
+      }
+      .footer {
+        margin-top: 28px;
+        padding-top: 18px;
+        border-top: 1px solid rgba(17, 53, 34, 0.12);
+        font-size: 12px;
+        line-height: 1.8;
+        color: #6e8178;
+      }
+      @media print {
+        body {
+          background: white;
+        }
+        .sheet {
+          width: auto;
+          margin: 0;
+          padding: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="sheet">
+      <p class="eyebrow">Simple Estimate Sheet</p>
+      <h1 class="title">크리스피크림도넛 케이터링 트럭 간이 견적서</h1>
+      <p class="subtitle">내부 품의용으로 바로 공유할 수 있도록 행사 정보 기준의 참고 견적을 정리한 문서입니다.</p>
+
+      <section class="hero">
+        <div class="hero-label">Estimated Total</div>
+        <p class="hero-price">${escapeHtml(formatCurrency(estimatedTotal))}</p>
+        <p class="hero-note">
+          ${escapeHtml(activeMenu.label)} / ${escapeHtml(`${attendees}명`)} / ${escapeHtml(activeRegion.label)} 기준 참고 견적입니다.
+          현장 동선, 운영 시간, 전기 지원 여부에 따라 실제 제안은 달라질 수 있습니다.
+        </p>
+      </section>
+
+      <section class="grid">
+        <article class="box">
+          <div class="box-label">운영 메뉴</div>
+          <div class="box-value">${escapeHtml(activeMenu.label)}</div>
+          <div class="box-text">${escapeHtml(activeMenu.description)}</div>
+        </article>
+        <article class="box">
+          <div class="box-label">추천 패키지</div>
+          <div class="box-value">${escapeHtml(recommendedPackage.label)}</div>
+          <div class="box-text">${escapeHtml(recommendedPackage.note)}</div>
+        </article>
+      </section>
+
+      <section class="box" style="margin-top: 14px;">
+        <table class="meta-table">
+          <tbody>
+            <tr>
+              <th>예상 인원</th>
+              <td>${escapeHtml(`${attendees}명`)}</td>
+            </tr>
+            <tr>
+              <th>행사 지역</th>
+              <td>${escapeHtml(activeRegion.label)}<br />${escapeHtml(activeRegion.note)}</td>
+            </tr>
+            <tr>
+              <th>1인 기준</th>
+              <td>${escapeHtml(formatCurrency(perHeadPrice))}</td>
+            </tr>
+            <tr>
+              <th>지역 가산</th>
+              <td>${escapeHtml(activeRegion.surcharge > 0 ? formatCurrency(activeRegion.surcharge) : "없음")}</td>
+            </tr>
+            <tr>
+              <th>출력 일시</th>
+              <td>${escapeHtml(formatTimestamp(issuedAt))}</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <p class="footer">
+        본 문서는 익명 행사 정보 기준의 간이 견적서이며, 실제 운영 제안은 행사 일정, 동선, 설치 조건, 운영 시간에 따라 조정될 수 있습니다.
+        전화 상담 시 이 금액을 기준으로 빠르게 논의하실 수 있습니다.
+      </p>
+    </main>
+  </body>
+</html>`;
+
+    const printWindow = window.open("", "_blank", "width=980,height=900");
+    if (!printWindow) return;
+
+    printWindow.document.open();
+    printWindow.document.write(estimateHtml);
+    printWindow.document.close();
+
+    printWindow.onload = () => {
+      printWindow.focus();
+      printWindow.print();
+    };
+  };
 
   return (
     <section className="-mt-2 pb-14 sm:pb-24" id="quick-quote">
@@ -170,13 +411,20 @@ export function QuickQuoteSection() {
                   </div>
                 </div>
 
-                <div className="mt-5 flex flex-col gap-2.5 sm:flex-row">
+                <div className="mt-5 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap">
                   <a
                     href={callTarget}
                     className="inline-flex h-12 items-center justify-center rounded-full bg-white px-6 text-sm font-semibold text-forest-900 transition hover:bg-blush"
                   >
                     예상 견적 그대로 전화 상담하기
                   </a>
+                  <button
+                    type="button"
+                    onClick={handlePrintEstimate}
+                    className="inline-flex h-12 items-center justify-center rounded-full border border-white/24 px-6 text-sm font-semibold text-cream transition hover:bg-white/10"
+                  >
+                    간이 견적서 PDF 저장
+                  </button>
                   <a
                     href="#packages"
                     className="inline-flex h-12 items-center justify-center rounded-full border border-white/24 px-6 text-sm font-semibold text-cream transition hover:bg-white/10"
@@ -184,7 +432,8 @@ export function QuickQuoteSection() {
                     추천 패키지 더 보기
                   </a>
                 </div>
-                {callNumber ? <p className="mt-3 text-xs text-cream/62">상담 연결: {callNumber}</p> : null}
+                <p className="mt-3 text-xs text-cream/62">출력 창에서 PDF 저장 또는 인쇄로 바로 공유할 수 있습니다.</p>
+                {callNumber ? <p className="mt-1 text-xs text-cream/62">상담 연결: {callNumber}</p> : null}
               </div>
             </div>
 

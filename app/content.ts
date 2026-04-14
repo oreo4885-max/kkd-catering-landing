@@ -260,8 +260,8 @@ export const siteContent = {
     {
       id: "reference",
       name: "Reference Collaboration",
-      badge: "한정 운영",
-      attendees: "100~120명 내외",
+      badge: "프로모션 운영",
+      attendees: "60~120명 내외",
       summary:
         "처음 시작하는 협업형 패키지. 공동 브랜딩, 사진 활용, 사례 소개가 가능한 경우 우선 검토합니다.",
       highlights: ["진입형 협업 패키지", "수도권 / 평일 우선", "레퍼런스 확보형"],

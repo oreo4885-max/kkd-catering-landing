@@ -115,7 +115,7 @@ export function TopNav() {
           })}
         </nav>
 
-        <nav className="grid grid-cols-7 gap-1 border-t border-forest-900/8 pt-2 lg:hidden">
+        <nav className="hidden grid-cols-7 gap-1 border-t border-forest-900/8 pt-2 lg:hidden">
           {navItems.map((item) => {
             const targetId = item.href.replace("#", "");
             const active = activeSection === targetId;

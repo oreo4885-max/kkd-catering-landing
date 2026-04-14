@@ -199,6 +199,11 @@ export function PackagesSection() {
                 <p className="ko-body mt-3 max-w-3xl text-sm leading-6 text-white/82 sm:text-base sm:leading-7">
                   {activePackage.summary}
                 </p>
+                {activePackage.id === "reference" ? (
+                  <div className="mt-3 inline-flex rounded-full border border-[#ffd8d1]/30 bg-[#ffd8d1] px-4 py-2 text-[12px] font-semibold text-kkdred shadow-[0_12px_22px_rgba(255,216,209,0.22)]">
+                    현재 프로모션 이벤트중
+                  </div>
+                ) : null}
               </div>
 
               <div className="grid gap-2.5 sm:grid-cols-3 lg:grid-cols-1">

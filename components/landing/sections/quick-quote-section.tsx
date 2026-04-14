@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { siteContent } from "@/app/content";
 import { DonutCoffeeIcon, DonutIcon } from "../brand-icons";
 
@@ -10,6 +10,8 @@ type MenuOption = {
   description: string;
   minimum: number;
   perHead: number;
+  minAttendees: number;
+  maxAttendees: number;
 };
 
 type RegionOption = {
@@ -26,13 +28,17 @@ const menuOptions: MenuOption[] = [
     description: "도넛 중심의 간결한 운영형",
     minimum: 800000,
     perHead: 8200,
+    minAttendees: 100,
+    maxAttendees: 250,
   },
   {
     id: "combo",
     label: "도넛+커피세트",
     description: "도넛과 커피를 함께 운영하는 기본형",
-    minimum: 920000,
+    minimum: 800000,
     perHead: 11200,
+    minAttendees: 60,
+    maxAttendees: 200,
   },
 ];
 
@@ -131,7 +137,7 @@ function escapeHtml(value: string) {
 
 export function QuickQuoteSection() {
   const [menu, setMenu] = useState<MenuOption["id"]>("combo");
-  const [attendees, setAttendees] = useState(100);
+  const [attendees, setAttendees] = useState(60);
   const [region, setRegion] = useState(regionOptions[0].id);
 
   const activeMenu = useMemo(() => menuOptions.find((item) => item.id === menu) ?? menuOptions[0], [menu]);
@@ -142,13 +148,19 @@ export function QuickQuoteSection() {
   const attendeeTier = attendees <= 120 ? "reference" : attendees >= 250 ? "premium" : "standard";
   const recommendedPackage = recommendedPackageCopy[attendeeTier];
 
+  useEffect(() => {
+    setAttendees((current) => {
+      if (current < activeMenu.minAttendees) return activeMenu.minAttendees;
+      if (current > activeMenu.maxAttendees) return activeMenu.maxAttendees;
+      return current;
+    });
+  }, [activeMenu.maxAttendees, activeMenu.minAttendees]);
+
   const estimatedTotal = useMemo(() => {
     const baseCost = Math.max(activeMenu.minimum, attendees * activeMenu.perHead);
     const volumeDiscount = attendees >= 250 ? 0.95 : attendees >= 180 ? 0.97 : 1;
     return Math.max(800000, roundToNearestTenThousand(baseCost * volumeDiscount + activeRegion.surcharge));
   }, [activeMenu, activeRegion.surcharge, attendees]);
-
-  const perHeadPrice = roundToNearestTenThousand(activeMenu.perHead * 10) / 10;
 
   const handlePrintEstimate = () => {
     const issuedAt = new Date();
@@ -336,10 +348,6 @@ export function QuickQuoteSection() {
               <td>${escapeHtml(activeRegion.label)}<br />${escapeHtml(activeRegion.note)}</td>
             </tr>
             <tr>
-              <th>1인 기준</th>
-              <td>${escapeHtml(formatCurrency(perHeadPrice))}</td>
-            </tr>
-            <tr>
               <th>지역 가산</th>
               <td>${escapeHtml(activeRegion.surcharge > 0 ? formatCurrency(activeRegion.surcharge) : "없음")}</td>
             </tr>
@@ -391,9 +399,9 @@ export function QuickQuoteSection() {
                   <div>
                     <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#ffd8d1]">메뉴 선택</p>
                     <div className="mt-2 rounded-full border border-white/12 bg-white/8 p-1">
-                      <div className="grid grid-cols-2 gap-1">
-                        {menuOptions.map((option) => {
-                          const active = option.id === menu;
+                    <div className="grid grid-cols-2 gap-1">
+                      {menuOptions.map((option) => {
+                        const active = option.id === menu;
 
                           return (
                             <button
@@ -416,38 +424,41 @@ export function QuickQuoteSection() {
                     <div className="rounded-[18px] border border-white/12 bg-white/7 px-4 py-3">
                       <div className="flex items-center justify-between gap-3">
                         <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#ffd8d1]">예상 인원</p>
-                        <div className="flex items-center gap-2 rounded-full border border-white/14 bg-white/10 px-3 py-1 text-xs text-white/80">
+                        <div className="hidden items-center gap-2 rounded-full border border-white/14 bg-white/10 px-3 py-1 text-xs text-white/80 sm:flex">
                           <span>직접 입력</span>
                           <input
                             type="number"
-                            min={100}
-                            max={300}
+                            min={activeMenu.minAttendees}
+                            max={activeMenu.maxAttendees}
                             step={1}
                             value={attendees}
                             onChange={(event) => {
                               const nextValue = Number(event.target.value);
 
                               if (Number.isNaN(nextValue)) return;
-                              setAttendees(Math.max(100, Math.min(300, nextValue)));
+                              setAttendees(Math.max(activeMenu.minAttendees, Math.min(activeMenu.maxAttendees, nextValue)));
                             }}
                             className="w-14 border-0 bg-transparent p-0 text-right text-sm font-semibold text-white focus:outline-none"
                           />
+                        </div>
+                        <div className="inline-flex items-center rounded-full border border-white/14 bg-white/10 px-3 py-1 text-xs font-semibold text-white sm:hidden">
+                          {attendees}명
                         </div>
                       </div>
                       <div className="mt-3">
                         <input
                           type="range"
-                          min={100}
-                          max={300}
+                          min={activeMenu.minAttendees}
+                          max={activeMenu.maxAttendees}
                           step={1}
                           value={attendees}
                           onChange={(event) => setAttendees(Number(event.target.value))}
                           className="h-2 w-full cursor-pointer appearance-none rounded-full bg-white/20 accent-[#ffd8d1]"
                         />
                         <div className="mt-2 flex items-center justify-between text-[11px] text-cream/68">
-                          <span>100명</span>
+                          <span>{activeMenu.minAttendees}명</span>
                           <span className="font-semibold text-white">{attendees}명</span>
-                          <span>300명</span>
+                          <span>{activeMenu.maxAttendees}명</span>
                         </div>
                       </div>
                     </div>
@@ -507,9 +518,6 @@ export function QuickQuoteSection() {
                   <span className="rounded-full border border-white/14 bg-white/8 px-3 py-1.5 text-[12px] font-medium text-cream/84">
                     지역 {activeRegion.label}
                   </span>
-                  <span className="rounded-full border border-white/14 bg-white/8 px-3 py-1.5 text-[12px] font-medium text-cream/84">
-                    1인 기준 약 {formatCurrency(perHeadPrice)}
-                  </span>
                 </div>
 
                 <div className="mt-5 grid gap-3 sm:grid-cols-2">
@@ -547,9 +555,6 @@ export function QuickQuoteSection() {
                   >
                     추천 패키지 더 보기
                   </a>
-                </div>
-                <div className="mt-4 rounded-[18px] border border-white/12 bg-white/7 px-4 py-3 text-sm leading-6 text-cream/84">
-                  고객사 예산에 맞춘 메뉴 및 수량 조정이 가능합니다. 우선 상담을 남겨주시면 운영 가능한 방향으로 함께 조율해드립니다.
                 </div>
                 <p className="mt-3 text-xs text-cream/62">출력 창에서 PDF 저장 또는 인쇄로 바로 공유할 수 있습니다.</p>
                 {callNumber ? <p className="mt-1 text-xs text-cream/62">상담 연결: {callNumber}</p> : null}

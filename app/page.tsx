@@ -16,7 +16,7 @@ import {
 
 export default function Home() {
   return (
-    <main className="pb-24 sm:pb-10">
+    <main className="pb-32 sm:pb-10">
       <TopNav />
       <HeroSection />
       <QuickQuoteSection />

@@ -388,7 +388,7 @@ export const siteContent = {
 
   bottomCta: {
     title: "행사에 맞는 도넛트럭 상담을 바로 시작해 보세요",
-    description: "지역 담당 번호로 직접 연결해 행사일, 지역, 예상 인원 기준으로 빠르게 상담을 진행하실 수 있습니다.",
+    description: "전화 상담과 카카오톡 문의 중 편한 방식으로 연결해 행사일, 지역, 예상 인원 기준의 운영 방향을 빠르게 안내해드립니다.",
     primaryCta: {
       label: "지방권 전화 상담",
       href: "tel:051-501-6637",

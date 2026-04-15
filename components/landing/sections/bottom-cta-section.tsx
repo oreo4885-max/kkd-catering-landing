@@ -2,6 +2,7 @@ import { siteContent } from "@/app/content";
 
 export function BottomCtaSection() {
   const { contact, legal } = siteContent;
+  const kakaoInquiryUrl = process.env.NEXT_PUBLIC_KAKAO_INQUIRY_URL ?? "";
 
   return (
     <section className="py-16 sm:py-24">
@@ -27,6 +28,18 @@ export function BottomCtaSection() {
               </div>
             ))}
           </div>
+          <div className="mt-5 rounded-[22px] border border-white/12 bg-white/8 px-4 py-4 text-sm leading-7 text-cream/84">
+            <p className="font-semibold text-white">빠른 상담 안내</p>
+            <div className="mt-2 flex flex-wrap gap-2">
+              {["행사일", "행사 지역", "예상 인원"].map((item) => (
+                <span key={item} className="rounded-full border border-white/12 bg-white/10 px-3 py-1 text-[12px] font-medium text-white/88">
+                  {item}
+                </span>
+              ))}
+            </div>
+            <p className="mt-2">개인정보 입력 없이 빠른 상담 가능</p>
+            <p className="text-cream/76">행사일 / 지역 / 인원만 알려주시면 빠르게 안내드립니다.</p>
+          </div>
           <p className="mt-4 text-sm text-cream/76">{contact.metroNotice}</p>
           <p className="mt-4 text-sm text-cream/72">
             상담 가능 시간(평일 기준) {contact.consultHours} | 점심시간 {contact.lunchBreak}
@@ -36,17 +49,27 @@ export function BottomCtaSection() {
             <p>운영주체: {legal.operator}</p>
           </div>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            {kakaoInquiryUrl ? (
+              <a
+                href={kakaoInquiryUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex h-12 items-center justify-center rounded-full border border-[#E6CB00] bg-[#FEE500] px-6 text-sm font-semibold text-[#191919] shadow-[0_14px_26px_rgba(25,25,25,0.14)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_30px_rgba(25,25,25,0.18)]"
+              >
+                카카오톡 문의
+              </a>
+            ) : null}
             <a
               href={siteContent.bottomCta.primaryCta.href}
               className="inline-flex h-12 items-center justify-center rounded-full bg-white px-6 text-sm font-semibold text-forest-900 transition hover:bg-blush"
             >
-              {siteContent.bottomCta.primaryCta.label}
+              전화 상담
             </a>
             <a
               href={siteContent.bottomCta.secondaryCta.href}
               className="inline-flex h-12 items-center justify-center rounded-full border border-white/30 px-6 text-sm font-semibold text-cream transition hover:bg-white/10"
             >
-              {siteContent.bottomCta.secondaryCta.label}
+              추천 패키지 확인하기
             </a>
           </div>
         </div>

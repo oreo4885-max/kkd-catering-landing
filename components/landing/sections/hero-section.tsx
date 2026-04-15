@@ -27,6 +27,7 @@ export function HeroSection() {
   const { hero } = siteContent;
   const [activeShowcase, setActiveShowcase] = useState(0);
   const currentShowcase = showcaseItems[activeShowcase];
+  const kakaoInquiryUrl = process.env.NEXT_PUBLIC_KAKAO_INQUIRY_URL ?? "";
 
   return (
     <section className="relative overflow-hidden" id="hero">
@@ -40,19 +41,44 @@ export function HeroSection() {
             {hero.title}
           </h1>
           <p className="ko-body mt-4 max-w-2xl text-[15px] leading-7 text-forest-800/80 sm:mt-5 sm:text-lg sm:leading-8">{hero.subtitle}</p>
-          <div className="mt-6 flex flex-col gap-2.5 sm:mt-7 sm:flex-row sm:gap-3">
+          <div className="mt-6 grid gap-2.5 sm:mt-7 sm:max-w-[34rem] sm:grid-cols-[1.15fr_0.85fr] sm:gap-3">
+            {kakaoInquiryUrl ? (
+              <a
+                href={kakaoInquiryUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex h-11 items-center justify-center rounded-full border border-[#E6CB00] bg-[#FEE500] px-5 text-[13px] font-semibold text-[#191919] shadow-[0_12px_24px_rgba(25,25,25,0.12)] transition hover:-translate-y-0.5 hover:shadow-[0_16px_28px_rgba(25,25,25,0.16)] sm:h-12 sm:px-7 sm:text-sm"
+              >
+                카카오톡 문의
+              </a>
+            ) : (
+              <a
+                href={hero.primaryCta.href}
+                className="inline-flex h-11 items-center justify-center rounded-full bg-forest-800 px-5 text-[13px] font-semibold text-cream transition hover:bg-forest-900 sm:h-12 sm:px-7 sm:text-sm"
+              >
+                {hero.primaryCta.label}
+              </a>
+            )}
             <a
               href={hero.primaryCta.href}
-              className="inline-flex h-11 items-center justify-center rounded-full bg-forest-800 px-5 text-[13px] font-semibold text-cream transition hover:bg-forest-900 sm:h-12 sm:px-7 sm:text-sm"
+              className="inline-flex h-11 items-center justify-center rounded-full border border-forest-900/10 bg-white/78 px-5 text-[13px] font-semibold text-forest-900 transition hover:border-forest-700/30 hover:bg-white sm:h-12 sm:px-7 sm:text-sm"
             >
-              {hero.primaryCta.label}
+              전화 상담
             </a>
-            <a
-              href={hero.secondaryCta.href}
-              className="inline-flex h-11 items-center justify-center rounded-full border border-forest-900/10 bg-white/70 px-5 text-[13px] font-semibold text-forest-900 transition hover:border-forest-700/30 hover:bg-white sm:h-12 sm:px-7 sm:text-sm"
-            >
-              {hero.secondaryCta.label}
-            </a>
+          </div>
+          <div className="mt-4 max-w-[35rem] rounded-[22px] border border-forest-900/8 bg-white/72 px-4 py-3.5 text-[13px] leading-6 text-forest-800/84 sm:px-5 sm:py-4 sm:text-sm sm:leading-7">
+            <p className="font-semibold text-forest-900">개인정보 입력 없이 빠른 상담 가능</p>
+            <p className="mt-1">행사일 / 지역 / 인원만 알려주시면 빠르게 안내드립니다.</p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {["행사일", "행사 지역", "예상 인원"].map((item) => (
+                <span
+                  key={item}
+                  className="inline-flex rounded-full border border-forest-900/8 bg-forest-50 px-3 py-1 text-[12px] font-medium text-forest-800"
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
           </div>
           <ul className="mt-6 flex flex-wrap gap-2 text-sm text-forest-800/80 sm:mt-8">
             {hero.badges.map((badge) => (

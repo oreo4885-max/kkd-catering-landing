@@ -404,7 +404,7 @@ export function QuickQuoteSection() {
               </p>
 
               <div className="mt-5 rounded-[24px] bg-forest-800 px-5 py-5 text-cream shadow-soft sm:mt-6 sm:px-6 sm:py-6">
-                <div className="rounded-[20px] border border-white/12 bg-white/7 px-4 py-4">
+                <div className="overflow-hidden rounded-[20px] border border-white/12 bg-white/7 px-4 py-4">
                   <div>
                     <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#ffd8d1]">메뉴 선택</p>
                     <div className="mt-2 rounded-full border border-white/12 bg-white/8 p-1">
@@ -433,37 +433,20 @@ export function QuickQuoteSection() {
                     <div>
                       <div className="flex items-center justify-between gap-3">
                         <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#ffd8d1]">예상 인원</p>
-                        <div className="flex items-center gap-2 rounded-full border border-white/14 bg-white/10 px-3 py-1 text-xs text-white/80">
-                          <span>직접 입력</span>
-                          <input
-                            type="number"
-                            min={activeMenu.minAttendees}
-                            max={activeMenu.maxAttendees}
-                            step={1}
-                            value={attendees}
-                            onChange={(event) => {
-                              const nextValue = Number(event.target.value);
-
-                              if (Number.isNaN(nextValue)) return;
-                              updateAttendees(nextValue);
-                            }}
-                            className="w-14 border-0 bg-transparent p-0 text-right text-sm font-semibold text-white focus:outline-none"
-                          />
-                        </div>
-                        <div className="inline-flex items-center gap-2 rounded-full border border-white/14 bg-white/10 px-2 py-1 text-xs text-white sm:hidden">
+                        <div className="inline-flex items-center gap-2 rounded-full border border-white/14 bg-white/10 px-2 py-1 text-xs text-white">
                           <button
                             type="button"
                             onClick={() => updateAttendees(attendees - 1)}
-                            className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-white/10 text-sm font-semibold text-white"
+                            className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-white/10 text-sm font-semibold text-white transition hover:bg-white/16"
                             aria-label="인원 1명 감소"
                           >
                             -
                           </button>
-                          <span className="min-w-[44px] text-center text-sm font-semibold text-white">{attendees}</span>
+                          <span className="min-w-[48px] text-center text-sm font-semibold text-white">{attendees}</span>
                           <button
                             type="button"
                             onClick={() => updateAttendees(attendees + 1)}
-                            className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-white/10 text-sm font-semibold text-white"
+                            className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-white/10 text-sm font-semibold text-white transition hover:bg-white/16"
                             aria-label="인원 1명 증가"
                           >
                             +

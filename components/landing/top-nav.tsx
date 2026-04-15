@@ -59,7 +59,12 @@ export function TopNav() {
   }, [sectionIds]);
 
   return (
-    <header className="sticky top-0 z-50 px-4 pt-2 sm:px-6 sm:pt-3">
+    <>
+      <header
+        className={`sticky top-0 z-50 px-4 pt-2 transition-transform duration-300 sm:px-6 sm:pt-3 ${
+          scrolled ? "-translate-y-[120%] lg:translate-y-0" : "translate-y-0"
+        }`}
+      >
       <div
         className={`mx-auto max-w-7xl rounded-[20px] border px-3 py-1.5 backdrop-blur-none transition-all sm:rounded-[24px] sm:px-5 sm:py-2.5 sm:backdrop-blur ${
           scrolled
@@ -122,6 +127,19 @@ export function TopNav() {
           })}
         </nav>
       </div>
-    </header>
+      </header>
+
+      <a
+        href="#hero"
+        aria-label="페이지 상단으로 이동"
+        className={`fixed left-3 top-3 z-50 inline-flex h-11 w-11 items-center justify-center rounded-full border border-forest-900/10 bg-white/96 text-forest-900 shadow-card transition-all duration-300 lg:hidden ${
+          scrolled ? "translate-y-0 opacity-100" : "-translate-y-3 opacity-0 pointer-events-none"
+        }`}
+      >
+        <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5 fill-current">
+          <path d="M12 4.5 4 10.8v8.2c0 .55.45 1 1 1h4.5v-5.5h5V20H19c.55 0 1-.45 1-1v-8.2L12 4.5Zm0-2.5 10 7.8-1.23 1.58L19 10.05V19a2 2 0 0 1-2 2h-4.5v-5.5h-1V21H7a2 2 0 0 1-2-2v-8.95l-1.77 1.33L2 9.8 12 2Z" />
+        </svg>
+      </a>
+    </>
   );
 }

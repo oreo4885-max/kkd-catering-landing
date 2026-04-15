@@ -12,6 +12,8 @@ const referenceVisuals = [
     label: "광장 유입형",
     summary: "지나가는 고객의 시선이 자연스럽게 머무르는 오픈형 운영 장면",
     usage: "야외 프로모션 / 오픈 행사",
+    scale: "100~150명 전후",
+    purpose: "유입 확대 / 대기열 분위기 연출",
     points: ["대기열이 부담 아닌 분위기로 보임", "현장 유입이 자연스럽게 생김", "브랜드 존재감이 눈에 띔"],
   },
   {
@@ -19,6 +21,8 @@ const referenceVisuals = [
     label: "응원 메시지형",
     summary: "참여자 반응과 사진 결과물이 함께 살아나는 응원형 현장 장면",
     usage: "학교 행사 / 사내 응원 이벤트",
+    scale: "60~120명 전후",
+    purpose: "응원 메시지 전달 / 참여 반응 강화",
     points: ["사진 반응이 자연스럽게 생김", "메시지 톤 전달이 쉬움", "참여 흐름이 자연스럽게 올라감"],
   },
   {
@@ -26,6 +30,8 @@ const referenceVisuals = [
     label: "비주얼 포인트형",
     summary: "트럭 자체가 현장 포인트가 되어 별도 장식 부담을 줄이는 장면",
     usage: "브랜드 협업 / 팝업 연계",
+    scale: "120명 이상",
+    purpose: "브랜드 노출 / 비주얼 포인트 확보",
     points: ["세팅이 과하지 않아도 눈에 띔", "브랜드 사진 컷 확보가 쉬움", "대기 동선이 깔끔하게 잡힘"],
   },
 ];
@@ -109,7 +115,7 @@ export function ReferencesSection() {
                 </blockquote>
                 <p className="ko-body mt-4 text-[14px] font-medium text-white/78 sm:text-base">{activeReference.author}</p>
 
-                <div className="mt-5 grid gap-2.5 sm:grid-cols-2 sm:gap-3">
+                <div className="mt-5 grid gap-2.5 sm:grid-cols-3 sm:gap-3">
                   <div className="rounded-[20px] border border-white/12 bg-white/8 px-4 py-3.5 backdrop-blur sm:rounded-[24px] sm:py-4">
                     <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/68">현장 인상</p>
                     <p className="ko-body mt-2 text-[13px] leading-5 text-white sm:text-sm sm:leading-6">{activeVisual.summary}</p>
@@ -117,6 +123,14 @@ export function ReferencesSection() {
                   <div className="rounded-[20px] border border-white/12 bg-white/8 px-4 py-3.5 backdrop-blur sm:rounded-[24px] sm:py-4">
                     <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/68">추천 활용</p>
                     <p className="ko-body mt-2 text-[13px] leading-5 text-white sm:text-sm sm:leading-6">{activeVisual.usage}</p>
+                  </div>
+                  <div className="rounded-[20px] border border-white/12 bg-white/8 px-4 py-3.5 backdrop-blur sm:rounded-[24px] sm:py-4">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/68">추천 규모 / 목적</p>
+                    <p className="ko-body mt-2 text-[13px] leading-5 text-white sm:text-sm sm:leading-6">
+                      {activeVisual.scale}
+                      <br />
+                      {activeVisual.purpose}
+                    </p>
                   </div>
                 </div>
               </div>

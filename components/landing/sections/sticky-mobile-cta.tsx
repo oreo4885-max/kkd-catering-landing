@@ -31,14 +31,14 @@ export function StickyMobileCta() {
               aria-label="카카오톡 실시간 문의"
             >
               <KakaoMark />
-              <span>카카오톡 문의</span>
+              <span>카카오 문의</span>
             </a>
           ) : (
             <a
               href="#inquiry-contact"
               className="inline-flex h-10 shrink-0 items-center justify-center rounded-full border border-forest-900/10 bg-white px-4 text-[13px] font-semibold text-forest-900 shadow-card"
             >
-              전화 상담
+              즉시 상담
             </a>
           )}
         </div>

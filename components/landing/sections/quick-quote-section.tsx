@@ -95,15 +95,15 @@ const regionOptions: RegionOption[] = [
 
 const recommendedPackageCopy = {
   reference: {
-    label: "Reference Collaboration",
+    label: "소규모 프로모션형",
     note: "100~120명 전후 행사에서 가볍게 시작하기 좋은 협업형 운영 흐름입니다.",
   },
   standard: {
-    label: "Standard Corporate Package",
+    label: "기본 기업행사형",
     note: "가장 문의가 많은 기본 운영형으로, 도넛과 커피를 안정적으로 제안하기 좋습니다.",
   },
   premium: {
-    label: "Premium Brand Event",
+    label: "대형 브랜드 이벤트형",
     note: "대형 행사나 브랜딩 밀도가 높은 현장에서 권장되는 상위 운영형입니다.",
   },
 } as const;

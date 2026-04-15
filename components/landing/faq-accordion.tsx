@@ -8,12 +8,12 @@ type FaqAccordionProps = {
 };
 
 export function FaqAccordion({ items }: FaqAccordionProps) {
-  const [openIndex, setOpenIndex] = useState<number>(0);
+  const [openIndexes, setOpenIndexes] = useState<number[]>([0, 1, 2]);
 
   return (
     <div className="space-y-4">
       {items.map((item, index) => {
-        const isOpen = openIndex === index;
+        const isOpen = openIndexes.includes(index);
 
         return (
           <div
@@ -23,7 +23,11 @@ export function FaqAccordion({ items }: FaqAccordionProps) {
             <button
               type="button"
               className="flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-6"
-              onClick={() => setOpenIndex(isOpen ? -1 : index)}
+              onClick={() =>
+                setOpenIndexes((current) =>
+                  isOpen ? current.filter((itemIndex) => itemIndex !== index) : [...current, index].sort((a, b) => a - b),
+                )
+              }
               aria-expanded={isOpen}
             >
               <span className="text-base font-semibold text-forest-900 sm:text-lg">

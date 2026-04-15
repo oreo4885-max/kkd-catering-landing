@@ -160,9 +160,9 @@ export const siteContent = {
     attendeeOptions: ["100~120명", "150명 이상", "250명 이상"],
     eventOptions: ["기업 행사", "지점 프로모션", "학교 행사", "촬영장 서포트", "브랜드 협업"],
     packageOptions: [
-      "Reference Collaboration",
-      "Standard Corporate Package",
-      "Premium Brand Event",
+      "소규모 프로모션형",
+      "기본 기업행사형",
+      "대형 브랜드 이벤트형",
     ],
     primaryCta: {
       label: "전화 상담 번호 보기",
@@ -259,7 +259,7 @@ export const siteContent = {
   packages: [
     {
       id: "reference",
-      name: "Reference Collaboration",
+      name: "소규모 프로모션형",
       badge: "프로모션 운영",
       attendees: "60~120명 내외",
       summary:
@@ -269,7 +269,7 @@ export const siteContent = {
     },
     {
       id: "standard",
-      name: "Standard Corporate Package",
+      name: "기본 기업행사형",
       badge: "기본 추천",
       attendees: "150명 이상",
       summary:
@@ -279,7 +279,7 @@ export const siteContent = {
     },
     {
       id: "premium",
-      name: "Premium Brand Event",
+      name: "대형 브랜드 이벤트형",
       badge: "상위 패키지",
       attendees: "250명 이상",
       summary:
@@ -357,10 +357,6 @@ export const siteContent = {
 
   faq: [
     {
-      question: "현장 결제가 가능한가요?",
-      answer: "현장 결제는 불가하며, 패키지 결제 이후 케이터링으로 진행됩니다.",
-    },
-    {
       question: "최소 며칠 전에 문의해야 하나요?",
       answer:
         "원활한 운영을 위해 최소 2주 전에 문의 및 예약해주시는 것이 좋습니다. 행사 일정과 지역에 따라 가능 여부가 달라질 수 있습니다.",
@@ -369,6 +365,15 @@ export const siteContent = {
       question: "전기 지원이 꼭 필요한가요?",
       answer:
         "현장 조건에 따라 필요한 운영 방식이 달라질 수 있습니다. 전화 상담 시 전기 지원 가능 여부를 알려주시면 빠르게 확인해드립니다.",
+    },
+    {
+      question: "최종 견적은 왜 달라질 수 있나요?",
+      answer:
+        "운영 시간, 행사 동선, 전기 지원 여부, 설치 조건, 지역에 따라 실제 제안 견적이 달라질 수 있습니다. 계산기 견적은 1차 참고용으로 확인해주시면 됩니다.",
+    },
+    {
+      question: "현장 결제가 가능한가요?",
+      answer: "현장 결제는 불가하며, 패키지 결제 이후 케이터링으로 진행됩니다.",
     },
     {
       question: "공동 브랜딩이 가능한가요?",
@@ -390,7 +395,7 @@ export const siteContent = {
     title: "행사에 맞는 도넛트럭 상담을 바로 시작해 보세요",
     description: "전화 상담과 카카오톡 문의 중 편한 방식으로 연결해 행사일, 지역, 예상 인원 기준의 운영 방향을 빠르게 안내해드립니다.",
     primaryCta: {
-      label: "지방권 전화 상담",
+      label: "즉시 일정 확인 전화 상담",
       href: "tel:051-501-6637",
     },
     secondaryCta: {

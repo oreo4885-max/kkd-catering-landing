@@ -11,7 +11,7 @@ export function InquirySection() {
           <div className="lg:sticky lg:top-10">
             <div className="card-surface rounded-[24px] p-5 sm:rounded-[28px] sm:p-6">
               <div className="rounded-[22px] bg-forest-800 px-5 py-5 text-base font-semibold leading-8 text-cream sm:px-6 sm:py-6 sm:text-[1.08rem] sm:leading-9">
-                <span className="text-white">전화 상담 시 업체명, 행사일, 예상 인원</span> 정도만 말씀해 주셔도
+                <span className="text-white">업체명 또는 행사명 / 행사일 / 지역 / 예상 인원</span> 정도만 말씀해 주셔도
                 운영 가능 여부와 방향을 빠르게 안내드릴 수 있습니다.
               </div>
               {kakaoInquiryUrl ? (
@@ -46,14 +46,14 @@ export function InquirySection() {
                 문의 방식에 맞게 더 빠르게 연결해드립니다
               </h3>
               <p className="mt-3 text-sm leading-7 text-cream/80 sm:text-base">
-                전화는 빠른 일정 확인용, 카카오톡은 조건 정리와 텍스트 문의용으로 활용하시면 더 편하게 상담하실 수 있습니다.
+                전화는 빠른 일정 확인과 즉시 상담에, 카카오톡은 행사 조건 정리와 텍스트 문의에 더 편하게 활용하실 수 있습니다.
               </p>
               <div className="mt-5 grid gap-3 sm:grid-cols-2">
                 <a
                   href={contact.contacts[0]?.href ?? "#inquiry-contact"}
                   className="inline-flex min-h-[54px] items-center justify-center rounded-full bg-white px-5 text-sm font-semibold text-forest-900 transition hover:bg-blush"
                 >
-                  전화 상담 바로 연결
+                  즉시 일정 확인 전화 상담
                 </a>
                 {kakaoInquiryUrl ? (
                   <a
@@ -62,7 +62,7 @@ export function InquirySection() {
                     rel="noreferrer"
                     className="inline-flex min-h-[54px] items-center justify-center rounded-full border border-[#E6CB00] bg-[#FEE500] px-5 text-sm font-semibold text-[#191919] shadow-[0_14px_26px_rgba(25,25,25,0.14)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_30px_rgba(25,25,25,0.18)]"
                   >
-                    카카오톡 문의
+                    행사 조건 보내고 카카오톡 문의
                   </a>
                 ) : (
                   <a
@@ -82,7 +82,7 @@ export function InquirySection() {
                     </span>
                   ))}
                 </div>
-                <p className="mt-2 text-cream/76">행사일 / 지역 / 인원만 알려주셔도 추천 메뉴와 운영 방향을 빠르게 안내드립니다.</p>
+                <p className="mt-2 text-cream/76">행사일 / 지역 / 예상 인원만 알려주시면 1차 안내가 가능합니다.</p>
               </div>
             </div>
 

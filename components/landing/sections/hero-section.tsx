@@ -67,8 +67,8 @@ export function HeroSection() {
             </a>
           </div>
           <div className="mt-4 max-w-[35rem] rounded-[22px] border border-forest-900/8 bg-white/72 px-4 py-3.5 text-[13px] leading-6 text-forest-800/84 sm:px-5 sm:py-4 sm:text-sm sm:leading-7">
-            <p className="font-semibold text-forest-900">개인정보 입력 없이 빠른 상담 가능</p>
-            <p className="mt-1">행사일 / 지역 / 인원만 알려주시면 빠르게 안내드립니다.</p>
+            <p className="font-semibold text-forest-900">예상 견적 확인 후 바로 카카오톡 문의 가능</p>
+            <p className="mt-1">행사일 / 지역 / 예상 인원만 알려주시면 빠르게 상담 가능합니다.</p>
             <div className="mt-3 flex flex-wrap gap-2">
               {["행사일", "행사 지역", "예상 인원"].map((item) => (
                 <span

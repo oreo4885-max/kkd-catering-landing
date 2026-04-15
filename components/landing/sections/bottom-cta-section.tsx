@@ -37,8 +37,8 @@ export function BottomCtaSection() {
                 </span>
               ))}
             </div>
-            <p className="mt-2">개인정보 입력 없이 빠른 상담 가능</p>
-            <p className="text-cream/76">행사일 / 지역 / 인원만 알려주시면 빠르게 안내드립니다.</p>
+            <p className="mt-2">예상 견적 확인 후 바로 문의 가능합니다.</p>
+            <p className="text-cream/76">행사일 / 지역 / 예상 인원만 알려주시면 빠르게 상담을 이어갈 수 있습니다.</p>
           </div>
           <p className="mt-4 text-sm text-cream/76">{contact.metroNotice}</p>
           <p className="mt-4 text-sm text-cream/72">
@@ -56,14 +56,14 @@ export function BottomCtaSection() {
                 rel="noreferrer"
                 className="inline-flex h-12 items-center justify-center rounded-full border border-[#E6CB00] bg-[#FEE500] px-6 text-sm font-semibold text-[#191919] shadow-[0_14px_26px_rgba(25,25,25,0.14)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_30px_rgba(25,25,25,0.18)]"
               >
-                카카오톡 문의
+                행사 조건 보내고 카카오톡 문의
               </a>
             ) : null}
             <a
               href={siteContent.bottomCta.primaryCta.href}
               className="inline-flex h-12 items-center justify-center rounded-full bg-white px-6 text-sm font-semibold text-forest-900 transition hover:bg-blush"
             >
-              전화 상담
+              즉시 일정 확인 전화 상담
             </a>
             <a
               href={siteContent.bottomCta.secondaryCta.href}

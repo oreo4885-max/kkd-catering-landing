@@ -157,6 +157,10 @@ export function QuickQuoteSection() {
     });
   }, [activeMenu.maxAttendees, activeMenu.minAttendees]);
 
+  const updateAttendees = (nextValue: number) => {
+    setAttendees(Math.max(activeMenu.minAttendees, Math.min(activeMenu.maxAttendees, nextValue)));
+  };
+
   const estimatedTotal = useMemo(() => {
     const extraAttendees = Math.max(attendees - activeMenu.minAttendees, 0);
     const baseCost = activeMenu.minimum + extraAttendees * activeMenu.perHead;
@@ -169,7 +173,7 @@ export function QuickQuoteSection() {
 <html lang="ko">
   <head>
     <meta charset="utf-8" />
-    <title>크리스피크림도넛 케이터링 트럭 간이 견적서</title>
+    <title>크리스피크림도넛 케이터링 트럭 견적서</title>
     <style>
       :root {
         color-scheme: light;
@@ -312,8 +316,8 @@ export function QuickQuoteSection() {
   <body>
     <main class="sheet">
       <p class="eyebrow">Simple Estimate Sheet</p>
-      <h1 class="title">크리스피크림도넛 케이터링 트럭 간이 견적서</h1>
-      <p class="subtitle">내부 품의용으로 바로 공유할 수 있도록 행사 정보 기준의 참고 견적을 정리한 문서입니다.</p>
+      <h1 class="title">크리스피크림도넛 케이터링 트럭 견적서</h1>
+      <p class="subtitle">내부 공유용으로 바로 확인할 수 있도록 행사 정보 기준의 참고 견적을 정리한 문서입니다.</p>
 
       <section class="hero">
         <div class="hero-label">Estimated Total (VAT 포함)</div>
@@ -365,7 +369,7 @@ export function QuickQuoteSection() {
       </section>
 
       <p class="footer">
-        본 문서는 익명 행사 정보 기준의 VAT 포함 간이 견적서이며, 실제 운영 제안은 행사 일정, 동선, 설치 조건, 운영 시간에 따라 조정될 수 있습니다.
+        본 문서는 익명 행사 정보 기준의 VAT 포함 견적서이며, 실제 운영 제안은 행사 일정, 동선, 설치 조건, 운영 시간에 따라 조정될 수 있습니다.
         전화 상담 시 이 금액을 기준으로 빠르게 논의하실 수 있습니다.
       </p>
     </main>
@@ -441,10 +445,29 @@ export function QuickQuoteSection() {
                               const nextValue = Number(event.target.value);
 
                               if (Number.isNaN(nextValue)) return;
-                              setAttendees(Math.max(activeMenu.minAttendees, Math.min(activeMenu.maxAttendees, nextValue)));
+                              updateAttendees(nextValue);
                             }}
                             className="w-14 border-0 bg-transparent p-0 text-right text-sm font-semibold text-white focus:outline-none"
                           />
+                        </div>
+                        <div className="inline-flex items-center gap-2 rounded-full border border-white/14 bg-white/10 px-2 py-1 text-xs text-white sm:hidden">
+                          <button
+                            type="button"
+                            onClick={() => updateAttendees(attendees - 1)}
+                            className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-white/10 text-sm font-semibold text-white"
+                            aria-label="인원 1명 감소"
+                          >
+                            -
+                          </button>
+                          <span className="min-w-[44px] text-center text-sm font-semibold text-white">{attendees}</span>
+                          <button
+                            type="button"
+                            onClick={() => updateAttendees(attendees + 1)}
+                            className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-white/10 text-sm font-semibold text-white"
+                            aria-label="인원 1명 증가"
+                          >
+                            +
+                          </button>
                         </div>
                       </div>
                       <div className="mt-3">
@@ -454,7 +477,7 @@ export function QuickQuoteSection() {
                           max={activeMenu.maxAttendees}
                           step={1}
                           value={attendees}
-                          onChange={(event) => setAttendees(Number(event.target.value))}
+                          onChange={(event) => updateAttendees(Number(event.target.value))}
                           className="h-2 w-full cursor-pointer appearance-none rounded-full bg-white/20 accent-[#ffd8d1]"
                         />
                         <div className="mt-2 flex items-center justify-between text-[11px] text-cream/68">
@@ -564,7 +587,7 @@ export function QuickQuoteSection() {
                     onClick={handlePrintEstimate}
                     className="inline-flex h-12 items-center justify-center rounded-full border border-white/24 px-6 text-sm font-semibold text-cream transition hover:bg-white/10"
                   >
-                    간이 견적서 PDF 저장
+                    견적서 PDF 저장
                   </button>
                   <a
                     href="#packages"

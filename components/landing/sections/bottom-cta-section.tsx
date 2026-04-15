@@ -56,14 +56,14 @@ export function BottomCtaSection() {
                 rel="noreferrer"
                 className="inline-flex h-12 items-center justify-center rounded-full border border-[#E6CB00] bg-[#FEE500] px-6 text-sm font-semibold text-[#191919] shadow-[0_14px_26px_rgba(25,25,25,0.14)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_30px_rgba(25,25,25,0.18)]"
               >
-                행사 조건 보내고 카카오톡 문의
+                카카오톡 상담
               </a>
             ) : null}
             <a
               href={siteContent.bottomCta.primaryCta.href}
               className="inline-flex h-12 items-center justify-center rounded-full bg-white px-6 text-sm font-semibold text-forest-900 transition hover:bg-blush"
             >
-              즉시 일정 확인 전화 상담
+              전화 상담
             </a>
             <a
               href={siteContent.bottomCta.secondaryCta.href}

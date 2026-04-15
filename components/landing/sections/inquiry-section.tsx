@@ -53,7 +53,7 @@ export function InquirySection() {
                   href={contact.contacts[0]?.href ?? "#inquiry-contact"}
                   className="inline-flex min-h-[54px] items-center justify-center rounded-full bg-white px-5 text-sm font-semibold text-forest-900 transition hover:bg-blush"
                 >
-                  즉시 일정 확인 전화 상담
+                  전화 상담
                 </a>
                 {kakaoInquiryUrl ? (
                   <a
@@ -62,7 +62,7 @@ export function InquirySection() {
                     rel="noreferrer"
                     className="inline-flex min-h-[54px] items-center justify-center rounded-full border border-[#E6CB00] bg-[#FEE500] px-5 text-sm font-semibold text-[#191919] shadow-[0_14px_26px_rgba(25,25,25,0.14)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_30px_rgba(25,25,25,0.18)]"
                   >
-                    행사 조건 보내고 카카오톡 문의
+                    카카오톡 상담
                   </a>
                 ) : (
                   <a
@@ -83,6 +83,11 @@ export function InquirySection() {
                   ))}
                 </div>
                 <p className="mt-2 text-cream/76">행사일 / 지역 / 예상 인원만 알려주시면 1차 안내가 가능합니다.</p>
+                {kakaoInquiryUrl ? (
+                  <p className="mt-2 rounded-[16px] bg-white/10 px-3.5 py-2 text-[12px] leading-5 text-white/84">
+                    예: 안녕하세요. 부산 / 5월 20일 / 120명 / 기업행사 문의드립니다.
+                  </p>
+                ) : null}
               </div>
             </div>
 

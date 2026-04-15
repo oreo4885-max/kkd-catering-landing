@@ -49,26 +49,29 @@ export function HeroSection() {
                 rel="noreferrer"
                 className="inline-flex h-11 items-center justify-center rounded-full border border-[#E6CB00] bg-[#FEE500] px-5 text-[13px] font-semibold text-[#191919] shadow-[0_12px_24px_rgba(25,25,25,0.12)] transition hover:-translate-y-0.5 hover:shadow-[0_16px_28px_rgba(25,25,25,0.16)] sm:h-12 sm:px-7 sm:text-sm"
               >
-                행사 조건 보내고 상담
+                카카오톡 상담
               </a>
             ) : (
               <a
                 href={hero.primaryCta.href}
                 className="inline-flex h-11 items-center justify-center rounded-full bg-forest-800 px-5 text-[13px] font-semibold text-cream transition hover:bg-forest-900 sm:h-12 sm:px-7 sm:text-sm"
               >
-                즉시 일정 확인
+                전화 상담
               </a>
             )}
             <a
               href={kakaoInquiryUrl ? hero.primaryCta.href : hero.secondaryCta.href}
               className="inline-flex h-11 items-center justify-center rounded-full border border-forest-900/10 bg-white/78 px-5 text-[13px] font-semibold text-forest-900 transition hover:border-forest-700/30 hover:bg-white sm:h-12 sm:px-7 sm:text-sm"
             >
-              {kakaoInquiryUrl ? "즉시 일정 확인" : hero.secondaryCta.label}
+              {kakaoInquiryUrl ? "전화 상담" : hero.secondaryCta.label}
             </a>
           </div>
           <div className="mt-4 max-w-[35rem] rounded-[22px] border border-forest-900/8 bg-white/72 px-4 py-3.5 text-[13px] leading-6 text-forest-800/84 sm:px-5 sm:py-4 sm:text-sm sm:leading-7">
             <p className="font-semibold text-forest-900">예상 견적 확인 후 바로 카카오톡 문의 가능</p>
             <p className="mt-1">행사일 / 지역 / 예상 인원만 알려주시면 빠르게 상담 가능합니다.</p>
+            <p className="mt-2 rounded-[16px] bg-forest-50 px-3.5 py-2 text-[12px] leading-5 text-forest-800/82 sm:text-[13px]">
+              예: 안녕하세요. 부산 / 5월 20일 / 120명 / 기업행사 문의드립니다.
+            </p>
             <div className="mt-3 flex flex-wrap gap-2">
               {["행사일", "행사 지역", "예상 인원"].map((item) => (
                 <span

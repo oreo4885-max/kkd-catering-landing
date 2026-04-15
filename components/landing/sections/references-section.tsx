@@ -121,11 +121,11 @@ export function ReferencesSection() {
                     <p className="ko-body mt-2 text-[13px] leading-5 text-white sm:text-sm sm:leading-6">{activeVisual.summary}</p>
                   </div>
                   <div className="rounded-[20px] border border-white/12 bg-white/8 px-4 py-3.5 backdrop-blur sm:rounded-[24px] sm:py-4">
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/68">추천 활용</p>
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/68">추천 행사 유형</p>
                     <p className="ko-body mt-2 text-[13px] leading-5 text-white sm:text-sm sm:leading-6">{activeVisual.usage}</p>
                   </div>
                   <div className="rounded-[20px] border border-white/12 bg-white/8 px-4 py-3.5 backdrop-blur sm:rounded-[24px] sm:py-4">
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/68">추천 규모 / 목적</p>
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/68">적정 인원 규모 / 운영 목적</p>
                     <p className="ko-body mt-2 text-[13px] leading-5 text-white sm:text-sm sm:leading-6">
                       {activeVisual.scale}
                       <br />

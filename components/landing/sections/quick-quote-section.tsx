@@ -139,6 +139,7 @@ export function QuickQuoteSection() {
   const [menu, setMenu] = useState<MenuOption["id"]>("combo");
   const [attendees, setAttendees] = useState(60);
   const [region, setRegion] = useState(regionOptions[0].id);
+  const kakaoInquiryUrl = process.env.NEXT_PUBLIC_KAKAO_INQUIRY_URL ?? "";
 
   const activeMenu = useMemo(() => menuOptions.find((item) => item.id === menu) ?? menuOptions[0], [menu]);
   const activeRegion = useMemo(() => regionOptions.find((item) => item.id === region) ?? regionOptions[0], [region]);
@@ -428,7 +429,7 @@ export function QuickQuoteSection() {
                     <div>
                       <div className="flex items-center justify-between gap-3">
                         <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#ffd8d1]">예상 인원</p>
-                        <div className="hidden items-center gap-2 rounded-full border border-white/14 bg-white/10 px-3 py-1 text-xs text-white/80 sm:flex">
+                        <div className="flex items-center gap-2 rounded-full border border-white/14 bg-white/10 px-3 py-1 text-xs text-white/80">
                           <span>직접 입력</span>
                           <input
                             type="number"
@@ -444,9 +445,6 @@ export function QuickQuoteSection() {
                             }}
                             className="w-14 border-0 bg-transparent p-0 text-right text-sm font-semibold text-white focus:outline-none"
                           />
-                        </div>
-                        <div className="inline-flex items-center rounded-full border border-white/14 bg-white/10 px-3 py-1 text-xs font-semibold text-white sm:hidden">
-                          {attendees}명
                         </div>
                       </div>
                       <div className="mt-3">
@@ -545,11 +543,21 @@ export function QuickQuoteSection() {
                 </div>
 
                 <div className="mt-5 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap">
+                  {kakaoInquiryUrl ? (
+                    <a
+                      href={kakaoInquiryUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex h-12 items-center justify-center rounded-full border border-[#E6CB00] bg-[#FEE500] px-6 text-sm font-semibold text-[#191919] shadow-[0_14px_26px_rgba(25,25,25,0.14)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_30px_rgba(25,25,25,0.18)]"
+                    >
+                      예상 견적으로 카톡 상담하기
+                    </a>
+                  ) : null}
                   <a
                     href={callTarget}
                     className="inline-flex h-12 items-center justify-center rounded-full bg-white px-6 text-sm font-semibold text-forest-900 transition hover:bg-blush"
                   >
-                    예상 견적 그대로 전화 상담하기
+                    예상 견적으로 전화 상담하기
                   </a>
                   <button
                     type="button"
@@ -565,6 +573,11 @@ export function QuickQuoteSection() {
                     추천 패키지 더 보기
                   </a>
                 </div>
+                {kakaoInquiryUrl ? (
+                  <p className="mt-3 text-xs leading-6 text-cream/68">
+                    카카오톡 상담 시 예: 안녕하세요. {activeRegion.label} / {attendees}명 / {activeMenu.label} 견적 문의드립니다.
+                  </p>
+                ) : null}
                 <p className="mt-3 text-xs text-cream/62">출력 창에서 PDF 저장 또는 인쇄로 바로 공유할 수 있습니다.</p>
                 {callNumber ? <p className="mt-1 text-xs text-cream/62">상담 연결: {callNumber}</p> : null}
               </div>

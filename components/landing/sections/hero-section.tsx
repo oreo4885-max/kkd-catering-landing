@@ -49,21 +49,21 @@ export function HeroSection() {
                 rel="noreferrer"
                 className="inline-flex h-11 items-center justify-center rounded-full border border-[#E6CB00] bg-[#FEE500] px-5 text-[13px] font-semibold text-[#191919] shadow-[0_12px_24px_rgba(25,25,25,0.12)] transition hover:-translate-y-0.5 hover:shadow-[0_16px_28px_rgba(25,25,25,0.16)] sm:h-12 sm:px-7 sm:text-sm"
               >
-                카카오톡 문의
+                행사 조건 보내고 상담
               </a>
             ) : (
               <a
                 href={hero.primaryCta.href}
                 className="inline-flex h-11 items-center justify-center rounded-full bg-forest-800 px-5 text-[13px] font-semibold text-cream transition hover:bg-forest-900 sm:h-12 sm:px-7 sm:text-sm"
               >
-                {hero.primaryCta.label}
+                즉시 일정 확인
               </a>
             )}
             <a
-              href={hero.primaryCta.href}
+              href={kakaoInquiryUrl ? hero.primaryCta.href : hero.secondaryCta.href}
               className="inline-flex h-11 items-center justify-center rounded-full border border-forest-900/10 bg-white/78 px-5 text-[13px] font-semibold text-forest-900 transition hover:border-forest-700/30 hover:bg-white sm:h-12 sm:px-7 sm:text-sm"
             >
-              전화 상담
+              {kakaoInquiryUrl ? "즉시 일정 확인" : hero.secondaryCta.label}
             </a>
           </div>
           <div className="mt-4 max-w-[35rem] rounded-[22px] border border-forest-900/8 bg-white/72 px-4 py-3.5 text-[13px] leading-6 text-forest-800/84 sm:px-5 sm:py-4 sm:text-sm sm:leading-7">

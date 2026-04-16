@@ -61,8 +61,8 @@ export function TopNav() {
   return (
     <>
       <header
-        className={`sticky top-0 z-50 px-4 pt-2 transition-transform duration-300 sm:px-6 sm:pt-3 ${
-          scrolled ? "-translate-y-[120%] lg:translate-y-0" : "translate-y-0"
+        className={`relative z-50 px-4 pt-2 sm:px-6 sm:pt-3 lg:sticky lg:top-0 lg:transition-transform lg:duration-300 ${
+          scrolled ? "lg:translate-y-0" : "translate-y-0"
         }`}
       >
       <div

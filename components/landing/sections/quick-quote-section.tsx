@@ -213,11 +213,12 @@ export function QuickQuoteSection() {
         background: #f5f6f3;
         color: #113522;
         font-family: "Segoe UI", "Malgun Gothic", sans-serif;
+        line-height: 1.45;
       }
       .sheet {
         width: 820px;
         margin: 0 auto;
-        padding: 40px 36px 48px;
+        padding: 28px 26px 24px;
         background: white;
       }
       .eyebrow {
@@ -228,24 +229,25 @@ export function QuickQuoteSection() {
         text-transform: uppercase;
       }
       .title {
-        margin: 14px 0 10px;
-        font-size: 34px;
+        margin: 10px 0 8px;
+        font-size: 28px;
         line-height: 1.15;
         font-weight: 800;
         color: #123b28;
       }
       .subtitle {
         margin: 0;
-        font-size: 15px;
-        line-height: 1.8;
+        font-size: 13px;
+        line-height: 1.6;
         color: #476050;
       }
       .hero {
-        margin-top: 28px;
-        padding: 24px 28px;
-        border-radius: 24px;
+        margin-top: 18px;
+        padding: 16px 18px;
+        border-radius: 18px;
         background: linear-gradient(135deg, #13492f 0%, #1b5b3a 100%);
         color: white;
+        page-break-inside: avoid;
       }
       .hero-label {
         font-size: 12px;
@@ -255,47 +257,48 @@ export function QuickQuoteSection() {
         color: #ffd8d1;
       }
       .hero-price {
-        margin: 12px 0 0;
-        font-size: 40px;
+        margin: 10px 0 0;
+        font-size: 34px;
         line-height: 1;
         font-weight: 800;
       }
       .hero-note {
-        margin: 14px 0 0;
-        font-size: 14px;
-        line-height: 1.75;
+        margin: 10px 0 0;
+        font-size: 12px;
+        line-height: 1.55;
         color: rgba(255, 255, 255, 0.82);
       }
       .grid {
-        margin-top: 24px;
+        margin-top: 14px;
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 14px;
+        gap: 10px;
       }
       .box {
         border: 1px solid rgba(17, 53, 34, 0.12);
-        border-radius: 18px;
-        padding: 18px 18px 16px;
+        border-radius: 14px;
+        padding: 12px 13px 11px;
         background: #f9fbf8;
+        page-break-inside: avoid;
       }
       .box-label {
-        font-size: 12px;
+        font-size: 11px;
         font-weight: 700;
         letter-spacing: 0.12em;
         text-transform: uppercase;
         color: #557161;
       }
       .box-value {
-        margin-top: 8px;
-        font-size: 22px;
+        margin-top: 6px;
+        font-size: 18px;
         font-weight: 800;
         line-height: 1.25;
         color: #123b28;
       }
       .box-text {
-        margin-top: 6px;
-        font-size: 14px;
-        line-height: 1.7;
+        margin-top: 4px;
+        font-size: 12px;
+        line-height: 1.55;
         color: #4a6555;
       }
       .meta-table {
@@ -305,37 +308,47 @@ export function QuickQuoteSection() {
       .meta-table th,
       .meta-table td {
         border-top: 1px solid rgba(17, 53, 34, 0.08);
-        padding: 14px 0;
+        padding: 9px 0;
         text-align: left;
         vertical-align: top;
       }
       .meta-table th {
-        width: 148px;
-        font-size: 13px;
+        width: 132px;
+        font-size: 12px;
         font-weight: 700;
         color: #56705f;
       }
       .meta-table td {
-        font-size: 15px;
-        line-height: 1.7;
+        font-size: 13px;
+        line-height: 1.55;
         color: #183c2a;
       }
       .footer {
-        margin-top: 28px;
-        padding-top: 18px;
+        margin-top: 16px;
+        padding-top: 12px;
         border-top: 1px solid rgba(17, 53, 34, 0.12);
-        font-size: 12px;
-        line-height: 1.8;
+        font-size: 11px;
+        line-height: 1.55;
         color: #6e8178;
+        page-break-inside: avoid;
+      }
+      @page {
+        size: A4 portrait;
+        margin: 10mm;
       }
       @media print {
         body {
           background: white;
         }
         .sheet {
-          width: auto;
+          width: 190mm;
           margin: 0;
           padding: 0;
+        }
+        .hero,
+        .box,
+        .footer {
+          break-inside: avoid;
         }
       }
     </style>

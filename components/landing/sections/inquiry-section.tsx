@@ -18,7 +18,7 @@ export function InquirySection() {
                 <div className="mt-4 rounded-[22px] border border-[#E6CB00] bg-[#FFF6B1] px-4 py-4 text-[13px] leading-6 text-[#3a3110] sm:px-5 sm:text-sm sm:leading-7">
                   <p className="font-semibold text-[#241b00]">카카오톡 문의 예시</p>
                   <p className="mt-2 rounded-[18px] bg-white/65 px-4 py-3 font-medium text-[#3f3211]">
-                    “안녕하세요. 부산 / 5월 20일 / 120명 / 기업행사 문의드립니다.”
+                    “안녕하세요. 부산 연제구 / 120명 / 기업행사 문의드립니다.”
                   </p>
                 </div>
               ) : null}
@@ -85,7 +85,7 @@ export function InquirySection() {
                 <p className="mt-2 text-cream/76">행사일 / 지역 / 예상 인원만 알려주시면 1차 안내가 가능합니다.</p>
                 {kakaoInquiryUrl ? (
                   <p className="mt-2 rounded-[16px] bg-white/10 px-3.5 py-2 text-[12px] leading-5 text-white/84">
-                    예: 안녕하세요. 부산 / 5월 20일 / 120명 / 기업행사 문의드립니다.
+                    예: 안녕하세요. 부산 연제구 / 120명 / 기업행사 문의드립니다.
                   </p>
                 ) : null}
               </div>
@@ -138,7 +138,7 @@ export function InquirySection() {
               </div>
               <div className="rounded-[20px] border border-forest-900/8 bg-white px-4 py-4 text-[13px] leading-6 text-forest-800/86">
                 <p className="font-semibold text-forest-900">권장 문의 시점</p>
-                <p className="mt-2">행사일 기준 최소 2주 전 문의 시 운영 가능성을 더 빠르게 안내드릴 수 있습니다.</p>
+                <p className="mt-2">행사일 기준 최소 1주 전 문의 시 운영 가능성을 더 빠르게 안내드릴 수 있습니다.</p>
               </div>
               <div className="rounded-[20px] border border-forest-900/8 bg-white px-4 py-4 text-[13px] leading-6 text-forest-800/86">
                 <p className="font-semibold text-forest-900">전기 필요 여부</p>

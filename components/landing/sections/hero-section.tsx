@@ -70,7 +70,7 @@ export function HeroSection() {
             <p className="font-semibold text-forest-900">예상 견적 확인 후 바로 카카오톡 문의 가능</p>
             <p className="mt-1">행사일 / 지역 / 예상 인원만 알려주시면 빠르게 상담 가능합니다.</p>
             <p className="mt-2 rounded-[16px] bg-forest-50 px-3.5 py-2 text-[12px] leading-5 text-forest-800/82 sm:text-[13px]">
-              예: 안녕하세요. 부산 / 5월 20일 / 120명 / 기업행사 문의드립니다.
+              예: 안녕하세요. 부산 연제구 / 120명 / 기업행사 문의드립니다.
             </p>
             <div className="mt-3 flex flex-wrap gap-2">
               {["행사일", "행사 지역", "예상 인원"].map((item) => (

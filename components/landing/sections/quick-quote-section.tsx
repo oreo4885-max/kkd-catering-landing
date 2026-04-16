@@ -182,16 +182,17 @@ export function QuickQuoteSection() {
     setAttendees(Math.max(activeMenu.minAttendees, Math.min(activeMenu.maxAttendees, nextValue)));
   };
 
+  const transportSurcharge =
+    (activeMenu.id === "donut" && attendees >= 200) || (activeMenu.id === "combo" && attendees >= 120) ? 100000 : 0;
+
+  const generatorSurcharge =
+    activePower.surcharge > 0 || (activeMenu.id === "combo" && attendees >= 120) ? 100000 : 0;
+
   const estimatedTotal = useMemo(() => {
     const extraAttendees = Math.max(attendees - activeMenu.minAttendees, 0);
     const baseCost = activeMenu.minimum + extraAttendees * activeMenu.perHead;
-    const transportSurcharge =
-      (activeMenu.id === "donut" && attendees > 200) || (activeMenu.id === "combo" && attendees > 120) ? 100000 : 0;
-    return roundToNearestTenThousand(baseCost + activeRegion.surcharge + activePower.surcharge + transportSurcharge);
-  }, [activeMenu, activePower.surcharge, activeRegion.surcharge, attendees]);
-
-  const transportSurcharge =
-    (activeMenu.id === "donut" && attendees > 200) || (activeMenu.id === "combo" && attendees > 120) ? 100000 : 0;
+    return roundToNearestTenThousand(baseCost + activeRegion.surcharge + generatorSurcharge + transportSurcharge);
+  }, [activeMenu, activeRegion.surcharge, attendees, generatorSurcharge, transportSurcharge]);
 
   const handlePrintEstimate = () => {
     const issuedAt = new Date();
@@ -380,7 +381,7 @@ export function QuickQuoteSection() {
             </tr>
             <tr>
               <th>전력 사용 가능 여부</th>
-              <td>${escapeHtml(activePower.label)}</td>
+              <td>${escapeHtml(activePower.label)}${escapeHtml(activeMenu.id === "combo" && attendees >= 120 ? " (대형 운영 자동 반영)" : "")}</td>
             </tr>
             <tr>
               <th>지역 가산</th>
@@ -388,7 +389,7 @@ export function QuickQuoteSection() {
             </tr>
             <tr>
               <th>발전기 사용 비용</th>
-              <td>${escapeHtml(activePower.surcharge > 0 ? "100,000원 추가발생" : "없음")}</td>
+              <td>${escapeHtml(generatorSurcharge > 0 ? "100,000원 추가발생" : "없음")}</td>
             </tr>
             <tr>
               <th>수량추가 운반비</th>
@@ -588,6 +589,11 @@ export function QuickQuoteSection() {
                   <span className="rounded-full border border-white/14 bg-white/8 px-3 py-1.5 text-[12px] font-medium text-cream/84">
                     전력 사용 {activePower.label}
                   </span>
+                  {activeMenu.id === "combo" && attendees >= 120 ? (
+                    <span className="rounded-full border border-white/14 bg-white/8 px-3 py-1.5 text-[12px] font-medium text-cream/84">
+                      발전기 자동 추가
+                    </span>
+                  ) : null}
                 </div>
 
                 <div className="mt-5 grid gap-3 sm:grid-cols-2">
@@ -611,10 +617,14 @@ export function QuickQuoteSection() {
                   <div className="rounded-[18px] border border-white/15 bg-white/8 px-4 py-3">
                     <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#ffd8d1]">발전기 사용비용</p>
                     <p className="mt-2 text-base font-semibold text-white">
-                      {activePower.surcharge > 0 ? formatCurrency(activePower.surcharge) : "0원"}
+                      {generatorSurcharge > 0 ? formatCurrency(generatorSurcharge) : "0원"}
                     </p>
                     <p className="mt-1 text-sm leading-6 text-cream/76">
-                      {activePower.surcharge > 0 ? "발전기 사용비용 10만원 추가발생" : "전력 사용 가능 시 추가 비용 없음"}
+                      {generatorSurcharge > 0
+                        ? activeMenu.id === "combo" && attendees >= 120
+                          ? "도넛+커피 120명 이상 운영으로 발전기 사용비용 10만원 추가발생"
+                          : "발전기 사용비용 10만원 추가발생"
+                        : "전력 사용 가능 시 추가 비용 없음"}
                     </p>
                   </div>
                   <div className="rounded-[18px] border border-white/15 bg-white/8 px-4 py-3">
@@ -624,7 +634,7 @@ export function QuickQuoteSection() {
                     </p>
                     <p className="mt-1 text-sm leading-6 text-cream/76">
                       {transportSurcharge > 0
-                        ? "기준 인원 초과로 수량추가 운반비 10만원 추가발생"
+                        ? "기준 인원 이상으로 수량추가 운반비 10만원 추가발생"
                         : "기준 인원 범위 내에서는 추가 없음"}
                     </p>
                   </div>

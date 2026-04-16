@@ -21,6 +21,12 @@ type RegionOption = {
   note: string;
 };
 
+type PowerOption = {
+  id: "available" | "unavailable";
+  label: string;
+  surcharge: number;
+};
+
 const menuOptions: MenuOption[] = [
   {
     id: "donut",
@@ -93,6 +99,19 @@ const regionOptions: RegionOption[] = [
   },
 ];
 
+const powerOptions: PowerOption[] = [
+  {
+    id: "available",
+    label: "가능",
+    surcharge: 0,
+  },
+  {
+    id: "unavailable",
+    label: "불가능",
+    surcharge: 100000,
+  },
+];
+
 const recommendedPackageCopy = {
   reference: {
     label: "소규모 프로모션형",
@@ -139,10 +158,12 @@ export function QuickQuoteSection() {
   const [menu, setMenu] = useState<MenuOption["id"]>("combo");
   const [attendees, setAttendees] = useState(60);
   const [region, setRegion] = useState(regionOptions[0].id);
+  const [power, setPower] = useState<PowerOption["id"]>("available");
   const kakaoInquiryUrl = process.env.NEXT_PUBLIC_KAKAO_INQUIRY_URL ?? "";
 
   const activeMenu = useMemo(() => menuOptions.find((item) => item.id === menu) ?? menuOptions[0], [menu]);
   const activeRegion = useMemo(() => regionOptions.find((item) => item.id === region) ?? regionOptions[0], [region]);
+  const activePower = useMemo(() => powerOptions.find((item) => item.id === power) ?? powerOptions[0], [power]);
   const callTarget = siteContent.contact.contacts[0]?.href ?? "#inquiry-contact";
   const callNumber = siteContent.contact.contacts[0]?.phone ?? "";
 
@@ -164,8 +185,13 @@ export function QuickQuoteSection() {
   const estimatedTotal = useMemo(() => {
     const extraAttendees = Math.max(attendees - activeMenu.minAttendees, 0);
     const baseCost = activeMenu.minimum + extraAttendees * activeMenu.perHead;
-    return roundToNearestTenThousand(baseCost + activeRegion.surcharge);
-  }, [activeMenu, activeRegion.surcharge, attendees]);
+    const transportSurcharge =
+      (activeMenu.id === "donut" && attendees > 200) || (activeMenu.id === "combo" && attendees > 120) ? 100000 : 0;
+    return roundToNearestTenThousand(baseCost + activeRegion.surcharge + activePower.surcharge + transportSurcharge);
+  }, [activeMenu, activePower.surcharge, activeRegion.surcharge, attendees]);
+
+  const transportSurcharge =
+    (activeMenu.id === "donut" && attendees > 200) || (activeMenu.id === "combo" && attendees > 120) ? 100000 : 0;
 
   const handlePrintEstimate = () => {
     const issuedAt = new Date();
@@ -323,7 +349,7 @@ export function QuickQuoteSection() {
         <div class="hero-label">Estimated Total (VAT 포함)</div>
         <p class="hero-price">${escapeHtml(formatCurrency(estimatedTotal))}</p>
         <p class="hero-note">
-          ${escapeHtml(activeMenu.label)} / ${escapeHtml(`${attendees}명`)} / ${escapeHtml(activeRegion.label)} 기준 VAT 포함 참고 견적입니다.
+          ${escapeHtml(activeMenu.label)} / ${escapeHtml(`${attendees}명`)} / ${escapeHtml(activeRegion.label)} / ${escapeHtml(`전력 사용 ${activePower.label}`)} 기준 VAT 포함 참고 견적입니다.
           현장 동선, 운영 시간, 전기 지원 여부에 따라 실제 제안은 달라질 수 있습니다.
         </p>
       </section>
@@ -353,8 +379,20 @@ export function QuickQuoteSection() {
               <td>${escapeHtml(activeRegion.label)}<br />${escapeHtml(activeRegion.note)}</td>
             </tr>
             <tr>
+              <th>전력 사용 가능 여부</th>
+              <td>${escapeHtml(activePower.label)}</td>
+            </tr>
+            <tr>
               <th>지역 가산</th>
               <td>${escapeHtml(activeRegion.surcharge > 0 ? formatCurrency(activeRegion.surcharge) : "없음")}</td>
+            </tr>
+            <tr>
+              <th>발전기 사용 비용</th>
+              <td>${escapeHtml(activePower.surcharge > 0 ? "100,000원 추가발생" : "없음")}</td>
+            </tr>
+            <tr>
+              <th>수량추가 운반비</th>
+              <td>${escapeHtml(transportSurcharge > 0 ? "100,000원 추가발생" : "없음")}</td>
             </tr>
             <tr>
               <th>추가 단가</th>
@@ -494,6 +532,30 @@ export function QuickQuoteSection() {
                         })}
                       </div>
                     </div>
+
+                    <div>
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#ffd8d1]">전력 사용 가능 여부</p>
+                      <div className="mt-3 grid grid-cols-2 gap-2">
+                        {powerOptions.map((option) => {
+                          const active = option.id === power;
+
+                          return (
+                            <button
+                              key={option.id}
+                              type="button"
+                              onClick={() => setPower(option.id)}
+                              className={`inline-flex min-h-[40px] items-center justify-center rounded-[14px] border px-3 py-2 text-center text-[12px] font-semibold transition ${
+                                active
+                                  ? "border-white bg-white text-forest-900 shadow-soft"
+                                  : "border-white/20 bg-transparent text-cream/82"
+                              }`}
+                            >
+                              {option.label}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
                   </div>
                 </div>
 
@@ -513,7 +575,7 @@ export function QuickQuoteSection() {
                   {formatCurrency(estimatedTotal)}
                 </p>
                 <p className="mt-3 text-sm leading-7 text-cream/80">
-                  {attendees}명 기준, {activeRegion.label} {activeRegion.note} 운영의 VAT 포함 예상 견적입니다.
+                  {attendees}명 기준, {activeRegion.label} {activeRegion.note}, 전력 사용 {activePower.label} 조건의 VAT 포함 예상 견적입니다.
                 </p>
 
                 <div className="mt-4 flex flex-wrap gap-2">
@@ -522,6 +584,9 @@ export function QuickQuoteSection() {
                   </span>
                   <span className="rounded-full border border-white/14 bg-white/8 px-3 py-1.5 text-[12px] font-medium text-cream/84">
                     지역 {activeRegion.label}
+                  </span>
+                  <span className="rounded-full border border-white/14 bg-white/8 px-3 py-1.5 text-[12px] font-medium text-cream/84">
+                    전력 사용 {activePower.label}
                   </span>
                 </div>
 
@@ -538,6 +603,29 @@ export function QuickQuoteSection() {
                     <p className="mt-2 text-base font-semibold text-white">{formatCurrency(activeMenu.perHead)}</p>
                     <p className="mt-1 text-sm leading-6 text-cream/76">
                       {activeMenu.minAttendees}명 초과 시 1인당 추가 적용
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                  <div className="rounded-[18px] border border-white/15 bg-white/8 px-4 py-3">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#ffd8d1]">발전기 사용비용</p>
+                    <p className="mt-2 text-base font-semibold text-white">
+                      {activePower.surcharge > 0 ? formatCurrency(activePower.surcharge) : "0원"}
+                    </p>
+                    <p className="mt-1 text-sm leading-6 text-cream/76">
+                      {activePower.surcharge > 0 ? "발전기 사용비용 10만원 추가발생" : "전력 사용 가능 시 추가 비용 없음"}
+                    </p>
+                  </div>
+                  <div className="rounded-[18px] border border-white/15 bg-white/8 px-4 py-3">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#ffd8d1]">수량추가 운반비</p>
+                    <p className="mt-2 text-base font-semibold text-white">
+                      {transportSurcharge > 0 ? formatCurrency(transportSurcharge) : "0원"}
+                    </p>
+                    <p className="mt-1 text-sm leading-6 text-cream/76">
+                      {transportSurcharge > 0
+                        ? "기준 인원 초과로 수량추가 운반비 10만원 추가발생"
+                        : "기준 인원 범위 내에서는 추가 없음"}
                     </p>
                   </div>
                 </div>

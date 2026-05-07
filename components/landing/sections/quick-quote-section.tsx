@@ -58,8 +58,8 @@ const regionOptions: RegionOption[] = [
   {
     id: "gijang",
     label: "기장",
-    surcharge: 0,
-    note: "기본 포함",
+    surcharge: 50000,
+    note: "+5만 원",
   },
   {
     id: "gimhae",
